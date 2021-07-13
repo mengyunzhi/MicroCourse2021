@@ -51,7 +51,11 @@ return [
     // 应用类库后缀
     'class_suffix'           => false,
     // 控制器类后缀
+<<<<<<< HEAD
     'controller_suffix'      => true,
+=======
+    'controller_suffix'      =>true,
+>>>>>>> origin
 
     // +----------------------------------------------------------------------
     // | 模块设置
