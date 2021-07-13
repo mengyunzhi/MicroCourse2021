@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>添加</title>
+</head>
+<body>
+    <form action="{:url('save')}" method='post'>
+        <label for="name">name:</label>
+        <input type="text" name="name" id="name">
+        <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
+        <label for="klass_id_">一班</label>
+        <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
+        <label for="klass_id_">二班</label>
+        <button type="sumbit">sumbit</button>       
+    </form>
+</body>
+</html>
