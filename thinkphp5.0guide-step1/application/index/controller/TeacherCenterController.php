@@ -2,7 +2,7 @@
 namespace app\index\controller;
 use think\Controller;
 
-class AdminCenterController extends Controller/*管理员端个人中心*/
+class TeacherCenterController extends Controller/*教师端个人中心*/
 {
     public function center()
     {

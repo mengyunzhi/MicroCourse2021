@@ -51,13 +51,6 @@ return [
     // 应用类库后缀
     'class_suffix'           => false,
     // 控制器类后缀
-<<<<<<< HEAD
-
-    'controller_suffix'      => false,
-=======
-    'controller_suffix'      =>true,
->>>>>>> origin
-
     'controller_suffix'      =>true,
 
 
