@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>教师端</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body class="contanier">
+    <!-- 菜单导航 -->
+    <div class="text left">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">梦云智</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">课程管理</a></li>
+                            <li><a href="#">学生管理</a></li>
+                            <li><a href="#">班级管理</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">个人中心</a></li>
+                            <li><a href="#">注销</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+    <!-- /菜单导航 -->
+    <div>
+        <table class="table table-hover table-bordered">
+            <tr class="info">
+                <th></th>
+                <th>教师姓名：张三</th>
+                <th>
+                    <label>教室：</label>
+                    <select >
+                        <option>101</option>
+                        <option>102</option>
+                    </select>
+                </th>
+                <th><button type="button" class="btn btn-info">查看座位表</button></th>
+                <th><button type="button" class="btn btn-info">开始上课</button></th>
+            </tr>
+        </table>
+        <div >
+            <div class="col-md-4">
+                <font size="3">课程名称：</font>
+                <select name="klass_id">
+                    <option value="" selected="selected">高数</option>
+                    <option>离散</option>
+                    <option>c++</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>上课班级：</label>
+                <label>一班</label>
+                <label>二班</label>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-4">签到时间：</div>
+                <div class="col-md-4"><input type="time" name="time"></div>
+            </div>
+        </div>
+        <div >       
+            <div class="col-md-4">
+                <font size="3">应到人数:</font>
+                <input class="form-inline" type="text" placeholder="40" disabled><br>
+            </div>
+            <div class="col-md-4">
+                <font size="3">实到人数:</font>
+                 <input class="form-inline" type="text" placeholder="A楼教室"  disabled><br>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="button" class="btn btn-info">随机点名</button>
+            <input class="form-inline" type="text" placeholder="李四"  disabled><br>
+        </div>
+        <div class="col-md-12">
+            <p><center>讲台</center></p>
+        </div>
+        
+        <!-- 座位表-->
+        <div class="container"style="padding-right:100px">
+        <table style="margin:0 auto;margin-bottom: 50px;">
+            <tr>
+                <th>
+                    <button class="btn btn-info seat" >student1
+                    </button>
+                </th>
+                <th>
+                   <button class="btn btn-info seat" >student2
+                    </button>
+                </th>
+                <th>
+                    <button class="btn btn-info seat" >student3
+                    </button>
+                </th>
+                <th>
+                    <button class="btn btn-default seat" style=" border:none;">
+                    </button>
+                </th>
+                 <th>
+                    <button class="btn btn-info seat ">student4
+                    </button>
+                </th>
+            </tr>
+             <tr>
+                <th>
+                    <button class="btn btn-info seat" >student5
+                    </button>
+                </th>
+                <th>
+                    <button class="btn btn-info seat" >student6
+                    </button>
+                </th>
+                <th>
+                    <button class="btn btn-info seat" >student7
+                    </button>
+                </th>
+                <th>
+                    <button class="btn btn-default seat" style=" border:none;">
+                    </button>
+                </th>
+                 <th>
+                    <button class="btn btn-info seat" >student8
+                    </button>
+                </th>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+</html>
