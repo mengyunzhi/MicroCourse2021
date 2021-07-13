@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body class="contanier">
+    <!-- 菜单导航 -->
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">梦云智</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">课程管理</a></li>
+                            <li><a href="#">学生管理</a></li>
+                            <li><a href="#">班级管理</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">个人中心</a></li>
+                            <li><a href="#">注销</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+    <!-- /菜单导航 -->
+    <div>
+        <table class="table table-hover table-bordered">
+            <tr class="info">
+                <th></th>
+                <th>教师姓名：张三</th>
+                <th><button>开始上课</button></th>
+                <th><button type="button" class="btn btn-info">查看座位表</button></th>
+            </tr>
+        </table>
+        <div >
+            <div class="col-md-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">课程:</div>
+                <select name="klass_id">
+                    <option value="" selected="selected">高数</option>
+                    <option>离散</option>
+                    <option>c++</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>上课班级：</label>
+                <label>一班</label>
+                <label>二班</label>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-4">签到时间：</div>
+                <div class="col-md-4"><input type="time" name="time"></div>
+            </div>
+        </div>
+        <div >
+            <div class="col-md-1"></div>         
+            <div class="col-md-4">
+                <div class="col-md-4">应到人数：</div>
+                <div class="col-md-4">40</div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-4">实到人数：</div>
+                <div class="col-md-4">40</div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2"><button type="button" class="btn btn-info">随机点名：</button></div>
+        </div>
+        <div>
+            <div class="col-md-4">123</div>
+        </div>
+        
+    </div>
+</body>
+</html>
