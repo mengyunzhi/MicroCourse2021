@@ -42,7 +42,7 @@ class AdminStudentController extends Controller
 			$Student->password=$Student->number;
 			//保存
 			$Student->save();
-			return $this->success('操作成功 密码重置为'.$Student->number, url('index'));
+			return $this->success('操作成功 密码重置为学号'.$Student->number, url('index'));
 		}catch(\think\Exception\HttpResponseException $e){
 			throw $e;
 		}catch(\Exception $e){
