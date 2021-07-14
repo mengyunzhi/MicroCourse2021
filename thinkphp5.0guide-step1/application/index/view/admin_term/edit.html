@@ -7,13 +7,14 @@
 </head>
 
 <body>
-    <form action="" method="post" class="form-inline">
+    <form action="{:url('save')}" method="post" class="form-inline">
+      <input type="hidden" name="id" value="{$Term->getData('id')}" />
         <label for="name">学期名称:</label>
-        <input type="text" name="name" id="name" />
-           <label for="startDay">开始日期:</label>
-           <input type="date" id="startDay" name="startDay">
-           <label for="endDay">结束日期:</label>
-           <input type="date" id="endDay" name="endDay">
+        <input type="text" name="name" id="name" value="{$Term->getData('name')}">
+           <label for="create_time">开始日期:</label>
+           <input type="date" id="create_time" name="create_time" value="{:date('Y-m-d',$Term->getData('create_time'))}">
+           <label for="end_time">结束日期:</label>
+           <input type="date" id="end_time" name="end_time" value="{:date('Y-m-d',$Term->getData('end_time'))}">
         <button type="submit">submit</button>
     </form>
 </body>
