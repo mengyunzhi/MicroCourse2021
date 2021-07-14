@@ -16,4 +16,8 @@ class TeacherCourseController extends Controller
 	{
 		return $this->fetch();
 	}
+	public function score()
+	{
+		return $this->fetch();
+	}
 }

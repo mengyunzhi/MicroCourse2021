@@ -22,7 +22,7 @@ class LogInController extends Controller
         $User = User::get($map);
         // $User要么是一个对象，要么是null。
         if (!is_null($User) && $User->getData('password') === $postData['password']) {
-            // 用户名密码正确，将userId存session，并跳转至教师管理界面
+            // 用户名密码正确，将userId存session，并跳转至用户界面
             session('userId', $User->getData('id'));
             return $this->success('登录成功', url('/index'));
         } else {

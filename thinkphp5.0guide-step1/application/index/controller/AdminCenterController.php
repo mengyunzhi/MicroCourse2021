@@ -8,4 +8,7 @@ class AdminCenterController extends Controller/*管理员端个人中心*/
     {
         return $this->fetch();
     }//查看个人中心界面
+    public function changecode(){
+        
+    }
 }
