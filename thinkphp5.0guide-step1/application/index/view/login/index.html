@@ -4,11 +4,12 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
         <title>用户登录</title>
+        <link rel="stylesheet" type="text/css" href="/thinkphp5/public/static/bootstrap-3.3.5-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/MicroCourse2021/thinkphp5.0guide-step1/public/static/css/log.css">
     </head>
     <body>
-        <form action="{:url('log_in')" method="post">
-         <div class="login">
+        <form action="{:url('login')" method="post" id="click">
+        <div class="login">
             <h1 ><font color="#CEE3F6 ">梦云智 微课堂</font></h1>
             <h2>用户登录</h2>
         
@@ -20,13 +21,14 @@
                 <input type="password" name='password' id='password' required="required">
                 <label for="password">密码</label>
             </div>
-            <button type="submit">登录
+            <a></a>
+            <button type="submit" class="btn btn-info" class="bg-info">登录
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
                 </button>
         </form>
-         </div>
+        </div>
     </body>
 </html>

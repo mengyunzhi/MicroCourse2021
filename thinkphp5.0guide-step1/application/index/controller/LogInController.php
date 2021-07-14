@@ -19,7 +19,13 @@ class LogInController extends Controller
 
         // 验证用户名是否存在
         $map = array('username'  => $postData['username']);
-        $User = User::get($map);
+        $User = Teacher::get($map);
+        if(is_null($User)){
+            $User = Student::get($map);
+            if(is_null($User)){
+                $User = Admin::get($map);
+            }
+        }
         // $User要么是一个对象，要么是null。
         if (!is_null($User) && $User->getData('password') === $postData['password']) {
             // 用户名密码正确，将userId存session，并跳转至用户界面
