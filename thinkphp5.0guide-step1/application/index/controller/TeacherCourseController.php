@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Controller;
 
+//教师端成绩管理
 class TeacherCourseController extends Controller
 {
 	public function index()
@@ -19,5 +20,9 @@ class TeacherCourseController extends Controller
 	public function score()
 	{
 		return $this->fetch();
+	}
+	public function delete()
+	{
+		return 'delete';
 	}
 }
