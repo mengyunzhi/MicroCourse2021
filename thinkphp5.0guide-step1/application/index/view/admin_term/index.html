@@ -35,34 +35,27 @@
                     <th>生效状态</th>
                     <th>操作</th>
                 </tr>
-                      <td>1</td>
-                      <td>2021年秋学期</td>
-                      <td>2021年8月20日</td>
-                      <td >2021年12月20日</td>
+                 {volist name="Terms" id="term" key="key"}
+                <tr>
+                      <td>{$key}</td>
+                      <td>{$term->getData('name')}</td>
+                      <td>{:date('Y-m-d',$term->getData('create_time'))}</td>
+                      <td >{:date('Y-m-d',$term->getData('end_time'))}</td>
+                      {eq name='$term->getData("effect")' value='1'}
                       <td class="text-success ">生效中</td>
-
-                     <td>
-                         <a class="btn btn-sm btn-info"><i class="glyphicon glyphicon-star-empty"></i>&nbsp;冻结</a></a>
-                         <a class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
-                         <a class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
-                         
+                      {else /}
+                       <td >未生效</td>{/eq}
+                     <td>{eq name='$term->getData("effect")' value='1'}
+                         <a href="{:url('frozen')}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-star-empty"></i>&nbsp;冻结</a>
+                         {else /}
+                         <a class="btn btn-sm btn-success"><i class="glyphicon glyphicon-star"></i>&nbsp;激活</a>{/eq}
+                         <a href="{:url('edit')}" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
+                         <a href="{:url('delete')}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                      </td>
-                </tr>    
-                </tr>
-                     <td>2</td>
-                      <td>2021年秋学期</td>
-                      <td>2021年8月20日</td>
-                      <td >2021年12月20日</td>
-                      <td >未生效</td>
-
-                     <td>
-                        <a class="btn btn-sm btn-success"><i class="glyphicon glyphicon-star"></i>&nbsp;激活</a>
-                         <a class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
-                         <a class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
-                         
-                     </td>
-                </tr>
+                </tr>  
+                {/volist}  
             </table>
+           {$Terms->render()}
         </div>
     </div>
 </body>
