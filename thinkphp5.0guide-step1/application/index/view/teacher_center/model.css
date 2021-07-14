@@ -1,0 +1,32 @@
+body {
+    /*弹性布局 让页面元素垂直+水平居中*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*让页面始终占浏览器可视区域总高度*/
+    height: 100vh;
+    /*背景渐变色*/
+    background: linear-gradient(#D6EAF8, #3498DB);
+
+}
+.head1{
+    color: #36A3F9;text-align:center
+}
+.out{
+background-color:#CEF6EC;border-radius: 25px;
+    border: 2px solid #6BF4DB;
+    padding: 20px;
+    width: 800px;
+    height: 450px;
+}
+.in{
+background-color: #E0F8F7;border-radius: 25px;
+    border: 2px solid #6BF4DB;
+    padding: 20px;
+    width: 450px;
+    height: 200px;
+     margin: 30px 10px 20px 150px
+}
+.code{
+    left: 1100px; position: absolute; top: 600px;
+}
