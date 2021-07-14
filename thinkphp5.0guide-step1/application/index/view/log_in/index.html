@@ -7,26 +7,26 @@
         <link rel="stylesheet" type="text/css" href="/MicroCourse2021/thinkphp5.0guide-step1/public/static/css/log.css">
     </head>
     <body>
+        <form action="{:url('log_in')" method="post">
          <div class="login">
             <h1 ><font color="#CEE3F6 ">梦云智 微课堂</font></h1>
             <h2>用户登录</h2>
+        
             <div class="login_box">
                 <input type="text" name='name' id='name' required  />
-                <label for="name" >用户名</label>
+                <label for="uearname" >用户名</label>
             </div>
             <div class="login_box">
-                <input type="password" name='pwd' id='pwd' required="required">
-                <label for="pwd">密码</label>
+                <input type="password" name='password' id='password' required="required">
+                <label for="password">密码</label>
             </div>
-            <a href="javascript:void(0)">
-                登录
+            <button type="submit">登录
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-            </a>
-
+                </button>
+        </form>
          </div>
-
     </body>
 </html>
