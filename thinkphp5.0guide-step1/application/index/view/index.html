@@ -19,9 +19,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">教师管理</a></li>
-                            <li><a href="#">学生管理</a></li>
-                            <li><a href="#">教室管理</a></li>
+                            <li><a href="{:url('AdminTeacher/index')}">教师管理</a></li>
+                            <li><a href="{:url('AdminStudent/index')}">学生管理</a></li>
+                            <li><a href="{:url('AdminRoom/index')}">教室管理</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">个人中心</a></li>
@@ -50,7 +50,9 @@
                     </form>
                 </div>
                 <div class="col-md-4 text-right">
-                    <a href="{:url('add')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加</a>
+                    {block name='operation'}
+                    <!--增加-->
+                    {/block}
                 </div>
             </div>
             <hr />
@@ -62,5 +64,5 @@
         </div>
     </div>
 </body>
-
+</html>
 </html>
