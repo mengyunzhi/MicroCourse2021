@@ -8,6 +8,9 @@ class AdminTermController extends Controller
     public function index()
     {
     return $this->fetch();
-
+    }
+     public function add ()
+    {
+    return $this->fetch();
     }
 }
