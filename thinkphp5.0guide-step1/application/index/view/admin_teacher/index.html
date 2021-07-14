@@ -34,32 +34,21 @@
                     <th>邮箱</th>
                     <th>操作</th>
                 </tr>
+                {volist name='teachers' id='teacher' key='key'}
                 <tr >
-                    <td>1</td>
-                    <td>张三</td>
-                    <td>200001</td>
-                    <td>1234567890@qq.com</td>
+                    <td>{$key}</td>
+                    <td>{$teacher->getData('name')}</td>
+                    <td>{$teacher->getData('number')}</td>
+                    <td>{$teacher->getData('email')}</td>
                     <td>
-                        <a class="btn btn-primary">编辑</a>
+                        <a class="btn btn-primary" href="{:url('edit')}">编辑</a>
                         &nbsp;&nbsp;
-                        <a class="btn btn-warning" onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
+                        <a class="btn btn-warning" herf="{:url('resentPassword')} "onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
                         &nbsp;&nbsp;
-                        <a class="btn btn-danger">删除</a>
+                        <a class="btn btn-danger" href="{:url('delete')}">删除</a>
                     </td>
                 </tr>
-                <tr >
-                    <td>2</td>
-                    <td>李四</td>
-                    <td>200002</td>
-                    <td>2234567890@qq.com</td>
-                    <td>
-                        <a class="btn btn-primary">编辑</a>
-                        &nbsp;&nbsp;
-                        <a class="btn btn-warning" onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
-                        &nbsp;&nbsp; 
-                        <a class="btn btn-danger">删除</a>
-                    </td>
-                </tr>
+                {/volist}
             </table>
         </div>
     </div>
