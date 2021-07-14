@@ -39,6 +39,18 @@
         <div class="col-md-12">
             <hr />
             <div class="row">
+                <form class="form-inline">
+                    <div>
+                        <div><label>导入学生成绩：</label></div>
+                        <div><button type="submit">模板下载</button></div>
+                        <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                        <input name="userfile" type="file" /></div>
+                        <div><label>导入学生成绩：</label></div>
+                        <div><button type="submit">导出成绩</button></div>
+                        <div></div>
+                    </div>
+                    <hr />
+                </form>
                 <div class="col-md-8">
                     <form class="form-inline">
                          <div class="form-group">
@@ -59,7 +71,10 @@
                     <th>姓名</th>
                     <th>学号</th>
                     <th>班级</th>
-                    <th>成绩</th>
+                    <th>课程</th>
+                    <th>平时成绩</th>
+                    <th>期末成绩</th>
+                    <th>总成绩(各占50%）</th>
                     <th>操作</th>
                 </tr>
                 <tr >
@@ -67,7 +82,10 @@
                     <td>张三</td>
                     <td>200001</td>
                     <td>一班</td>
-                    <td>60</td>
+                    <td>高等数学</td>
+                    <td>100</td>
+                    <td>90</td>
+                    <td>95</td>
                     <td>
                         <a class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                         &nbsp;&nbsp;

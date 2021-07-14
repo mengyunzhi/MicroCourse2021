@@ -11,4 +11,9 @@ class TeacherController extends Controller
 	{
 		return $this->fetch();
 	}
+	
+	public function edit()
+	{
+		return $this->fetch();
+	}
 }

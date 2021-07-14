@@ -5,7 +5,7 @@
     <title>编辑</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
-<body class="container">
+<body  class="container">
 <!-- 菜单导航 -->
     <div class="text left">
         <div class="col-md-12">
@@ -33,14 +33,15 @@
             </nav>
         </div>
     </div>
-    <form action="{:url('save')}" method='post'>
-        <label for="name">name:</label>
-        <input type="text" name="name" id="name" value="高数">
+    <form action="" method='post'>
+        <label for="name">课程:</label>
+        <input type="text" name="name" id="name">
         <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
         <label for="klass_id_">一班</label>
         <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
         <label for="klass_id_">二班</label>
-        <button type="sumbit">sumbit</button>       
+        <button type="sumbit">保存</button>    
+        <button type="sumbit">取消</button>     
     </form>
 </body>
 </html>
