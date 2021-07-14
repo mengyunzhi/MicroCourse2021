@@ -54,6 +54,14 @@
                         &nbsp;&nbsp;
                         <a class="btn btn-warning" herf="{:url('resentPassword')} "onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
                         &nbsp;&nbsp;
+                    <td>{$teacher->getData('name')}</td>
+                    <td>{$teacher->getData('number')}</td>
+                    <td>{$teacher->getData('email')}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{:url('edit')}">编辑</a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-warning" herf="{:url('resentPassword')} "onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
+                        &nbsp;&nbsp;
                         <a class="btn btn-danger" href="{:url('delete')}">删除</a>
                     </td>
                 </tr>
