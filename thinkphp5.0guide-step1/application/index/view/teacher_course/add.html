@@ -33,14 +33,15 @@
             </nav>
         </div>
     </div>
-    <form action="{:url('save')}" method='post'>
-        <label for="name">name:</label>
+    <form action="" method='post'>
+        <label for="name">课程:</label>
         <input type="text" name="name" id="name">
         <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
         <label for="klass_id_">一班</label>
         <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
         <label for="klass_id_">二班</label>
-        <button type="sumbit">sumbit</button>       
+        <button type="sumbit">保存</button>    
+        <button type="sumbit">取消</button>     
     </form>
 </body>
 </html>
