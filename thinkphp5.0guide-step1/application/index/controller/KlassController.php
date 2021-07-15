@@ -37,14 +37,6 @@ class KlassController extends Controller
         return $this->fetch();
     }
 
-    // public function save()
-    // {
-    //     $Request = Request::instance();
-    //     $Klass = new Klass();
-    //     $Klass->name = $Request->post('name');
-    //     var_dump($Klass->save());
-    //     return $Klass->name . '成功增加至数据表中。新增ID为:' . $Klass->id;
-    // }
         public function save()
     {
         // 实例化请求信息
@@ -92,5 +84,31 @@ class KlassController extends Controller
         } else {
             return $this->success('操作成功', url('index'));
         }
+    }
+
+    public function delete()
+    {
+        // 获取pathinfo传入的ID值.
+        $id = Request::instance()->param('id/d'); // “/d”表示将数值转化为“整形”
+
+        if (is_null($id) || 0 === $id) {
+            return $this->error('未获取到ID信息');
+        }
+
+        // 获取要删除的对象
+        $Klass = Klass::get($id);
+
+        // 要删除的对象不存在
+        if (is_null($Klass)) {
+            return $this->error('不存在id为' . $id . '的教师，删除失败');
+        }
+
+        // 删除对象
+        if (!$Klass->delete()) {
+            return $this->error('删除失败:' . $Klass->getError());
+        }
+
+        // 进行跳转
+        return $this->success('删除成功', url('index'));
     }
 }
