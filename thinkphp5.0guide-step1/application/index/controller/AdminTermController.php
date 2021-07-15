@@ -122,20 +122,11 @@ class AdminTermController extends Controller
             // 提示操作成功，并跳转至管理列表
             return $this->success( $term->name . '新增成功。', url('index'));
         } 
-    
+      }
     }
 
      public function edit()
     {
-    return $this->fetch();
-    }
-
-
-    //激活学期
-    public function activate()
-    {
-
-
        // 获取传入ID
         $id = Request::instance()->param('id/d');
 
@@ -159,6 +150,7 @@ class AdminTermController extends Controller
         // 将封装好的V层内容返回给用户
         return $htmls;
     }
+
     public function save(){
         $message = '';  // 提示信息
 
@@ -219,7 +211,7 @@ class AdminTermController extends Controller
 
         // 删除对象
         if (!$Term->delete()) {
-            return $this->error('删除失败:' . $Teacher->getError());
+            return $this->error('删除失败:' . $Term->getError());
         }
         return $this->success('删除成功',url('index')); 
     }
