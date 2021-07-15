@@ -2,64 +2,84 @@
 namespace app\index\controller;
 use think\Controller;
 use think\Request; 
+use think\Db;
+use app\common\model\Teacher;
+use app\common\model\Student;
+use app\common\model\Admin;
+
 class AdminCenterController extends Controller/*管理员端个人中心*/
 {
-    public function center()
-    {
-        return $this->fetch();
-    }//查看个人中心界面
 
-    public function edit() {
+
+    public function center()
+    {   
+        
+        $Teacher = new Admin; 
+        $teachers = $Teacher->find();
+        // 向V层传数据
+        $this->assign('teachers', $teachers);
+        // 取回打包后的数据
+        $htmls = $this->fetch();
+        
+        return $htmls;
+    }//查看个人中心界面
+    public function update(){
+        // 获取传入ID
+        $id = Request::instance()->param('id/d');
+
+        // 在Teacher表模型中获取当前记录
+        $Teacher = Admin::get($id);
+        // 将数据传给V层
+        $this->assign('Teacher', $Teacher);
+
+        // 获取封装好的V层内容
+        $htmls = $this->fetch();
+
+        // 将封装好的V层内容返回给用户
+        return $htmls;
+    }
+    public function edit()  {
+        $teacherid = input('post.id');
         $oldPassword = input('post.oldPassword');
         $password = input('post.password');
-        $teacherId = session('teacherId');
-        $Teacher = Teacher::get($teacherId);
-        if(is_null($Teacher)){
-            $Teacher = Student::get($studentId);
-            if(is_null($Teacher)){
-                $Teacher = Admin::get($adminId);
-            }
-        }
+        $Teacher = Admin::get($teacherid);
         if(is_null($Teacher)) {
-            return $this->error('未获取到任何成员', $Request->header('referer'));
+            return $this->error('未获取到任何用户');
         }
         $newPasswordAgain = input('post.newPasswordAgain');
 
 
         //判断旧密码是否正确
-        $encryptOldPassword = $Teacher->encryptPassword($oldPassword);
-        if($encryptOldPassword != $Teacher->password) {
-           return $this->error('旧密码错误', url('passwordModification'));
+        
+        if($oldPassword != $Teacher->password) {
+           return $this->error('旧密码错误', url('update'));
         }
 
         //判断新旧密码是否一致
         if($oldPassword === $password) {
-           return $this->error('新旧密码一致', url('passwordModification'));
+           return $this->error('新旧密码一致', url('update'));
         }
 
         //判断新密码是否符合要求必须由字母
         if (!preg_match('/[a-zA-Z]/', $password)) {
-            return $this->error('新密码必须包含字母', url('passwordModification'));
+            return $this->error('新密码必须包含字母', url('update'));
         }
 
         //判断两次新密码是否一致
          if($newPasswordAgain != $password) {
-           return $this->error('两次输入的新密码不一致', url('passwordModification'));
+           return $this->error('两次输入的新密码不一致', url('update'));
         }
 
         // 判断新密码位数是否符合标准c
         if(strlen($password) < 6 || strlen($password)>25) {
-            return $this->error('密码长度应为6到25之间', url('passwordModification'));
+            return $this->error('密码长度应为6到25之间', url('update'));
         }
-
-        $Teacher->password = $Teacher->encryptPassword($password);
-        if(!$Teacher->validate()->save()) {
-            return $this->error('密码更新失败', url('passwordModification'));
+        // var_dump(Teacher)
+        $Teacher->password=$password;
+        if(!$Teacher->save()) {
+            return $this->error('密码更新失败', url('update'));
         }
-        $username = $Teacher->username;
-
-        // 密码修改成功后消除当前session，跳转到登陆界面
-        session('teacherId', null);
-        return $this->success('密码修改成功,请重新登录', url('LogIn/index?username=', $username));
+         return $this->success('修改成功，请重新登录', url('login/'));
     }//修改密码
 }
+
