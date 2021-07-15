@@ -22,7 +22,7 @@
                     </form>
                 </div>
                 <div class="col-md-4 text-right">
-                    <a href="" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加</a>
+                    <a href="{:url('add')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加</a>
                 </div>
             </div>
             <hr />
@@ -34,35 +34,42 @@
                     <th>邮箱</th>
                     <th>操作</th>
                 </tr>
+                {volist name='teachers' id='teacher' key='key'}
                 <tr >
-                    <td>1</td>
-                    <td>张三</td>
-                    <td>200001</td>
-                    <td>1234567890@qq.com</td>
+                    <td>{$key}</td>
+                    <td>{$teacher->name}</td>
+                    <td>{$teacher->number}</td>
+                    <td>{$teacher->email}</td>
                     <td>
-                        <a class="btn btn-primary">编辑</a>
+                        <a class="btn btn-primary" href="{:url('edit?id=' . $teacher->getData('id'))}">编辑</a>
                         &nbsp;&nbsp;
-                        <a class="btn btn-warning" onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
+                        <a class="btn btn-primary" href="{:url('resentPassword?id=' . $teacher->getData('id'))}">重置密码</a>
                         &nbsp;&nbsp;
-                        <a class="btn btn-danger">删除</a>
+                        <a class="btn btn-danger" href="{:url('delete?id='.$teacher->id)}">删除</a>
+                    <td>{$teacher->getData('name')}</td>
+                    <td>{$teacher->getData('number')}</td>
+                    <td>{$teacher->getData('email')}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{:url('edit')}">编辑</a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-warning" herf="{:url('resentPassword')} "onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
+                        &nbsp;&nbsp;
+                    <td>{$teacher->getData('name')}</td>
+                    <td>{$teacher->getData('number')}</td>
+                    <td>{$teacher->getData('email')}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{:url('edit')}">编辑</a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-warning" herf="{:url('resentPassword')} "onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-danger" href="{:url('delete')}">删除</a>
                     </td>
                 </tr>
-                <tr >
-                    <td>2</td>
-                    <td>李四</td>
-                    <td>200002</td>
-                    <td>2234567890@qq.com</td>
-                    <td>
-                        <a class="btn btn-primary">编辑</a>
-                        &nbsp;&nbsp;
-                        <a class="btn btn-warning" onClick="return confirm('密码将重置为，确定重置？')">密码重置</a>
-                        &nbsp;&nbsp; 
-                        <a class="btn btn-danger">删除</a>
-                    </td>
-                </tr>
+                {/volist}
             </table>
         </div>
     </div>
+    {$teachers->render()}
 </body>
 
 </html>

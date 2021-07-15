@@ -8,10 +8,49 @@
 </head>
 
 <body class="container">
+<!-- 菜单导航 -->
+    <div class="text left">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">梦云智</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">课程管理</a></li>
+                            <li><a href="#">学生管理</a></li>
+                            <li><a href="#">班级管理</a></li>
+                            <li><a href="#">上课</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">个人中心</a></li>
+                            <li><a href="#">注销</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <hr />
             <div class="row">
+                <form class="form-inline">
+                    <div>
+                        <div><label>导入学生成绩：</label></div>
+                        <div><button type="submit">模板下载</button></div>
+                        <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                        <input name="userfile" type="file" /></div>
+                        <div><label>导入学生成绩：</label></div>
+                        <div><button type="submit">导出成绩</button></div>
+                        <div></div>
+                    </div>
+                    <hr />
+                </form>
                 <div class="col-md-8">
                     <form class="form-inline">
                          <div class="form-group">
@@ -32,7 +71,10 @@
                     <th>姓名</th>
                     <th>学号</th>
                     <th>班级</th>
-                    <th>成绩</th>
+                    <th>课程</th>
+                    <th>平时成绩</th>
+                    <th>期末成绩</th>
+                    <th>总成绩(各占50%）</th>
                     <th>操作</th>
                 </tr>
                 <tr >
@@ -40,7 +82,10 @@
                     <td>张三</td>
                     <td>200001</td>
                     <td>一班</td>
-                    <td>60</td>
+                    <td>高等数学</td>
+                    <td>100</td>
+                    <td>90</td>
+                    <td>95</td>
                     <td>
                         <a class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                         &nbsp;&nbsp;

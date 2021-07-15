@@ -10,6 +10,33 @@
 <body class="container">
     <div class="row">
         <div class="col-md-12">
+          <!-- 菜单导航 -->
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">梦云智</a>
+                            </div>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#">教师管理</a></li>
+                                    <li><a href="#">学生管理</a></li>
+                                    <li><a href="#">教室管理</a></li>
+                                    <li><a href="{:url('index')}">模板管理</a></li>
+
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="#">个人中心</a></li>
+                                    <li><a href="#">注销</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container-fluid -->
+                    </nav>
+                </div>
+            </div>
+    <!-- /菜单导航 -->
             <hr />
             <div class="row">
                 <div class="col-md-8">
@@ -22,7 +49,7 @@
                     </form>
                 </div>
                 <div class="col-md-4 text-right">
-                    <a href="" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加模板</a>
+                    <a href="{:url('add')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加模板</a>
                 </div>
             </div>
             <hr />
@@ -37,9 +64,9 @@
                       <td>A楼教室</td>
                       <td>30人</td>
                       <td>
-                         <a class="btn btn-sm btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>&nbsp;
-                         <a class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
-                         <a class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
+                         <a href="{:url('check')}" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>&nbsp;
+                         <a href="{:url('edit')}" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
+                         <a href="{:url('delete')}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                      </td>
                 </tr>    
             </table>
