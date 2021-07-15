@@ -33,15 +33,15 @@
             </nav>
         </div>
     </div>
-    <form action="" method='post'>
+    <form action="{:url('save')}" method='post'>
         <label for="name">课程:</label>
         <input type="text" name="name" id="name">
-        <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
-        <label for="klass_id_">一班</label>
-        <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
-        <label for="klass_id_">二班</label>
+        {volist name="Course->Klasses()->select()" id="klass"}
+            <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" />
+            <label for="klass_id_{$klass->id}">{$klass->name}</label>
+        {/volist}
         <button type="sumbit">保存</button>    
-        <button type="sumbit">取消</button>     
+        <a href="{:url('index')}"><button type="button">取消</button></a>     
     </form>
 </body>
 </html>
