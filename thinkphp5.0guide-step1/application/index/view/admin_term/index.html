@@ -67,7 +67,7 @@
                 <tr>
                       <td>{$key}</td>
                       <td>{$term->getData('name')}</td>
-                      <td>{:date('Y-m-d',$term->getData('create_time'))}</td>
+                      <td>{:date('Y-m-d',$term->getData('start_time'))}</td>
                       <td >{:date('Y-m-d',$term->getData('end_time'))}</td>
                       {eq name='$term->getData("effect")' value='1'}
                       <td class="text-success ">生效中</td>

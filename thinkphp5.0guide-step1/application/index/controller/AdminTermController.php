@@ -61,12 +61,12 @@ class AdminTermController extends Controller
          // 实例化空对象
         $term = new term();
        
-        $time1=strtotime($postData['create_time']);
+        $time1=strtotime($postData['start_time']);
         $time2=strtotime($postData['end_time']);
 
         // 为对象赋值
         $term->name = $postData['name'];
-        $term->create_time = $time1;
+        $term->start_time = $time1;
         $term->end_time = $time2;
         $term->effect = $postData['effect'];
         // 新增对象至数据表
@@ -74,13 +74,13 @@ class AdminTermController extends Controller
         
         // 反馈结果
         //判断日期是否为空
-        if($term->end_time===false ||$term->create_time===false){
+        if($term->end_time===false ||$term->start_time===false){
             $message = '新增失败:' . '日期不能为空';
         	return $this->error($message);
         }
 
         //判断开始日期是否小于结束日期
-        if($term->end_time<$term->create_time){
+        if($term->end_time<$term->start_time){
             $message = '新增失败:' . '开始日期不能大于结束日期';
         	return $this->error($message);
         }
@@ -130,23 +130,23 @@ class AdminTermController extends Controller
          // 实例化空对象
         $term = Term::get($postData['id']);
        
-        $time1=strtotime($postData['create_time']);
+        $time1=strtotime($postData['start_time']);
         $time2=strtotime($postData['end_time']);
 
         // 为对象赋值
         $term->name = $postData['name'];
-        $term->create_time = $time1;
+        $term->start_time = $time1;
         $term->end_time = $time2;
         
 
         //判断日期是否为空
-        if($term->end_time===false ||$term->create_time===false){
+        if($term->end_time===false ||$term->start_time===false){
             $message = '新增失败:' . '日期不能为空';
         	return $this->error($message);
         }
 
         //判断开始日期是否小于结束日期
-        if($term->end_time<$term->create_time){
+        if($term->end_time<$term->start_time){
             $message = '新增失败:' . '开始日期不能大于结束日期';
         	return $this->error($message);
         }
