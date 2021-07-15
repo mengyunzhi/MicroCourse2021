@@ -3,7 +3,9 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request; 
 use app\common\model\Teacher;
-class LogInController extends Controller
+use app\common\model\Student;
+use app\common\model\Admin;
+class LoginController extends Controller
 {
     public function index()
     {
@@ -20,10 +22,14 @@ class LogInController extends Controller
         // 验证用户名是否存在
         $map = array('username'  => $postData['username']);
         $User = Teacher::get($map);
+        $tag=1;
+        echo $tag;
         if(is_null($User)){
             $User = Student::get($map);
+            $tag=2;
             if(is_null($User)){
                 $User = Admin::get($map);
+                $tag=3;
             }
         }
         // $User要么是一个对象，要么是null。
@@ -36,7 +42,7 @@ class LogInController extends Controller
             return $this->error('用户名或密码错误', url('index'));
         }
     }
-
+//$tag===1教师，$tag===学生,$tag===3管理员
 // 验证用户名是否存在
 // 验证密码是否正确
 // 用户名密码正确 ，将teacherId 存session
