@@ -7,8 +7,4 @@ use think\Model;
 class Klass extends Model
 {
 
-
-class Klass extends Model
-{
-	
 }
