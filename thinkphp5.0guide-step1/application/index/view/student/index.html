@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>微课堂 学生端</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body  class="contanier">
+<!-- 菜单导航 -->
+    <div class="text left">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">梦云智</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">我的课程</a></li>
+                            <li><a href="#">学生管理</a></li>
+                            <li><a href="#">班级管理</a></li>
+                            <li><a href="#">上课</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{:url('student_center/center')?id={}}">个人中心</a></li>
+                            <li><a href="#">注销</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+    <div class="text left">
+        <div class="col-md-12">
+            <font size="3">上课时间:</font>
+            <input type="text" name="time">            
+        </div>
+        <div class="col-md-12">
+            <font size="3">课程:</font>
+            <select>
+                <option>高数</option>
+                <option>离散</option>
+            </select>       
+        </div>
+        <div class="col-md-12">
+            <font size="3">班级:</font>
+            <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
+            <label for="">1班</label> 
+            <font size="3">班级:</font>
+            <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
+            <label for="">2班</label> 
+        </div>
+        <div class="col-md-12"> <button type="button" class="btn btn-info">开始上课</button></div>
+    </div>
+</body>
+</html>
