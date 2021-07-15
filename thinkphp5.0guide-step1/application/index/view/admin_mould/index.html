@@ -61,16 +61,20 @@
                     <th>容量</th>
                     <th>操作</th>
                 </tr>
-                      <td>1</td>
-                      <td>A楼教室</td>
-                      <td>30人</td>
+                {volist name="Moulds" id="mould" key="key"}
+                <tr>
+                      <td>{$key}</td>
+                      <td>{$mould->getData('name')}</td>
+                      <td>{$mould->getData('num')}</td>
                       <td>
                          <a href="{:url('check')}" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>&nbsp;
                          <a href="{:url('edit')}" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
                          <a href="{:url('delete')}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                      </td>
-                </tr>    
+                </tr>
+                {/volist}      
             </table>
+            {$Moulds->render()}
         </div>
     </div>
 </body>
