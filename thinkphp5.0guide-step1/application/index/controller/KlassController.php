@@ -28,4 +28,22 @@ class KlassController extends Controller
 
 	}
 
+    //增加数据
+    public function add()
+    {
+    	// 获取所有的教师信息
+        $klasses = Klass::all();
+        $this->assign('klasses', $klasses);
+        return $this->fetch();
+    }
+
+    public function save()
+    {
+        $Request = Request::instance();
+        $Klass = new Klass();
+        $Klass->name = $Request->post('name');
+        var_dump($Klass->save());
+        return $Klass->name . '成功增加至数据表中。新增ID为:' . $Klass->id;
+    }
+
 }
