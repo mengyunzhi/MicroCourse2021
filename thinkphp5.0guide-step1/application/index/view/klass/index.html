@@ -43,7 +43,7 @@
                     <form class="form-inline">
                          <div class="form-group">
                             <label class="sr-only">学号</label>
-                            <input name="" type="text" class="form-control" placeholder="班级..." value="">
+                            <input name="name" type="text" class="form-control" placeholder="班级..." value="{:input('get.name')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -60,10 +60,11 @@
                     <th>人数</th>
                     <th>操作</th>
                 </tr>
-                <tr >
-                    <td>1</td>
-                    <td>一班</td>
-                    <td>30</td>
+                {volist name="klasses" id="klass" key="key"}
+                <tr >                    
+                    <td>{$key}</td>
+                    <td>{$klass->getData('name')}</td>
+                    <td>{$klass->getData('size')}</td>
                     <td>
                         <a class="btn btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查看学生</a>
                         &nbsp;&nbsp;
@@ -72,7 +73,9 @@
                         <a class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </td>
                 </tr>
+                {/volist}
             </table>
+            {$klasses->render()}
         </div>
     </div>
 </body>
