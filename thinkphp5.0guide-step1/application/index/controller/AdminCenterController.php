@@ -6,18 +6,21 @@ use think\Db;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
+
 class AdminCenterController extends Controller/*管理员端个人中心*/
 {
+
+
     public function center()
-    {
+    {   
+        
         $Teacher = new Admin; 
         $teachers = $Teacher->find();
         // 向V层传数据
         $this->assign('teachers', $teachers);
-
         // 取回打包后的数据
         $htmls = $this->fetch();
-
+        
         return $htmls;
     }//查看个人中心界面
     public function update(){
@@ -25,7 +28,7 @@ class AdminCenterController extends Controller/*管理员端个人中心*/
         $id = Request::instance()->param('id/d');
 
         // 在Teacher表模型中获取当前记录
-        $Teacher = Teacher::get($id);
+        $Teacher = Admin::get($id);
         // 将数据传给V层
         $this->assign('Teacher', $Teacher);
 
@@ -35,19 +38,19 @@ class AdminCenterController extends Controller/*管理员端个人中心*/
         // 将封装好的V层内容返回给用户
         return $htmls;
     }
-    public function edit() {
-        $Teacher = new Admin;
-        $postData = Request::instance()->post();
+    public function edit()  {
+        $teacherid = input('post.id');
         $oldPassword = input('post.oldPassword');
         $password = input('post.password');
-        
+        $Teacher = Admin::get($teacherid);
         if(is_null($Teacher)) {
-            return $this->error('未获取到任何成员', $Request->header('referer'));
+            return $this->error('未获取到任何用户');
         }
         $newPasswordAgain = input('post.newPasswordAgain');
 
 
         //判断旧密码是否正确
+        
         if($oldPassword != $Teacher->password) {
            return $this->error('旧密码错误', url('update'));
         }
@@ -71,13 +74,12 @@ class AdminCenterController extends Controller/*管理员端个人中心*/
         if(strlen($password) < 6 || strlen($password)>25) {
             return $this->error('密码长度应为6到25之间', url('update'));
         }
+        // var_dump(Teacher)
         $Teacher->password=$password;
         if(!$Teacher->save()) {
             return $this->error('密码更新失败', url('update'));
         }
-        $username = $Teacher->username;
-        $admin=new Admin;
-        $admin->save($Teacher);
-        return $this->success('密码修改成功,请重新登录', url('LogIn/index?username=', $username));
+         return $this->success('修改成功，请重新登录', url('login/'));
     }//修改密码
 }
+

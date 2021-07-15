@@ -23,7 +23,6 @@ class LoginController extends Controller
         $map = array('username'  => $postData['username']);
         $User = Teacher::get($map);
         $tag=1;
-        echo $tag;
         if(is_null($User)){
             $User = Student::get($map);
             $tag=2;
@@ -36,7 +35,14 @@ class LoginController extends Controller
         if (!is_null($User) && $User->getData('password') === $postData['password']) {
             // 用户名密码正确，将userId存session，并跳转至用户界面
             session('userId', $User->getData('id'));
-            return $this->success('登录成功', url('/index'));
+            if($tag===1){
+                        return $this->success('登录成功', url('teacher/index'));
+                    }
+            if($tag===2){
+                        return $this->success('登录成功', url('student/index'));
+                    }
+            if($tag===3)
+                    return $this->success('登录成功', url('admin/index'));
         } else {
             // 用户名不存在，跳转到登录界面。
             return $this->error('用户名或密码错误', url('index'));
