@@ -47,12 +47,12 @@
     <div class="row" >
          <div class="text-left "  style="  position:relative; top:20px;left: 23px">
               <font size="3">模板名称:</font>
-             <input class="form-inline" type="text" placeholder="A楼教室"  disabled><br>
+             <input class="form-inline" type="text" value="{$Mould->getData('name')}"  disabled><br>
              <font size="3">容量:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <input class="form-inline" type="text" placeholder="8人"  disabled><br>
+             <input class="form-inline" type="text" value="{$Mould->getData('num')}"  disabled><br>
         </div>
         <div class="text-right">
-            <a class="btn btn-primary" href="" style="margin-top: -15px;">
+            <a class="btn btn-primary" href="{:url('edit?id=' . $Mould->getData('id'))}" style="margin-top: -15px;">
                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
             </a>
             <a class="btn btn-danger "style="margin-top: -15px;">
@@ -76,52 +76,41 @@
 
     </div>
 
+   <!-- 模板显示 -->
     <div class="container"style="padding-right:100px">
         <table style="margin:0 auto;margin-bottom: 50px;">
+         <?php for ($x=1; $x<=$Mould->getData('row'); $x++) : ?>
             <tr>
-                <th>
-                    <button class="btn btn-info seat" >
-                    </button>
-                </th>
-                <th>
-                   <button class="btn btn-info seat" >
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-info seat" >
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-default seat" style=" border:none;">
-                    </button>
-                </th>
-                 <th>
-                    <button class="btn btn-info seat ">
-                    </button>
-                </th>
+             <?php for ($y=1; $y<=$Mould->getData('line'); $y++) :?>
+                  <!-- 输出座位 -->
+                  {volist name="Seats" id="seat" key="key"}
+                      {eq name'$seat["mid"]' value='$Mould->getData("id")'} 
+                            {eq name='$seat["x"]' value='$x'} 
+                               {eq name='$seat["y"]' value='$y'}
+                                 <th>
+                                    <button class="btn btn-info seat" >
+                                    </button>
+                                 </th>
+                                {/eq}
+                             {/eq}
+                            {/eq}
+                  {/volist}
+                  <!-- 输出过道 -->
+                  {volist name="Aisles" id="aisle" key="key"}
+                      {eq name='$aisle["mid"]' value='$Mould->getData("id")'} 
+                            {eq name='$aisle["x"]' value='$x'} 
+                               {eq name='$aisle["y"]' value='$y'}
+                                 <th>
+                                    <button class="btn btn-default seat" style="border:none;">
+                                    </button>
+                                 </th>
+                                {/eq}
+                             {/eq}
+                            {/eq}
+                  {/volist}
+               <?php endfor; ?>
             </tr>
-             <tr>
-                <th>
-                    <button class="btn btn-info seat" >
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-info seat" >
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-info seat" >
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-default seat" style=" border:none;">
-                    </button>
-                </th>
-                 <th>
-                    <button class="btn btn-info seat" >
-                    </button>
-                </th>
-            </tr>
+           <?php endfor; ?>
         </table>
     </div>
     <hr>
