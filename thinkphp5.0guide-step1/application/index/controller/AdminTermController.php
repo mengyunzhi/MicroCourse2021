@@ -263,7 +263,6 @@ class AdminTermController extends Controller
         $Term->validate(true)->save();
        
        return $this->success('激活'.$Term->name.'成功',url('index'));
->>>>>>> origin
     }
 
     //冻结学期

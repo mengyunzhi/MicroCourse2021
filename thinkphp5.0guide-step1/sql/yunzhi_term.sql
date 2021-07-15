@@ -30,7 +30,6 @@ CREATE TABLE `yunzhi_term`  (
   `effect` int(255) NOT NULL DEFAULT 0 COMMENT '0已生效 1未生效',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-=======
 ) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
