@@ -27,6 +27,7 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
+                                    <li><a href="{:url('admin_term/index')}">学期管理</a></li>
                                     <li><a href="#">教师管理</a></li>
                                     <li><a href="#">学生管理</a></li>
                                     <li><a href="#">教室管理</a></li>
@@ -55,7 +56,7 @@
             <a class="btn btn-primary" href="{:url('edit?id=' . $Mould->getData('id'))}" style="margin-top: -15px;">
                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
             </a>
-            <a class="btn btn-danger "style="margin-top: -15px;">
+            <a class="btn btn-danger " href="{:url('delete?id=' . $Mould->getData('id'))}" style="margin-top: -15px;">
                 <i class="glyphicon glyphicon-trash"></i>&nbsp;删除
             </a>
         </div>
@@ -84,7 +85,7 @@
              <?php for ($y=1; $y<=$Mould->getData('line'); $y++) :?>
                   <!-- 输出座位 -->
                   {volist name="Seats" id="seat" key="key"}
-                      {eq name'$seat["mid"]' value='$Mould->getData("id")'} 
+                      {eq name='$seat["mid"]' value='$Mould->getData("id")'} 
                             {eq name='$seat["x"]' value='$x'} 
                                {eq name='$seat["y"]' value='$y'}
                                  <th>
