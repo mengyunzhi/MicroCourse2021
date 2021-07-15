@@ -3,11 +3,7 @@ namespace app\index\controller;
 use think\Request;  
 use think\Controller;
 use app\common\model\Term;
-<<<<<<< HEAD
-=======
 use think\Db; 
->>>>>>> origin
-
 class AdminTermController extends Controller
 {
 
@@ -23,11 +19,7 @@ class AdminTermController extends Controller
     	$Term = new Term;
          
         // 按条件查询数据并调用分页
-<<<<<<< HEAD
-    	$Terms= $Term->where('name', 'like', '%' . $name . '%')->paginate($pageSize, false, [
-=======
     	$Terms= $Term->where('name', 'like', '%' . $name . '%')->order('effect desc')->paginate($pageSize, false, [
->>>>>>> origin
             'query'=>[
                 'name' => $name,
                 ],
@@ -47,7 +39,6 @@ class AdminTermController extends Controller
     }
 
     public function insert()
-<<<<<<< HEAD
     {
        $message = '';  // 提示信息
 
@@ -77,7 +68,6 @@ class AdminTermController extends Controller
                 // 提示操作成功，并跳转至管理列表
                 return $this->success('学期' . $term->name . '新增成功。', url('index'));
             } 
-=======
     {      
        //将其他生效学期改为冻结
        $Terms = Db::name('term')->select();
@@ -132,13 +122,11 @@ class AdminTermController extends Controller
             // 提示操作成功，并跳转至管理列表
             return $this->success( $term->name . '新增成功。', url('index'));
         } 
->>>>>>> origin
-     
+    
     }
 
      public function edit()
     {
-<<<<<<< HEAD
     return $this->fetch();
     }
 
@@ -148,7 +136,6 @@ class AdminTermController extends Controller
     {
 
 
-=======
        // 获取传入ID
         $id = Request::instance()->param('id/d');
 
@@ -282,9 +269,6 @@ class AdminTermController extends Controller
     //冻结学期
     public function frozen()
     {
-<<<<<<< HEAD
-
-=======
        // 获取传入ID
         $id = Request::instance()->param('id/d'); 
 
@@ -303,7 +287,6 @@ class AdminTermController extends Controller
 
         //将冻结的学期生效值改为0
         $Term->effect = 0;
->>>>>>> origin
 
         //保存   
         $Term->validate(true)->save();
