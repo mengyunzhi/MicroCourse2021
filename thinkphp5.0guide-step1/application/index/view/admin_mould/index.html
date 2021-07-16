@@ -44,7 +44,7 @@
                     <form class="form-inline">
                         <div class="form-group">
                             <label class="sr-only" for="name">名称</label>
-                            <input name="name" type="text" class="form-control" placeholder="名称..." value="">
+                            <input name="name" type="text" class="form-control" placeholder="名称..." value={:input('get.name')}>
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -65,11 +65,11 @@
                 <tr>
                       <td>{$key}</td>
                       <td>{$mould->getData('name')}</td>
-                      <td>{$mould->getData('num')}</td>
+                      <td>{$mould->getData('num')}人</td>
                       <td>
-                         <a href="{:url('check')}" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>&nbsp;
-                         <a href="{:url('edit')}" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
-                         <a href="{:url('delete')}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
+                         <a href="{:url('check?id=' . $mould->getData('id'))}" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查看</a>&nbsp;
+                         <a href="{:url('edit?id=' . $mould->getData('id'))}" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
+                         <a href="{:url('delete?id=' . $mould->getData('id'))}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                      </td>
                 </tr>
                 {/volist}      

@@ -13,12 +13,12 @@
     <h1 class="head1">个人中心</h1>
     <div class="in">
     <ul>
-        <li><font size="5" >管理员编号:<td></td></font></li>
-        <li><font size="5" >姓名：<td></td></font></li>
-        <li><font size="5" >性别：<td></td></font></li>
-        <li><font size="5" >用户名：<td></td></font></li>
+        <li><font size="5" >管理员编号:<td>{:$teachers->id}</td></font></li>
+        <li><font size="5" >姓名：{:$teachers->name}<td></td></font></li>
+        <li><font size="5" >性别：{:$teachers->sex}<td></td></font></li>
+        <li><font size="5" >用户名：{:$teachers->username}<td></td></font></li>
     </ul>
-    <div class="code"><a href="edit.html"><font size="4">修改密码</font></a></div>
+    <div class="code"><a href="{:url('update?id=' . $teachers->getData('id'))}"><font size="4">修改密码</font></a></div>
 </div>
 </div>
 </body>

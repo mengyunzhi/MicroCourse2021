@@ -6,7 +6,7 @@ class Term extends Validate
 {
     protected $rule = [
     	'name'  => 'require|length:2,25',
-    	'create_time' => 'require',
+    	'start_time' => 'require',
     	'end_time' => 'require',
     ];
 }
