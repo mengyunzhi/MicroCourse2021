@@ -81,7 +81,7 @@ class ScoreController extends Controller
             if(!is_null($Score)){
                 $Score->usual_score=input('post.usual_score');
                 $Score->exam_score=input('post.exam_score');
-                $score->sum_score=$Score->usual_score+$Score->exam_score;
+                $Score->sum_score=input('post.usual_score')+input('post.exam_score');
                     if(false===$Score->validate(true)->save()){
                         return $this->error('更新失败' . $Score->getError());
                     }
@@ -94,7 +94,7 @@ class ScoreController extends Controller
         }catch(\Exception $e){
             return $e->getMessage();
         }
-        return $this->success('操作成功',url('index'));
+        return $this->success('操作成功',url('index?id='.$Score->student_id));
     }
     
 }
