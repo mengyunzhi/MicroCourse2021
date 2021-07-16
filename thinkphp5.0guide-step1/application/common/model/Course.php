@@ -46,4 +46,8 @@ class Course extends Model
     {
         return $this->hasMany('KlassCourse');
     }
+    public function Teacher()
+    {
+        return $this->belongsTo('Teacher');
+    }
 }
