@@ -22,7 +22,7 @@
                                     <li><a href="{:url('admin_term/index')}">学期管理</a></li>
                                     <li><a href="#">教师管理</a></li>
                                     <li><a href="#">学生管理</a></li>
-                                    <li><a href="#">教室管理</a></li>
+                                    <li><a href="{:url('admin_room/index')}">教室管理</a></li>
                                     <li><a href="{:url('admin_mould/index')}">模板管理</a></li>
 
                                 </ul>
@@ -70,13 +70,13 @@
                       <td>{:date('Y-m-d',$term->getData('start_time'))}</td>
                       <td >{:date('Y-m-d',$term->getData('end_time'))}</td>
                       {eq name='$term->getData("effect")' value='1'}
-                      <td class="text-success ">生效中</td>
+                      <td ><span class="label label-success">生效中</span></td>
                       {else /}
-                       <td >未生效</td>{/eq}
+                       <td ><span class="label label-default">未生效</span></td>{/eq}
                      <td>{eq name='$term->getData("effect")' value='1'}
-                         <a href="{:url('frozen?id=' . $term->getData('id'))}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-star-empty"></i>&nbsp;冻结</a>
+                         <a href="{:url('frozen?id=' . $term->getData('id'))}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-ice-lolly"></i>&nbsp;冻结</a>
                          {else /}
-                         <a href="{:url('activate?id=' . $term->getData('id'))}" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-star"></i>&nbsp;激活</a>{/eq}
+                         <a href="{:url('activate?id=' . $term->getData('id'))}" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ice-lolly-tasted"></i>&nbsp;激活</a>{/eq}
                          <a href="{:url('edit?id=' . $term->getData('id'))}" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>&nbsp;
                          <a href="{:url('delete?id=' . $term->getData('id'))}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                      </td>

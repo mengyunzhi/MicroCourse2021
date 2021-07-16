@@ -1,8 +1,10 @@
 <?php
 namespace app\index\controller;
-use app\common\model\Klass;        
+use app\common\model\Klass;
+use app\common\model\Student;        
 use think\Controller;
 use think\Request;
+use think\Db;
 
 // 教师端班级管理
 class KlassController extends Controller
@@ -31,7 +33,7 @@ class KlassController extends Controller
     //增加数据
     public function add()
     {
-    	// 获取所有的教师信息
+    	// 获取所有的班级信息
         $klasses = Klass::all();
         $this->assign('klasses', $klasses);
         return $this->fetch();
@@ -110,5 +112,27 @@ class KlassController extends Controller
 
         // 进行跳转
         return $this->success('删除成功', url('index'));
+    }
+
+    //查看班级
+    public function check()
+    {
+        //接收id
+        $id = Request::instance()->param('id/d');
+
+        //获取学生信息
+        $Student = Db::name('student')->select();
+
+        //分页数
+        $pageSize=2;
+
+        //查询该班学生信息
+        $students = Student::where('klass_id', '=', $id)->paginate($pageSize);
+
+        //向V层传数据
+        $this->assign('students', $students);
+
+        //返回
+        return $this->fetch();
     }
 }

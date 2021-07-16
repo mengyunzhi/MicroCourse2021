@@ -6,7 +6,7 @@ use think\Db;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
-class StudentController extends Controller
+class StudentController extends IndexController
 {
 	public function index()
 	{
