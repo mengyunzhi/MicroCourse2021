@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+            <div class="col-md-4">
+                <a href="{:url('TeacherStudent/index')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;返回</a>
+            </div>
+            <hr />
+            <table class="table table-hover table-bordered">
+                <tr class="info">
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>课程</th>
+                    <th>平时成绩</th>
+                    <th>期末成绩</th>
+                    <th>总成绩(各占50%）</th>
+                    <th>操作</th>
+                </tr>
+                {volist name='scores' id='score' key='key'}
+                <tr >
+                    <td>{$key}</td>
+                    <td>{:$Student->get($score->student_id)->name}</td>
+                    <td>{:$Course->get($score->course_id)->name}</td>
+                    <td>{$score->usual_score}</td>
+                    <td>{$score->exam_score}</td>
+                    <td>{$score->sum_score}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{:url('edit?id='.$score->id)}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+                        &nbsp;&nbsp;
+                    </td>
+                </tr>
+                {/volist}
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
