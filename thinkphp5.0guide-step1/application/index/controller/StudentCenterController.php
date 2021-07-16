@@ -10,9 +10,11 @@ class StudentCenterController extends Controller/*学生端个人中心*/
 {
     public function center()
     {   
+
         $id = session('id');
         $Teacher = new Student; 
         $teachers = Student::get($id);
+
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据
@@ -25,7 +27,9 @@ class StudentCenterController extends Controller/*学生端个人中心*/
         $id = Request::instance()->param('id/d');
 
         // 在Teacher表模型中获取当前记录
+
         $Teacher = Student::get($id);
+
         // 将数据传给V层
         $this->assign('Teacher', $Teacher);
 
@@ -39,7 +43,9 @@ class StudentCenterController extends Controller/*学生端个人中心*/
         $teacherid = input('post.id');
         $oldPassword = input('post.oldPassword');
         $password = input('post.password');
+
         $Teacher = Student::get($teacherid);
+
         if(is_null($Teacher)) {
             return $this->error('未获取到任何用户');
         }
@@ -103,4 +109,5 @@ class StudentCenterController extends Controller/*学生端个人中心*/
         }
         return $this->success('修改成功', url('student_center/center'));
     }
+
 }

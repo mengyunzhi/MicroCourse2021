@@ -14,6 +14,7 @@
     <h1 class="head1">个人中心</h1>
     <div class="in">
     <ul>
+
         
         <li><font size="5" >学生学号:<td>{:$teachers->id}</td></font></li>
         <li><font size="5" >姓名：{:$teachers->name}<td></td></font></li>
@@ -24,6 +25,7 @@
     <div class="email"><button class="btn btn-default col-md-offset-12"><a href="{:url('updateemail?id=' . $teachers->getData('id'))}"><font size="3">修改邮箱</font></a></button></div>
     <br>
     <div class="code"><button class="btn btn-default col-md-offset-12"><a href="{:url('update?id=' . $teachers->getData('id'))}"><font size="3">修改密码</font></a></button></div>
+
 </div>
 </div>
 </body>
