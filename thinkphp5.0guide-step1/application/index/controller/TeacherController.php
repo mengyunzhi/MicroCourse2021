@@ -94,11 +94,13 @@ class TeacherController extends Controller
         //随机选择学生
         $studentNumber=count($studentIds);
         if ($studentNumber===0) {
-        	return $this->error('该班级学生人数为0，请重新点名');
+        	$studentName='';
+        }else{
+        	$studentId=(int)$this->dc_rand1(0,$studentNumber-0.1,5)[3];
+        	$Student=Student::get($studentIds[$studentId]);
+        	$studentName=$Student->name;
         }
-        $studentId=(int)$this->dc_rand1(0,$studentNumber-0.1,5)[3];
-        $Student=Student::get($studentIds[$studentId]);
-        return $Student->name;
+        return $studentName;
              
     }
 	//获得随机数

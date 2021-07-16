@@ -36,6 +36,12 @@
     <form action="{:url('save')}" method='post'>
         <label for="name">课程:</label>
         <input type="text" name="name" id="name">
+        <label >教师姓名:</label>
+        <select name="teacher_id">
+            {volist name='$Teacher->select()' id='teacher'}
+                <option value="{$teacher->getData('id')}" >{$teacher->name}</option> 
+            {/volist}
+        </select>
         {volist name="Course->Klasses()->select()" id="klass"}
             <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" />
             <label for="klass_id_{$klass->id}">{$klass->name}</label>
