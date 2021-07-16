@@ -20,13 +20,14 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="#">我的课程</a></li>
-                            <li><a href="#">学生管理</a></li>
-                            <li><a href="#">班级管理</a></li>
+                            <li><a href="#">我得成绩</a></li>
+                            <li><a href="#">上课签到</a></li>
                             <li><a href="#">上课</a></li>
                         </ul>
+   						                        
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{:url('student_center/center')?id={}}">个人中心</a></li>
-                            <li><a href="#">注销</a></li>
+                            <li><a href="{:url('student_center/center')}">个人中心</a></li>
+                            <li><a href=>注销</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -35,27 +36,5 @@
             </nav>
         </div>
     </div>
-    <div class="text left">
-        <div class="col-md-12">
-            <font size="3">上课时间:</font>
-            <input type="text" name="time">            
-        </div>
-        <div class="col-md-12">
-            <font size="3">课程:</font>
-            <select>
-                <option>高数</option>
-                <option>离散</option>
-            </select>       
-        </div>
-        <div class="col-md-12">
-            <font size="3">班级:</font>
-            <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
-            <label for="">1班</label> 
-            <font size="3">班级:</font>
-            <input type="checkbox" name="klass_id[]" id="klass_id_" value="" />
-            <label for="">2班</label> 
-        </div>
-        <div class="col-md-12"> <button type="button" class="btn btn-info">开始上课</button></div>
-    </div>
-</body>
+    </body>
 </html>

@@ -10,9 +10,9 @@ class StudentCenterController extends Controller/*学生端个人中心*/
 {
     public function center()
     {   
-        
+        $id = session('id');
         $Teacher = new Student; 
-        $teachers = $Teacher->find();
+        $teachers = Student::get($id);
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据

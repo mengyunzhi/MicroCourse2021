@@ -11,8 +11,9 @@ class TeacherCenterController extends Controller/*教师端个人中心*/
     public function center()
     {   
         
+        $id = session('id');
         $Teacher = new Teacher; 
-        $teachers = $Teacher->find();
+        $teachers = Teacher::get($id);
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据

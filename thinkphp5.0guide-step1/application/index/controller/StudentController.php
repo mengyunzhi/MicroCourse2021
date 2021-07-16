@@ -10,7 +10,7 @@ class StudentController extends Controller
 {
 	public function index()
 	{
-		$id = Request::instance()->param('id/d');
+		
 		return $this->fetch();
 	}
 	public function onclass()

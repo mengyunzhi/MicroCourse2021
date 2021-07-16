@@ -13,9 +13,9 @@ class AdminCenterController extends Controller/*管理员端个人中心*/
 
     public function center()
     {   
-        
+        $id = session('id');
         $Teacher = new Admin; 
-        $teachers = $Teacher->find();
+        $teachers = Admin::get($id);
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据
