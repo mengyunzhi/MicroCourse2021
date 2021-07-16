@@ -4,7 +4,7 @@ use think\Controller;
 use app\common\model\Teacher;  
 use app\common\model\Student;
 use app\common\model\Admin;
-class IndexController 
+class IndexController extends Controller
 {   
     public function __construct()
     {
@@ -12,8 +12,8 @@ class IndexController
         parent::__construct();
 
         // 验证用户是否登陆
-        if (!Teacher::isLogin() {
-            return $this->error('plz login first', url('Login/index'));
+        if (!Teacher::isLogin()) {
+            return $this->error('未检测到登录信息，请重新登录', url('Login/index'));
         }
     }//没有改写继承关系，没有改写M层代码
     public function index()

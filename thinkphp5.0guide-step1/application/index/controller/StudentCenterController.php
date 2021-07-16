@@ -6,7 +6,7 @@ use think\Db;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
-class StudentCenterController extends Controller/*学生端个人中心*/
+class StudentCenterController extends IndexController/*学生端个人中心*/
 {
     public function center()
     {   
