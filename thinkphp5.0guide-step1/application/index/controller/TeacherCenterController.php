@@ -6,13 +6,16 @@ use think\Db;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
-class TeacherCenterController extends Controller/*教师端个人中心*/
+class TeacherCenterController extends IndexController/*教师端个人中心*/
 {
     public function center()
     {   
         
+
+        $id = session('id');
         $Teacher = new Teacher; 
-        $teachers = $Teacher->find();
+        $teachers = Teacher::get($id);
+
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据
@@ -78,4 +81,31 @@ class TeacherCenterController extends Controller/*教师端个人中心*/
         }
          return $this->success('修改成功，请重新登录', url('login/'));
     }//修改密码
+
+    public function updateemail(){
+       // 获取传入ID
+        $id = Request::instance()->param('id/d');
+
+        // 在Teacher表模型中获取当前记录
+        $Teacher = Teacher::get($id);
+        // 将数据传给V层
+        $this->assign('Teacher', $Teacher);
+
+        // 获取封装好的V层内容
+        $htmls = $this->fetch();
+
+        // 将封装好的V层内容返回给用户
+        return $htmls;
+    }
+    public function editemail(){
+        $teacherid = input('post.id');
+        $email=input('post.email');
+        $Teacher = Teacher::get($teacherid);
+        $Teacher->email=$email;
+        if(!$Teacher->save()){
+            return $this->error('邮箱更新失败', url('updateemail'));
+        }
+        return $this->success('修改成功', url('teacher_center/center'));
+    }
+
 }

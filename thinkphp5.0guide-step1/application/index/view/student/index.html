@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>微课堂 学生端</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body  class="contanier">
+<!-- 菜单导航 -->
+    <div class="text left">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">梦云智</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">我的课程</a></li>
+                            <li><a href="#">我得成绩</a></li>
+                            <li><a href="#">上课签到</a></li>
+                            <li><a href="#">上课</a></li>
+                        </ul>
+   						                        
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{:url('student_center/center')}">个人中心</a></li>
+                            <li><a href="{:url('Login/logout')}">注销</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+    </body>
+</html>

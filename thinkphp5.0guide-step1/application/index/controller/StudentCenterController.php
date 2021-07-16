@@ -6,13 +6,15 @@ use think\Db;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
-class StudentCenterController extends Controller/*学生端个人中心*/
+class StudentCenterController extends IndexController/*学生端个人中心*/
 {
     public function center()
     {   
-        
-        $Teacher = new Admin; 
-        $teachers = $Teacher->find();
+
+        $id = session('id');
+        $Teacher = new Student; 
+        $teachers = Student::get($id);
+
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据
@@ -25,7 +27,9 @@ class StudentCenterController extends Controller/*学生端个人中心*/
         $id = Request::instance()->param('id/d');
 
         // 在Teacher表模型中获取当前记录
-        $Teacher = Admin::get($id);
+
+        $Teacher = Student::get($id);
+
         // 将数据传给V层
         $this->assign('Teacher', $Teacher);
 
@@ -39,7 +43,9 @@ class StudentCenterController extends Controller/*学生端个人中心*/
         $teacherid = input('post.id');
         $oldPassword = input('post.oldPassword');
         $password = input('post.password');
-        $Teacher = Admin::get($teacherid);
+
+        $Teacher = Student::get($teacherid);
+
         if(is_null($Teacher)) {
             return $this->error('未获取到任何用户');
         }
@@ -78,4 +84,30 @@ class StudentCenterController extends Controller/*学生端个人中心*/
         }
          return $this->success('修改成功，请重新登录', url('login/'));
     }//修改密码
+    public function updateemail(){
+       // 获取传入ID
+        $id = Request::instance()->param('id/d');
+
+        // 在Teacher表模型中获取当前记录
+        $Teacher = Student::get($id);
+        // 将数据传给V层
+        $this->assign('Teacher', $Teacher);
+
+        // 获取封装好的V层内容
+        $htmls = $this->fetch();
+
+        // 将封装好的V层内容返回给用户
+        return $htmls;
+    }
+    public function editemail(){
+        $teacherid = input('post.id');
+        $email=input('post.email');
+        $Teacher = Student::get($teacherid);
+        $Teacher->email=$email;
+        if(!$Teacher->save()){
+            return $this->error('邮箱更新失败', url('updateemail'));
+        }
+        return $this->success('修改成功', url('student_center/center'));
+    }
+
 }
