@@ -9,6 +9,7 @@ class Student extends Model
         $klassId = $this->getData('klass_id');
         $Klass = Klass::get($klassId);
         return $Klass;
+    }
 
 	/**
     * ThinkPHP使用一个叫做__get()的魔法函数来完成这个函数的自动调用
