@@ -58,11 +58,11 @@ class LoginController extends Controller
 // 用户名密码正确 ，将teacherId 存session
 // 用户名密码错误，跳转到登录界面 
     public function logout(){
-        if(Teacher::logout()||Admin::logout()||Student::logout()){
-            return $this->success('注销成功',url('login'));
+        if(Teacher::logout()){
+            return $this->success('注销成功',url('login/index'));
         }
         else{
-            return $this->error('logout error',url('login'));
+            return $this->error('注销失败',url(''));
         }
     }
 }
