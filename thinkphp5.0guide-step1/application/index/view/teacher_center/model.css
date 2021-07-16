@@ -28,5 +28,10 @@ background-color: #E0F8F7;border-radius: 25px;
      margin: 30px 10px 20px 150px
 }
 .code{
-    left: 1100px; position: absolute; top: 600px;
+    position:relative
+    left: 1100px;  top: 600px;
+}
+.email{
+    position:relative
+    left: 1100px;  top: 700px;
 }
