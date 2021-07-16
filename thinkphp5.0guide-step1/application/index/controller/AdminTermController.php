@@ -40,35 +40,7 @@ class AdminTermController extends Controller
 
     public function insert()
     {
-       $message = '';  // 提示信息
-
-            // 接收传入数据
-            $postData = Request::instance()->post();    
-               
-                        // 实例化空对象
-            $term = new term();
-           
-           $time1=strtotime($postData['create_time']);
-           $time2=strtotime($postData['end_time']);
-
-            // 为对象赋值
-            $term->name = $postData['name'];
-            $term->create_time = $time1;
-            $term->end_time = $time2;
-            $term->effect = $postData['effect'];
-            // 新增对象至数据表
-            $result = $term->save();
-            
-            // 反馈结果
-            if (false === $result)
-            {
-                // 验证未通过，发生错误
-                $message = '新增失败:' . $term->getError();
-            } else {
-                // 提示操作成功，并跳转至管理列表
-                return $this->success('学期' . $term->name . '新增成功。', url('index'));
-            } 
-    {      
+       
        //将其他生效学期改为冻结
        $Terms = Db::name('term')->select();
 
@@ -122,20 +94,11 @@ class AdminTermController extends Controller
             // 提示操作成功，并跳转至管理列表
             return $this->success( $term->name . '新增成功。', url('index'));
         } 
+     }
     
-    }
 
      public function edit()
     {
-    return $this->fetch();
-    }
-
-
-    //激活学期
-    public function activate()
-    {
-
-
        // 获取传入ID
         $id = Request::instance()->param('id/d');
 
@@ -159,6 +122,7 @@ class AdminTermController extends Controller
         // 将封装好的V层内容返回给用户
         return $htmls;
     }
+
     public function save(){
         $message = '';  // 提示信息
 
@@ -219,7 +183,7 @@ class AdminTermController extends Controller
 
         // 删除对象
         if (!$Term->delete()) {
-            return $this->error('删除失败:' . $Teacher->getError());
+            return $this->error('删除失败:' . $Term->getError());
         }
         return $this->success('删除成功',url('index')); 
     }

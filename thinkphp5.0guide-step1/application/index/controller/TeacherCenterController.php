@@ -11,9 +11,11 @@ class TeacherCenterController extends IndexController/*教师端个人中心*/
     public function center()
     {   
         
+
         $id = session('id');
         $Teacher = new Teacher; 
         $teachers = Teacher::get($id);
+
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据
@@ -79,6 +81,7 @@ class TeacherCenterController extends IndexController/*教师端个人中心*/
         }
          return $this->success('修改成功，请重新登录', url('login/'));
     }//修改密码
+
     public function updateemail(){
        // 获取传入ID
         $id = Request::instance()->param('id/d');
@@ -104,4 +107,5 @@ class TeacherCenterController extends IndexController/*教师端个人中心*/
         }
         return $this->success('修改成功', url('teacher_center/center'));
     }
+
 }

@@ -19,6 +19,7 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
+                                    <li><a href="{:url('admin_term/index')}">学期管理</a></li>
                                     <li><a href="#">教师管理</a></li>
                                     <li><a href="#">学生管理</a></li>
                                     <li><a href="#">教室管理</a></li>
@@ -40,17 +41,21 @@
 	<div class="col-md-12">
 		<hr>
 		<input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
-	    <form class="form-inline col-md-4 col-md-offset-4" action="{:url('set')}">
-	  <div class="form-group">
-	    <label for="x">请输入模板行数</label>
-	    <input type="text" class="form-control" id="exampleInputName2" >
+	    <form class="form-inline col-md-4 col-md-offset-4" method="post" action="{:url('set')}">
+        <div class="form-group" >
+        <label for="name">请输入模板名字</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+	  <div class="form-group " style="position: relative;top:20px">
+	    <label for="row">请输入模板行数</label>
+	    <input type="text" class="form-control" id="row" name="row">
 	  </div>
-	  <div class="form-group" style="position: relative;top:20px">
-	    <label for="exampleInputEmail2">请输入模板列数</label>
-	    <input type="email" class="form-control" id="y" >
+	  <div class="form-group" style="position: relative;top:40px">
+	    <label for="line">请输入模板列数</label>
+	    <input type="text" class="form-control" id="line" name="line">
 	  </div>
 	  <br>
-	  <button type="submit" class="btn btn-default col-md-offset-2" style="position: relative;top:40px;left: 70px">submit</button>
+	  <button type="submit" class="btn btn-default col-md-offset-2" style="position: relative;top:60px;left: 70px">submit</button>
 	  </form>
 	</div>
 </body>

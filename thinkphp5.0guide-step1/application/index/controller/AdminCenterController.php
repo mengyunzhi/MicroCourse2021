@@ -16,6 +16,7 @@ class AdminCenterController extends IndexController/*管理员端个人中心*/
         $id = session('id');
         $Teacher = new Admin; 
         $teachers = Admin::get($id);
+
         // 向V层传数据
         $this->assign('teachers', $teachers);
         // 取回打包后的数据
@@ -31,6 +32,7 @@ class AdminCenterController extends IndexController/*管理员端个人中心*/
         $Teacher = Admin::get($id);
         // 将数据传给V层
         $this->assign('Teacher', $Teacher);
+
 
         // 获取封装好的V层内容
         $htmls = $this->fetch();

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>学生管理</title>
+    <title>增加班级</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
@@ -19,10 +19,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="{:url('TeacherCourse/index')}">课程管理</a></li>
-                            <li><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
-                            <li><a href="{:url('TeacherKlass/index')}">班级管理</a></li>
-                            <li><a href="{:url('Teacher/index')}">上课</a></li>
+                            <li><a href="#">课程管理</a></li>
+                            <li><a href="#">学生管理</a></li>
+                            <li><a href="#">班级管理</a></li>
+                            <li><a href="#">上课</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">个人中心</a></li>
@@ -37,25 +37,15 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
             <hr />
+            <h2>学生名单</h2>
             <div class="row">
-                <form class="form-inline" action="">
-                    <div>
-                        <div><label>导入学生成绩：</label></div>
-                        <div><button type="submit">模板下载</button></div>
-                        <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                        <input name="userfile" type="file" /></div>
-                        <div><label>导出学生成绩：</label></div>
-                        <div><button type="submit">导出成绩</button></div>
-                        <div></div>
-                    </div>
-                    <hr />
-                </form>
                 <div class="col-md-8">
                     <form class="form-inline">
                          <div class="form-group">
                             <label class="sr-only">学号</label>
-                            <input name="" type="text" class="form-control" placeholder="学号..." value="">
+                            <input name="name" type="text" class="form-control" placeholder="学号..." value="">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -68,29 +58,21 @@
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>序号</th>
+                    <th>班级</th>
                     <th>姓名</th>
                     <th>学号</th>
-                    <th>班级</th>
-                    <th>课程</th>
-                    <th>平时成绩</th>
-                    <th>期末成绩</th>
-                    <th>总成绩(各占50%）</th>
                     <th>操作</th>
                 </tr>
-                {volist name='students' id='Student' key='key'}
-                <tr >
+                {volist name="students" id="student" key="key"}
+                <tr >                    
                     <td>{$key}</td>
-                    <td>{$Student->name}</td>
-                    <td>{$Student->number}</td>
-                    <td>{$Student->Klass->name}</td>
-                    <td>高等数学</td>
-                    <td>100</td>
-                    <td>90</td>
-                    <td>95</td>
+                    <td>{$student->getKlass->getData('name')}</td>
+                    <td>{$student->getData('name')}</td>
+                    <td>{$student->getData('number')}</td>
                     <td>
-                        <a class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+                        <a class="btn btn-primary" href="{:url('student_edit?id=' . $student->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                         &nbsp;&nbsp;
-                        <a class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
+                        <a class="btn btn-danger" href="{:url('student_delete?id=' . $student->getData('id'))}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </td>
                 </tr>
                 {/volist}

@@ -3,6 +3,7 @@ namespace app\common\model;
 use think\Model;
 
 class Teacher extends Model
+
 {
 	static public function logOut()
     {
@@ -21,4 +22,15 @@ class Teacher extends Model
             return false;
         }
     }
+{	//一对多关联
+	public	function courses()
+	{
+		return $this->hasMany('Course')->field('id,name');
+	}
+	
+
+
+       
+
+
 }
