@@ -49,6 +49,9 @@ class AdminMouldController extends Controller
             $this->error('系统未找到ID为' . $id . '的记录');
         } 
         
+        //获取所有模板信息
+        $Moulds = Db::name('mould')->select();
+
         //获取座位信息
         $Seats = Db::name('seat')->select();
 
@@ -57,6 +60,9 @@ class AdminMouldController extends Controller
        
         // 将数据传给V层
         $this->assign('Mould', $Mould);
+
+        $this->assign('Moulds', $Moulds);
+        
 
         $this->assign('Seats',$Seats);
         
