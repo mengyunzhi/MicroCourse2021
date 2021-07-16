@@ -37,15 +37,20 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+        <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
         <hr />
-            <form action="" method="">
-                <label>姓名:</label>
-                <input type="hidden" name="id" value="" />
-                <input type="text" name="name" value="" />
-                <label>学号:</label>
-                <input type="text" name="number" value="" />
+            <form action="{:url('student_update')}" method="post">
+                <input type="hidden" name="id" id="id" value="{$Student->getData('id')}" />
+                <label for="klass_id">班级:</label>
+                <input type="text" name="klass_id" id="klass_id" value="{$Student->getKlass->getData('name')}" />
+                <label for="name">姓名:</label>
+                <input type="text" name="name" id="name" value="{$Student->getData('name')}" />
+                <label for="number">学号:</label>
+                <input type="text" name="number" id="number" value="{$Student->getData('number')}" />
+                <input type="hidden" name="sex" value="" />
+                <input type="hidden" name="email" value="" />
+                <input type="hidden" name="username" value="" />
                 <button type="submit">保存</button>
-                <button type="submit">取消</button>
             </form>
         </div>
     </div>
