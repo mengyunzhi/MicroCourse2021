@@ -110,7 +110,7 @@ class AdminMouldController extends Controller
     {
        // 获取传入ID
         $id = Request::instance()->param('id/d');
-
+         
         // 判断是否成功接收
         if (is_null($id) || 0 === $id) {
             $this->error('未获取到模板信息');
@@ -212,7 +212,7 @@ class AdminMouldController extends Controller
         header("Location: $url");
         exit(); 
     }
-
+    
     public function save()
     {
         $postData = Request::instance()->post();
@@ -235,11 +235,49 @@ class AdminMouldController extends Controller
 	{
 		return $this->fetch();
 	}
+    
+    //设置座位信息
 	public function set()
 	{
-		return $this->fetch();
-	}
+		$postData = Request::instance()->post();
+         
+        $Mould = new Mould;
 
+        $Mould->name=$postData['name'];
+        $Mould->row=$postData['row'];
+        $Mould->line=$postData['line'];
+        $Mould->num =(int) $Mould->row *(int) $Mould->line;
+
+        // 新增对象至数据表
+        $result = $Mould->validate(true)->save();
+         
+        if (false === $result)
+        {   
+            // 验证未通过，发生错误
+            $message = '新增失败:' . $Mould->getError();
+            return $this->error($message);
+        } else {
+
+            //增加row*line的座位列表
+            for($x=1;$x<=$Mould->row;$x++){
+                for($y=1;$y<=$Mould->line;$y++){
+                    $seat = new Seat;
+                    $seat->mid=$Mould->id;
+                    $seat->x = $x;
+                    $seat->y = $y;
+                    $result = $seat->validate(true)->save();
+                    if (false === $result)
+                    {   
+                        // 验证未通过，发生错误
+                        $message = '新增失败:' . $seat->getError();
+                        return $this->error($message);
+                    }      
+                }
+            }
+        }    
+        return $this->success('创建成功', url('check?id=' . $Mould->id));
+	}
+    
 	public function delete()
 	{
 		// 获取传入ID
