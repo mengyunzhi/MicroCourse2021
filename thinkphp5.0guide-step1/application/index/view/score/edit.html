@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>编辑</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body  class="container">
+    <form action="{:url('update')}" method='post'>
+        <font size="3">学生姓名:</font>
+        <input class="form-inline" type="text" placeholder="{:$Student->get($Score->student_id)->name}" disabled>
+        <font size="3">平时成绩:</font>
+        <input type="text" name="usual_score" value="{$Score->usual_score}" >
+        <font size="3">考试成绩:</font>
+        <input type="text" name="exam_score"  value="{$Score->exam_score}">
+        <input type="hidden" name="id" value="{$Score->id}" >
+        <button type="sumbit">保存</button>    
+        <a href="{:url('index')}"><button type="button">取消</button></a>     
+    </form>
+</body>
+</html>

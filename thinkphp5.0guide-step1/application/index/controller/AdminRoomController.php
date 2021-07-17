@@ -5,7 +5,7 @@ use app\common\model\Mould;
 use think\Db;
 use app\common\model\Room;
 use think\Request;  
-class AdminRoomController extends Controller
+class AdminRoomController extends IndexController
 {
 	public function index()
 	{

@@ -4,7 +4,7 @@ use think\Request;
 use think\Controller;
 use app\common\model\Term;
 use think\Db; 
-class AdminTermController extends Controller
+class AdminTermController extends IndexController
 {
 
     public function index()

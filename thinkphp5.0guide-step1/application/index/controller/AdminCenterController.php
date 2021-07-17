@@ -81,6 +81,7 @@ class AdminCenterController extends IndexController/*管理员端个人中心*/
         if(!$Teacher->save()) {
             return $this->error('密码更新失败', url('update'));
         }
+        session('id', null);
          return $this->success('修改成功，请重新登录', url('login/'));
     }//修改密码
     public function updateemail(){
