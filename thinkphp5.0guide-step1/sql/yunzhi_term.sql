@@ -11,8 +11,7 @@
  Target Server Version : 100113
  File Encoding         : 65001
 
-
- Date: 15/07/2021 09:53:06
+ Date: 17/07/2021 16:14:24
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +30,7 @@ CREATE TABLE `yunzhi_term`  (
   `create_time` int(255) NULL DEFAULT 0,
   `update_time` int(255) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of yunzhi_term
@@ -40,5 +39,8 @@ INSERT INTO `yunzhi_term` VALUES (13, '2021年春期学期', 1612540800, 1628092
 INSERT INTO `yunzhi_term` VALUES (49, '2021年春期学期', 1625673600, 1625760000, 1, 0, 0);
 INSERT INTO `yunzhi_term` VALUES (52, '2021年春期学期', 1627056000, 1627488000, 0, 0, 0);
 INSERT INTO `yunzhi_term` VALUES (55, '2021年春期学期', 1626192000, 1627488000, 0, 0, 0);
+INSERT INTO `yunzhi_term` VALUES (58, '2021年春期学期', 1625155200, 1626796800, 0, 0, 0);
+INSERT INTO `yunzhi_term` VALUES (59, '2021年春期学期', 1625673600, 1626796800, 0, 0, 0);
+INSERT INTO `yunzhi_term` VALUES (61, '2021年秋期学期', 1627056000, 1625760000, 0, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

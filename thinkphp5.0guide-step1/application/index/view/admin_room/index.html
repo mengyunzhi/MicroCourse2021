@@ -20,15 +20,14 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                   <li><a href="{:url('admin_term/index')}">学期管理</a></li>
-                                    <li><a href="#">教师管理</a></li>
-                                    <li><a href="#">学生管理</a></li>
-                                    <li><a href="{:url('admin_room/index')}">教室管理</a></li>
+                                    <li ><a href="{:url('admin_teacher/index')}">教师管理</a></li>
+                                    <li ><a href="{:url('admin_student/index')}">学生管理</a></li>
+                                    <li class="active"><a href="{:url('admin_room/index')}">教室管理</a></li>
                                     <li><a href="{:url('admin_mould/index')}">模板管理</a></li>
-
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="#">个人中心</a></li>
-                                    <li><a href="#">注销</a></li>
+                                    <li><a href="{:url('admin_center/center')}">个人中心</a></li>
+                                    <li><a href="{:url('Login/logout')}">注销</a></li>
                                 </ul>
                             </div>
                             <!-- /.navbar-collapse -->
@@ -44,7 +43,7 @@
                     <form class="form-inline">
                         <div class="form-group">
                             <label class="sr-only" for="name">名称</label>
-                            <input name="name" type="text" class="form-control" placeholder="名称..." value="">
+                            <input name="name" type="text" class="form-control" placeholder="名称..." value={:input('get.name')}>
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
