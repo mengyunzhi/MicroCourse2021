@@ -7,7 +7,7 @@ use think\Request;
 use think\Db;
 
 // 教师端班级管理
-class KlassController extends Controller
+class KlassController extends IndexController
 {
     public function index()
 	{	
