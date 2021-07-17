@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 15/07/2021 19:04:09
+ Date: 17/07/2021 18:28:30
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,13 @@ CREATE TABLE `yunzhi_teacher`  (
   `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '123' COMMENT '密码',
   `create_time` int unsigned NOT NULL COMMENT '创建时间',
   `update_time` int unsigned NOT NULL COMMENT '更新时间',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of yunzhi_teacher
+-- ----------------------------
+INSERT INTO `yunzhi_teacher` VALUES (0, 'q', '0', 0, '2@da.com', '123', 0, 0, 'qwe');
 
 SET FOREIGN_KEY_CHECKS = 1;

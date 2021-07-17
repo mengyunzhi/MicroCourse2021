@@ -32,12 +32,12 @@
                             </div>
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                               <ul class="nav navbar-nav">
+                                <ul class="nav navbar-nav">
                                   <li><a href="{:url('admin_term/index')}">学期管理</a></li>
                                     <li ><a href="{:url('admin_teacher/index')}">教师管理</a></li>
                                     <li ><a href="{:url('admin_student/index')}">学生管理</a></li>
-                                    <li ><a href="{:url('admin_room/index')}">教室管理</a></li>
-                                    <li class="active"><a href="{:url('admin_mould/index')}">模板管理</a></li>
+                                    <li class="active"><a href="{:url('admin_room/index')}">教室管理</a></li>
+                                    <li><a href="{:url('admin_mould/index')}">模板管理</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="{:url('admin_center/center')}">个人中心</a></li>
@@ -51,6 +51,7 @@
                 
     <!-- /菜单导航 -->
     <div class="row" >
+         <?php $url1 = 'room_id=' . $room_id . '&room_name=' . $room_name . '&mid='.$Mould->getData('id').'&op='.$op; ?>
          <div class="text-left "  style="  position:relative; top:20px;left: 23px">
               <font size="3">模板名称:</font>
              <input class="form-inline" type="text" value="{$Mould->getData('name')}"  disabled><br>
@@ -58,12 +59,19 @@
              <input class="form-inline" type="text" value="{$Mould->getData('num')}"  disabled><br>
         </div>
         <div class="text-right">
-            <a class="btn btn-primary" href="{:url('edit?id=' . $Mould->getData('id'))}" style="margin-top: -15px;">
-                <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
+            {eq name="1" value="$op" }
+            <a href="{:url('add?id='.$room_id. '&' . $url1)}" style="margin-top: -15px;">
+                <button class="btn btn-success" >
+                <i class="glyphicon glyphicon-ok"></i>&nbsp;选择该模板
+                </button>
             </a>
-            <a class="btn btn-danger " href="{:url('delete?id=' . $Mould->getData('id'))}" style="margin-top: -15px;">
-                <i class="glyphicon glyphicon-trash"></i>&nbsp;删除
+            {else /}
+            <a href="{:url('edit?id='.$room_id. '&' . $url1)}" style="margin-top: -15px;">
+                <button class="btn btn-success" >
+                <i class="glyphicon glyphicon-ok"></i>&nbsp;选择该模板
+                </button>
             </a>
+            {/eq}
         </div>
         <hr >
         <div class="col-md-4 col-md-offset-5" >
@@ -137,7 +145,7 @@
         
         <!-- 不是第一个模板 -->
         {if($mould['is_first'] !== 1)}
-           <a href="{:url('check?id='.$per_id )}" class="btn btn-primary style1 ">
+           <a href="{:url('choose?id='.$per_id  . '&' . $url1 )}" class="btn btn-primary style1 ">
             <i class="glyphicon glyphicon-chevron-left "></i>
             &nbsp;上一个模板
         </a>
@@ -155,7 +163,7 @@
         
         {if($mould['is_last'] !== 1)}
         <?php $next_id =$Moulds[$key]['id'] ; ?>
-           <a href="{:url('check?id='.$next_id )}" class="btn btn-primary  style2">
+           <a href="{:url('choose?id='.$next_id  . '&' . $url1 )}" class="btn btn-primary  style2">
             &nbsp;下一个模板
             <i class="glyphicon glyphicon-chevron-right "></i>
         </a>

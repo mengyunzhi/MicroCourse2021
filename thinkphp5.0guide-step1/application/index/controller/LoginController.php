@@ -13,9 +13,10 @@ class LoginController extends Controller
         return $this->fetch();
     }
 
-    // 处理用户提交的登录数据
+    // 处理用户提交的登录数据  
     public function login()
     {
+        
         // 接收post信息
         $postData = Request::instance()->post();
 
@@ -48,7 +49,7 @@ class LoginController extends Controller
             if($tag===3)
                     session('id', $User->getData('id'));
 
-                    return $this->success('登录成功', url('admin/index'));
+                    return $this->success('登录成功', url('admin_term/index'));
         } else {
             // 用户名不存在，跳转到登录界面。
             return $this->error('用户名或密码错误', url('index'));
