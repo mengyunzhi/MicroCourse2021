@@ -51,7 +51,7 @@
             <form action="{:url('update')}" method="post">
                     <input type="hidden" name="id" value="{$Klass->getData('id')}" />
                     <label for="name">班级:</label>
-                    <input type="hidden" name="size" value="{$Klass->getData('size')}" />
+                    <input type="hidden" name="student_number" value="{$Klass->getData('student_number')}" />
                     <input type="text" name="name" id="name" value="{$Klass->getData('name')}"/>
                     <button type="submit">保存</button>
             </form>
