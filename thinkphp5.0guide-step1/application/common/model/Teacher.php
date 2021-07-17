@@ -22,7 +22,7 @@ class Teacher extends Model
             return false;
         }
     }
-{	//一对多关联
+	//一对多关联
 	public	function courses()
 	{
 		return $this->hasMany('Course')->field('id,name');

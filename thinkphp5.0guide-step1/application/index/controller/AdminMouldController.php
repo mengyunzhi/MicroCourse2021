@@ -62,7 +62,7 @@ class AdminMouldController extends Controller
         $this->assign('Mould', $Mould);
 
         $this->assign('Moulds', $Moulds);
-        
+
 
         $this->assign('Seats',$Seats);
         
@@ -73,7 +73,6 @@ class AdminMouldController extends Controller
 
         // 将封装好的V层内容返回给用户
         return $htmls;
-
 	}
 	public function edit()
 	{
