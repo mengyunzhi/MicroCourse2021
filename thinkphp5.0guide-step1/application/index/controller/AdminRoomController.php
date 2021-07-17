@@ -4,6 +4,8 @@ use think\Controller;
 use app\common\model\Mould;
 use think\Db;
 use app\common\model\Room;
+use app\common\model\Aisle;
+use app\common\model\Seat;
 use think\Request;  
 class AdminRoomController extends IndexController
 {
@@ -236,5 +238,24 @@ class AdminRoomController extends IndexController
             return $this->error('删除失败:' . $room->getError());
         }
         return $this->success('删除成功',url('index')); 
+    }
+
+        public function QRCode()
+    {
+        $id = input('param.id/d');
+        $AdminRoom = AdminRoom::get($id);
+        $seats = Seat::where('classroom_id', '=', $id)->order('id desc')->select();
+        if (empty($seats)) {
+            return $this->error('当前教室无座位', url('index'));
+        }
+        $SeatMap = SeatMap::get($Classroom->seat_map_id);
+        $this->assign('seats', $seats);
+        $this->assign('SeatMap', $SeatMap);
+        $this->assign('Classroom', $Classroom);
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/studentWx?seatId=';
+        $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/teacherIndex?classroomId=' . $Classroom->id;
+        $this->assign('url', $url);
+        $this->assign('urlTeacher', $urlTeacher);
+        return $this->fetch();
     }
 }
