@@ -49,7 +49,7 @@ class LoginController extends Controller
             if($tag===3)
                     session('id', $User->getData('id'));
 
-                    return $this->success('登录成功', url('admin/index'));
+                    return $this->success('登录成功', url('admin_term/index'));
         } else {
             // 用户名不存在，跳转到登录界面。
             return $this->error('用户名或密码错误', url('index'));

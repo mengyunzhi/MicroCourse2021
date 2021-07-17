@@ -48,15 +48,19 @@
                     <th>课程名称</th>
                     <th>上课地点</th>
                     <th>总成绩</th>
-                    <th>操作</th
+                    <th>操作</th>
                 </tr>
+                {$student->getklass()}
+                {volist name="teachers" id="_Teacher" key="key"}
                 <tr>
-                    <td>1</td>
-                    <td>高数</td>
-                    <td>A201</td>
-                    <td>98</td>
+                    <td>{$key}</td>
+                    <td>{$_Teacher->getData('name')}</td>
+                    <td>{}</td>
+                    <td></td>
+                    
                     <td><a href="{:url('check')}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
                 </tr>
+                {/volist}
             </table>
         </div>
     </div>
