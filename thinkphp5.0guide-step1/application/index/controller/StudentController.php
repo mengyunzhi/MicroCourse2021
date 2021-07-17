@@ -18,8 +18,14 @@ class StudentController extends IndexController
 		return $this->fetch();
 	}
 	
-	public function myclass()
-	{
+	public function check()
+	{	
+		$id = session('id');
+        $Teacher = new Student; 
+        $teachers = Student::get($id);
+
+        // 向V层传数据
+        $this->assign('teachers', $teachers);
 		return $this->fetch();
 	}
 
