@@ -123,11 +123,14 @@ class KlassController extends IndexController
         //获取学生信息
         $Student = Db::name('student')->select();
 
+        //获得查询信息
+        $name=Request::instance()->get('name');
+        
         //分页数
         $pageSize=2;
 
         //查询该班学生信息
-        $students = Student::where('klass_id', '=', $id)->paginate($pageSize);
+        $students = Student::where('klass_id', '=', $id)->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
 
         //向V层传数据
         $this->assign('students', $students);
