@@ -30,16 +30,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                              <li><a href="{:url('admin_term/index')}">学期管理</a></li>
-                                <li ><a href="{:url('admin_teacher/index')}">教师管理</a></li>
-                                <li ><a href="{:url('admin_student/index')}">学生管理</a></li>
-                                <li ><a href="{:url('admin_room/index')}">教室管理</a></li>
-                                <li class="active"><a href="{:url('admin_mould/index')}">模板管理</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="{:url('admin_center/center')}">个人中心</a></li>
-                                <li><a href="{:url('Login/logout')}">注销</a></li>
-                            </ul>
+                    <li><a href="{:url('admin_term/index')}">学期管理</a></li>
+                      <li ><a href="{:url('admin_teacher/index')}">教师管理</a></li>
+                      <li ><a href="{:url('admin_student/index')}">学生管理</a></li>
+                      <li ><a href="{:url('admin_room/index')}">教室管理</a></li>
+                      <li class="active"><a href="{:url('admin_mould/index')}">模板管理</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{:url('admin_center/center')}">个人中心</a></li>
+                      <li><a href="{:url('Login/logout')}">注销</a></li>
+                  </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -57,7 +57,7 @@
             <input type="hidden" name="row" value="{$Mould->getData('row')}"/>
             <input type="hidden" name="line" value="{$Mould->getData('line')}"/>
              <div class="text-left "  style="  position:relative; top:15px;left: 20px">
-                 <font size="3">模板日期:</font>
+                 <font size="3">模板名称:</font>
                  <input class="form-inline style1" type="text" name="name" id="name" value="{$Mould->getData('name')}"  ><br>
                  <font size="3">容量:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  <input class="form-inline style2" type="text" name="num" id="num" value="{$Mould->getData('num')}"  ><br>
