@@ -33,7 +33,10 @@ class TeacherCourseController extends Controller
                     ],
                 ]);
             // 向V层传数据
-            $this->assign('courses', $courses);
+            $this->assign([
+                'courses'=> $courses,
+                'Teacher'=>new Teacher
+            ]);
 
             // 取回打包后的数据
             $htmls = $this->fetch();
@@ -53,7 +56,10 @@ class TeacherCourseController extends Controller
     //添加数据
 	public function add()
 	{
-		$this->assign('Course', new Course);
+		$this->assign([
+            'Course'=> new Course,
+            'Teacher'=>new Teacher
+        ]);
         return $this->fetch();
 	} 
 	public function edit()
