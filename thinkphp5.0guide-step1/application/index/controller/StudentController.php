@@ -18,7 +18,7 @@ class StudentController extends IndexController
 		return $this->fetch();
 	}
 	
-	public function edit()
+	public function myclass()
 	{
 		return $this->fetch();
 	}

@@ -7,7 +7,7 @@ use app\common\model\Seat;
 use app\common\model\Aisle;
 use think\Db; 
 
-class AdminMouldController extends Controller
+class AdminMouldController extends IndexController
 {
 	public function index()
 	{
