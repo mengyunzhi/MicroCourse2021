@@ -40,8 +40,8 @@
             <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" {eq name="$Course->getIsChecked($klass)" value="true"}checked="checked"{/eq}/>
             <label for="klass_id_{$klass->id}">{$klass->name}</label>
         {/volist}
-        <button type="sumbit">保存</button>    
-        <a href="{:url('index')}"><button type="sumbit">取消</button></a>     
+        <button type="sumbit">保存</button>     
+        <a href="{:url('index')}"><button type="button">取消</button></a>     
     </form>
 </body>
 </html>
