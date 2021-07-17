@@ -8,7 +8,7 @@ class Student extends Validate
     	'name'  => 'require|length:2,25',
 
     	'number' => 'require|unique:teacher|length:2,11',
-        'email' => 'email'，
+        'email' => 'email',
         'klass_id' => 'require|length:1,25',
         'number' => 'require|length:6,7'
     ];

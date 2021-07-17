@@ -17,10 +17,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">课程管理</a></li>
-                            <li><a href="#">学生管理</a></li>
-                            <li><a href="#">班级管理</a></li>
-                            <li><a href="#">上课</a></li>
+                            <li><a href="{:url('TeacherCourse/index')}">课程管理</a></li>
+                            <li><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
+                            <li><a href="{:url('TeacherKlass/index')}">班级管理</a></li>
+                            <li><a href="{:url('Teacher/index')}">上课</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">个人中心</a></li>
@@ -36,6 +36,12 @@
     <form action="{:url('save')}" method='post'>
         <label for="name">课程:</label>
         <input type="text" name="name" id="name">
+        <label >教师姓名:</label>
+        <select name="teacher_id">
+            {volist name='$Teacher->select()' id='teacher'}
+                <option value="{$teacher->getData('id')}" >{$teacher->name}</option> 
+            {/volist}
+        </select>
         {volist name="Course->Klasses()->select()" id="klass"}
             <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" />
             <label for="klass_id_{$klass->id}">{$klass->name}</label>

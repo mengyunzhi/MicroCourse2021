@@ -87,6 +87,17 @@ class TeacherStudentController extends controller
             // 删除对象
             if (!$Student->delete()) {
                 $message = '删除失败:' . $Student->getError();
+            }else{
+                //删除
+                $student_id=$id;
+                $Score=new Score;
+                $scores=$Score->select();
+                $number=count($scores);
+                for ($i=0 ; $i < $number; $i++) { 
+                    if($scores[$i]->student_id==$student_id){
+                        $scores[$i]->delete();
+                }
+            }
             }
 
             // 进行跳转
