@@ -254,6 +254,19 @@ class AdminMouldController extends IndexController
         $Mould->line=$postData['line'];
         $Mould->num =(int) $Mould->row *(int) $Mould->line;
 
+        //获取到最后一条记录
+          $Moulds = Db::name('mould')->select();
+          $last = 0;
+          foreach ($Moulds as $value) {
+              $last = $value['id'];
+            }
+          $Mould2 = Mould::get($last); 
+          if($Mould2){
+            $Mould2->is_last = 0;
+            $Mould2->validate()->save();
+         } 
+
+         $Mould->is_last = 1;
         // 新增对象至数据表
         $result = $Mould->validate(true)->save();
          
@@ -262,7 +275,7 @@ class AdminMouldController extends IndexController
             // 验证未通过，发生错误
             $message = '新增失败:' . $Mould->getError();
             return $this->error($message);
-        } else {
+        } else { 
 
             //增加row*line的座位列表
             for($x=1;$x<=$Mould->row;$x++){
@@ -280,7 +293,11 @@ class AdminMouldController extends IndexController
                     }      
                 }
             }
-        }    
+        }  
+
+        //将模板的is_last改为1 
+        
+
         return $this->success('创建成功', url('check?id=' . $Mould->id));
 	}
     
@@ -335,7 +352,38 @@ class AdminMouldController extends IndexController
                     return $this->error('删除失败:' . $room->getError());
                 }
               }
-            }
+          }
+         //将对应的seat删除
+         $Seats= Db::name('seat')->select();  
+         foreach ($Seats as $value) {
+              if($value['mid']===$mid){
+                $seat = Seat::get($value['id']);
+                // 要删除的对象不存在
+                if (is_null($seat)) {
+                    return $this->error('不存在id为' . $id . '的座位，删除失败');
+                }
+                // 删除对象
+                if (!$seat->delete()) {
+                    return $this->error('删除失败:' . $seat->getError());
+                }
+              }
+          }
+        //将对应的aisle删除
+         $Aisles= Db::name('aisle')->select();  
+         foreach ($Aisles as $value) {
+              if($value['mid']===$mid){
+                $Aisle = Aisle::get($value['id']);
+                // 要删除的对象不存在
+                if (is_null($Aisle)) {
+                    return $this->error('不存在id为' . $id . '的过道，删除失败');
+                }
+                // 删除对象
+                if (!$Aisle->delete()) {
+                    return $this->error('删除失败:' . $Aisle->getError());
+                }
+              }
+          }
+            
 
         //如果是第一条数据
         if($match===1){
