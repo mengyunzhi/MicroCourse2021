@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100113
+ Source Server Version : 80022
  Source Host           : localhost:3306
  Source Schema         : tp1
 
  Target Server Type    : MySQL
- Target Server Version : 100113
+ Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 17/07/2021 16:14:49
+ Date: 17/07/2021 18:27:55
 */
 
 SET NAMES utf8mb4;
@@ -22,12 +22,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_seat`;
 CREATE TABLE `yunzhi_seat`  (
-  `id` int(40) NOT NULL AUTO_INCREMENT,
-  `x` int(255) NOT NULL COMMENT 'x坐标',
-  `y` int(255) NOT NULL COMMENT 'y坐标',
-  `mid` int(255) NULL DEFAULT NULL COMMENT '对应的模板id',
-  `create_time` int(255) NULL DEFAULT 0,
-  `update_time` int(255) NULL DEFAULT 0,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `x` int(0) NOT NULL COMMENT 'x坐标',
+  `y` int(0) NOT NULL COMMENT 'y坐标',
+  `mid` int(0) NULL DEFAULT NULL COMMENT '对应的模板id',
+  `create_time` int(0) NULL DEFAULT 0,
+  `update_time` int(0) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2628 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
@@ -65,8 +65,6 @@ INSERT INTO `yunzhi_seat` VALUES (2527, 4, 5, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2528, 5, 1, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2529, 5, 2, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2530, 5, 3, 101, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2531, 5, 4, 101, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2532, 5, 5, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2533, 1, 1, 102, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2534, 1, 2, 102, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2535, 1, 3, 102, 0, 0);
@@ -89,8 +87,6 @@ INSERT INTO `yunzhi_seat` VALUES (2560, 1, 3, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2562, 1, 5, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2563, 2, 1, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2564, 2, 2, 103, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2565, 2, 3, 103, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2567, 2, 5, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2568, 1, 1, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2569, 1, 2, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2570, 1, 3, 104, 0, 0);
@@ -99,8 +95,6 @@ INSERT INTO `yunzhi_seat` VALUES (2572, 2, 1, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2575, 2, 4, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2576, 3, 1, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2577, 3, 2, 104, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2578, 3, 3, 104, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2579, 3, 4, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2580, 1, 1, 105, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2581, 1, 2, 105, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2582, 1, 3, 105, 0, 0);
@@ -140,5 +134,11 @@ INSERT INTO `yunzhi_seat` VALUES (2622, 5, 2, 106, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2623, 5, 3, 106, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2624, 5, 4, 106, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2625, 5, 5, 106, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2629, 5, 5, 101, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2630, 5, 4, 101, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2631, 2, 5, 103, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2632, 2, 3, 103, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2633, 3, 4, 104, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2634, 3, 3, 104, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
