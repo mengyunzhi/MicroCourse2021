@@ -27,7 +27,7 @@ class StudentController extends IndexController
             if (!empty($name)) {
                 $Teacher->where('name', 'like', '%' . $name . '%');
             }
-
+            
             // 按条件查询数据并调用分页
             $teachers = $Teacher->paginate($pageSize);
 
