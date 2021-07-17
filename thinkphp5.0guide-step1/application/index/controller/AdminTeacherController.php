@@ -6,7 +6,7 @@ use app\common\model\Teacher;
 /**
  * 管理员端教师管理
  */
-class AdminTeacherController extends Controller
+class AdminTeacherController extends IndexController
 {   
     public function index()
     {

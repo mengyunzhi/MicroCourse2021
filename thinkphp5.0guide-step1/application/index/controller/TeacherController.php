@@ -9,7 +9,7 @@ use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\KlassCourse;
 
-class TeacherController extends Controller
+class TeacherController extends IndexController
 {
 	public function index()
 	{	
