@@ -11,6 +11,9 @@ class Student extends Model
         return $Klass;
     }
 
+
+
+
 	/**
     * ThinkPHP使用一个叫做__get()的魔法函数来完成这个函数的自动调用
     * 在本章第五节中，我们将专门对__get()进行讲解
