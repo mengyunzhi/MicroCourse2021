@@ -13,18 +13,23 @@ class KlassController extends Controller
 	{	
 		//获得查询信息
 		$name=Request::instance()->get('name');
+
 		//分页数
 		$pageSize=2;
+
 		//实例化klass
 		$Klass=new Klass;
+
 		// 按条件查询数据并调用分页
 		$klasses = $Klass->where('name', 'like', '%' . $name . '%')->paginate($pageSize, false, [
             'query'=>[
                 'name' => $name,
                 ],
             ]); 
+
 		//向v层传数据
 		$this->assign('klasses',$klasses);
+
 		//返回
 		return $this->fetch();
 
@@ -164,7 +169,7 @@ class KlassController extends Controller
             return $this->error('数据添加错误：' . $Student->getError());
         }
 
-        return $this->success('操作成功', url('check'));
+        return $this->success('操作成功', url('index'));
     }
     public function student_edit()
     {
@@ -203,7 +208,7 @@ class KlassController extends Controller
         if (!$Student->validate()->save()) { 
             return $this->error('更新错误：' . $Student->getError());
         } else {
-            return $this->success('操作成功', url('check'));
+            return $this->success('操作成功', url('index'));
         }
     }
 
