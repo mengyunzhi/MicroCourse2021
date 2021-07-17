@@ -6,6 +6,7 @@ use app\common\model\Mould;
 use app\common\model\Seat;
 use app\common\model\Aisle;
 use think\Db; 
+use app\common\model\Room;
 
 class AdminMouldController extends IndexController
 {
@@ -292,19 +293,76 @@ class AdminMouldController extends IndexController
         if (0 === $id || is_null($id) ) {
              return $this->error('未获取到ID信息');
         }
+ 
+        $match = 0;
 
         // 获取要删除的对象
         $Mould = Mould::get($id);
 
+        $mid = $Mould->id;
+
+        //如果是第一条数据
+        if($Mould->is_first===1){
+             $match = 1;
+        }
+        
+        //如果是最后一条数据
+        if($Mould->is_last===1){
+            $match = 2;
+        }
+
         // 要删除的对象不存在
         if (is_null($Mould)) {
-            return $this->error('不存在id为' . $id . '的学期，删除失败');
+            return $this->error('不存在id为' . $id . '的模板，删除失败');
         }
 
         // 删除对象
         if (!$Mould->delete()) {
             return $this->error('删除失败:' . $Mould->getError());
         }
+
+        //将对应的教室删除
+        $Rooms = Db::name('room')->select();  
+         foreach ($Rooms as $value) {
+              if($value['mid']===$mid){
+                $room = Room::get($value['id']);
+                // 要删除的对象不存在
+                if (is_null($room)) {
+                    return $this->error('不存在id为' . $id . '的教室，删除失败');
+                }
+                // 删除对象
+                if (!$room->delete()) {
+                    return $this->error('删除失败:' . $room->getError());
+                }
+              }
+            }
+
+        //如果是第一条数据
+        if($match===1){
+             
+        //将下一条对象的is_first改为1
+        $Mould1 = Mould::get();
+         if($Mould1){
+            $Mould1->is_first = 1;
+            $Mould1->validate()->save();
+         }
+        }
+        //如果是最后一条数据
+        if($match === 2){
+          //将id最大的对象的is_last改为1
+          //获取所有模板信息
+          $Moulds = Db::name('mould')->select();
+          $last = 0;
+          foreach ($Moulds as $value) {
+              $last = $value['id'];
+            }
+          $Mould2 = Mould::get($last); 
+          if($Mould2){
+            $Mould2->is_last = 1;
+            $Mould2->validate()->save();
+         } 
+        }
+
         return $this->success('删除成功',url('index')); 
 	}
 }
