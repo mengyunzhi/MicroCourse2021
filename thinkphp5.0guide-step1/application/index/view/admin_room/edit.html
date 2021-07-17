@@ -11,19 +11,64 @@
     </script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
-<body> 
+<body class="container"> 
+    <div class="row">
+        <div class="col-md-12">
+          <!-- 菜单导航 -->
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">梦云智</a>
+                            </div>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="{:url('admin_term/index')}">学期管理</a></li>
+                                    <li><a href="#">教师管理</a></li>
+                                    <li><a href="#">学生管理</a></li>
+                                    <li><a href="{:url('admin_room/index')}">教室管理</a></li>
+                                    <li><a href="{:url('index')}">模板管理</a></li>
 
-      <form class="form-inline">
-      <div class="form-group">
-          <label for="roomName">教室名称:</label>
-          <input type="text" class="form-control" id="roomName" >
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="#">个人中心</a></li>
+                                    <li><a href="#">注销</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container-fluid -->
+                    </nav>
+                </div>
+            </div>
+    <!-- /菜单导航 -->
+      <hr>
+      <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
+        <form class="form-inline col-md-4 col-md-offset-4" method="post" action="" name="form1">
+           <input type="hidden" name="room_id" value="{$room->getData('id')}"/>
+           <input type="hidden" name="mid" value="{$Mould->getData('id')}"/>
+           <input type="hidden" name="num" value="{$Mould->num}"/>
+          <div class="form-group" >
+          <label for="name">教室名字</label>
+          <input type="text" class="form-control" id="room_name" name="room_name" value="{$room_name}">
+        </div>
+      <div class="form-group " style="position: relative;top:20px">
+        <label for="num">教室容量</label>
+        <input type="text" class="form-control" id="num" name="num" value="{$Mould->num}" disabled>
       </div>
-      <div class="form-group">
-          <label for="num">教室容量:</label>
-          <input type="text" class="form-control" id="num" >
+      <br>
+      <div class="form-group" style="position: relative;top:40px">
+      <label for="mould_name">当前模板</label>
+      <input type="text" class="form-control " id="mould_name" name="mould_name" disabled value="{$Mould->name}">
+    </div>
+      <div class="form-group" style="position: relative;top:40px;left: 100px;">
+         <input type="button" value="选择模板" type="submit" class="btn btn-primary "
+         onclick="form1.action='{:url('choose')}';form1.submit();" />
       </div>
-          <button type="submit" class="btn btn-default">选择模板</button>&nbsp;
-          <button type="submit">submit</button>
-    </form>
+      <br>
+      <input type="button" value="submit" type="submit" class="btn btn-default col-md-offset-2"
+       onclick="form1.action='{:url('save')}';form1.submit();" style="position: relative;top:60px;left: 55px"/>
+      </form>
+    </div>
 </body>
 </html>

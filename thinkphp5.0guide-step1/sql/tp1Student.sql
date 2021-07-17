@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 16/07/2021 19:36:12
+ Date: 17/07/2021 09:11:52
 */
 
 SET NAMES utf8mb4;
@@ -40,8 +40,8 @@ CREATE TABLE `yunzhi_student`  (
 -- ----------------------------
 INSERT INTO `yunzhi_student` VALUES (1, '小红', 1, 'xiaohong', '0123456789@qq.com', 0, 0, '123', '200011', 1);
 INSERT INTO `yunzhi_student` VALUES (2, '小明', 0, 'xiaoming', '23456789012@qq.com', 0, 0, '123', '200002', 1);
-INSERT INTO `yunzhi_student` VALUES (3, '小亮', 0, 'xiaoliang', '3456789012@qq.com', 0, 0, '123', '200003', 2);
-INSERT INTO `yunzhi_student` VALUES (4, '小丫', 1, 'xiaoya', '4567890123@qq.com', 0, 0, '123', '200004', 1);
+INSERT INTO `yunzhi_student` VALUES (3, '小亮', 0, 'xiaoliang', '3456789012@qq.com', 0, 0, '123', '200004', 2);
+INSERT INTO `yunzhi_student` VALUES (10, '小兰', NULL, NULL, '', 0, 0, '123', '200003', 1);
 INSERT INTO `yunzhi_student` VALUES (7, '小奇', 1, 'xiaoqi', '1234567890@qq.com', 0, 0, '123', '200009', 2);
 INSERT INTO `yunzhi_student` VALUES (9, '小灰', 0, 'xiaohui', '1234567890@qq.com', 0, 0, '123', '200010', 2);
 
