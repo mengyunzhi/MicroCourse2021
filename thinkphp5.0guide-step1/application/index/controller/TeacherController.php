@@ -8,6 +8,7 @@ use app\common\model\Room;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\KlassCourse;
+use app\common\model\Mould;
 
 class TeacherController extends IndexController
 {
@@ -47,6 +48,29 @@ class TeacherController extends IndexController
 			}
 
 		}
+		// 在模型中获取当前记录
+        if (null === $Mould = Mould::get($id))
+        {
+            $this->error('系统未找到ID为' . $id . '的记录');
+        } 
+		 //获取所有模板信息
+        $Moulds = Db::name('mould')->select();
+
+        //获取座位信息
+        $Seats = Db::name('seat')->select();
+
+        //获取过道信息
+        $Aisles = Db::name('aisle')->select();
+       
+        // 将数据传给V层
+        $this->assign('Mould', $Mould);
+
+        $this->assign('Moulds', $Moulds);
+
+
+        $this->assign('Seats',$Seats);
+        
+        $this->assign('Aisles',$Aisles);
 		//随机点名
 		$studentName=$this->getStudent($postDate['course_id']);
 		//向v层传数据

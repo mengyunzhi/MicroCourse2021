@@ -11,7 +11,7 @@
  Target Server Version : 100113
  File Encoding         : 65001
 
- Date: 17/07/2021 16:13:28
+ Date: 17/07/2021 17:32:57
 */
 
 SET NAMES utf8mb4;
@@ -32,14 +32,14 @@ CREATE TABLE `yunzhi_mould`  (
   `is_first` int(255) NOT NULL COMMENT '第一个模板',
   `is_last` int(255) NOT NULL COMMENT '最后一个模板',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of yunzhi_mould
 -- ----------------------------
 INSERT INTO `yunzhi_mould` VALUES (101, 'D教学楼', 8, 5, 5, 0, 0, 1, 0);
-INSERT INTO `yunzhi_mould` VALUES (103, 'D教学楼', 8, 2, 5, 0, 0, 0, 0);
 INSERT INTO `yunzhi_mould` VALUES (104, 'B教学楼', 12, 3, 4, 0, 0, 0, 0);
-INSERT INTO `yunzhi_mould` VALUES (105, 'C教学楼', 21, 4, 5, 0, 0, 0, 1);
+INSERT INTO `yunzhi_mould` VALUES (105, 'C教学楼', 21, 4, 5, 0, 0, 0, 0);
+INSERT INTO `yunzhi_mould` VALUES (108, 'D教学楼', 16, 5, 5, 0, 0, 0, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
