@@ -13,13 +13,15 @@ class TeacherController extends IndexController
 {
 	public function index()
 	{	
+		$teacher_id=Request::instance()->param('id'); 
 		//实例化对象
 		$Course=new Course;
 		$Klass=new Klass;
 		//向v层传值
 		$this->assign([
 			'Course'=>$Course,
-			'Klass'=>$Klass
+			'Klass'=>$Klass,
+			'teacher_id'=>$teacher_id
 		]);
 		//返回
 		return $this->fetch();
@@ -30,9 +32,9 @@ class TeacherController extends IndexController
 		//接收数据
 		$postDate=Request::instance()->post();
 		//实例化对象
+		$Teacher=Teacher::get($postDate['teacher_id']);
 		$Course=Course::get($postDate['course_id']);
 		$Room=new Room;
-		$Teacher=new Teacher;
 		$rooms=$Room->select();
 		//应到人数
 		//获取班级信息并计算人数
@@ -56,7 +58,8 @@ class TeacherController extends IndexController
 			'studentNumber'=>$studentNumber,
 			'rooms'=>$rooms,
 			'time'=>$postDate['time'],
-			'studentName'=>$studentName
+			'studentName'=>$studentName,
+			'teacherName'=>$Teacher->name
 		]);
 		return $this->fetch();
 	}
