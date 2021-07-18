@@ -9,6 +9,7 @@ use app\common\model\Admin;
 use app\common\model\Klass;
 use app\common\model\Course;
 use app\common\model\KlassCourse;
+use app\common\model\Score;
 class StudentController extends IndexController
 {
     public function getCourse($klass_id)
@@ -32,15 +33,26 @@ class StudentController extends IndexController
         //获取学生
        return $courseIds;
     }
-    public function getgrade($course_id,$student_id){
-        $course = course::$course_id;
-
+    public function getscore($course_id,$student_id){
+        $scoreids=array();
+        $course=Course::get($course_id);
+        $student=Student::get($student_id);
+        $score=new score;
+        $scores=$score->select();
+        $number=count($scores);;
+        for($j=0,$i=0;$i<$number;$i++){
+            if($course_id==$scores[$i]->course_id&&$student_id==$scores[$i]->student_id);{
+                $scoreid=$scores[$i]->id;
+            }
+        }
+        $score=Score::get($scoreid);
+        return $score;
     }
 	public function index()
 	{
 		
 		 $name = Request::instance()->get('name');
-            echo $name;
+            
             $id = session('id');
             $pageSize = 5; // 每页显示5条数据
             $Student=Student::get($id);
@@ -51,12 +63,19 @@ class StudentController extends IndexController
             $klassid=$Student->getklass()->id;
             $courseid=$this->getCourse($klassid);
             $course=array();
+            $scoreids=array();
+            $score=array();
             $number=count($courseid);
             for ($i=0; $i < $number; $i++) { 
             $course[$i]=Course::get($courseid[$i]);
-        }
-
-        $this->assign('course',$course);
+            }
+            for($i=0;$i<$number;$i++){
+                $scoreids[$i]=$this->getscore($courseid[$i],$id);
+                
+            }
+            
+            $this->assign('score',$score);
+            $this->assign('course',$course);
             $this->assign('courseid',$courseid);
             // 定制查询信息
             if (!empty($name)) {
@@ -71,7 +90,16 @@ class StudentController extends IndexController
                 ]);
 
             // 向V层传数据
-            if(!empty($name)){
+            $number=count($teachers);
+            $numberk=count($course);
+            for($i=0,$j=0;$i<$number;$i++){
+                for($k=0;$k<$numberk;$k++){
+                if($course[$k]->name==$teachers[$i]->name){
+                    $j=1;
+                }
+                }
+            }
+            if(!empty($name)&&$j==1){
             $this->assign('course', $teachers);
         }
             // 取回打包后的数据

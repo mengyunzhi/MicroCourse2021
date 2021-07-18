@@ -50,4 +50,20 @@ class Course extends Model
     {
         return $this->belongsTo('Teacher');
     }
+    public function getscore($course_id,$student_id){
+        $scoreids=array();
+        $course=Course::get($course_id);
+        $student=Student::get($student_id);
+        $score=new score;
+        $scores=$score->select();
+        $number=count($scores);
+        $scoreid=null;
+        for($j=0,$i=0;$i<$number;$i++){
+            if($course_id==$scores[$i]->course_id&&$student_id==$scores[$i]->student_id){
+                $scoreid=$scores[$i]->id;
+            }
+        }
+        $score1=Score::get($scoreid);
+        return $score1;
+    }
 }
