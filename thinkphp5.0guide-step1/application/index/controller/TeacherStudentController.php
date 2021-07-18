@@ -1,11 +1,14 @@
 <?php
 namespace app\index\controller;
+use think\Db;
 use think\Controller;
 use app\common\model\Student;
 use think\Request;
 use app\common\model\Klass;
 use app\common\model\KlassCourse;
 use app\common\model\Score;
+use app\index\controller\ExcelController;
+use app\common\model\Course;
 
 class TeacherStudentController extends controller
 {
@@ -87,6 +90,17 @@ class TeacherStudentController extends controller
             // 删除对象
             if (!$Student->delete()) {
                 $message = '删除失败:' . $Student->getError();
+            }else{
+                //删除
+                $student_id=$id;
+                $Score=new Score;
+                $scores=$Score->select();
+                $number=count($scores);
+                for ($i=0 ; $i < $number; $i++) { 
+                    if($scores[$i]->student_id==$student_id){
+                        $scores[$i]->delete();
+                }
+            }
             }
 
             // 进行跳转
@@ -167,6 +181,108 @@ class TeacherStudentController extends controller
         return $this->success('操作成功', url('index'));
 
     }
+    /*
+    *读取文件数据
+    */
+    public function getFile()
+    {
+        try{
+            $userfile=request()->file('userfile');
+            if($userfile){
+                $info=$userfile->move('/readfile/www/upload/','');
+                }else{
+                    // 上传失败获取错误信息
+                    echo $file->getError();
+                }
+
+            $ExcelController=new ExcelController;
+            $data=$ExcelController->readExcel($info->getSavename());
+            $TeacherStudentController=new TeacherStudentController;
+            if(true==$TeacherStudentController->saveFile($data)){
+                return $this->success('操作成功');
+            }else{
+                throw new \Exception('错误', 1);}
+        }catch(\think\Exception\HttpResponseException $e){
+            throw $e;
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+        
+    }
+    /*
+    *保存文件信息
+    */
+    public function saveFile($fileData)
+    {
+        $lineNumber=count($fileData);
+        $Student=new Student;
+        $Course=new Course;
+        $Score=new Score;
+        $students=$Student->select();
+        $courses=$Course->select();
+        $scores=$Score->select();
+        $studentNumber=count($students);
+        $courseNumber=count($courses);
+        $scoreNumber=count($scores);
+        for ($i=1; $i<$lineNumber; $i++) { 
+            $n=0;
+            //遍历分数信息，判断是否有相同的
+            for($j=0;$j<$scoreNumber;$j++){
+                $student_id=$course_id=-1;
+                for($k=0;$k<$studentNumber;$k++){
+                    if($students[$k]->number==$fileData[$i][1]){
+                        $student_id=$students[$k]->id;
+                    }
+                }
+                for($k=0;$k<$courseNumber;$k++){
+                    if($courses[$k]->name==$fileData[$i][2]){
+                        $course_id=$courses[$k]->id;
+                    }
+                }
+                if($student_id==$scores[$j]->student_id And $course_id==$scores[$j]->course_id){
+                    $scores[$j]->usual_score=$fileData[$i][3];
+                    $scores[$j]->exam_score=$fileData[$i][4];
+                    $scores[$j]->save();
+                    $n=1;
+                }
+            }
+            //没有对应信息
+            if($n===0){
+                $Score=new Score;
+                $a=0;
+                $b=0;
+                for($k=0;$k<$studentNumber;$k++){
+                    if($students[$k]->number==$fileData[$i][1]){
+                        $student_id=$students[$k]->id;
+                        $a=1;
+                    }
+
+                }
+                for($k=0;$k<$courseNumber;$k++){
+                    if($courses[$k]->name==$fileData[$i][2]){
+                        $course_id=$courses[$k]->id;
+                        $b=1;
+                    }
+                }
+                if ($a===0) {
+                    return $this->error('不存在学号为'.$fileData[$i][1].'的学生');
+                }
+                if($b===0){
+                    return $this->error('不存在名字为'.$fileData[$i][2].'的课程');
+                }
+                $Score->student_id=$student_id;
+                $Score->course_id=$course_id;
+                $Score->usual_score=$fileData[$i][3];
+                $Score->exam_score=$fileData[$i][4];
+                $Score->sum_score=$fileData[$i][3]+$fileData[$i][4];
+                $Score->validate(true)->save();
+            }
+        }
+        return true;
+    }
+    /*
+    * 保存学生
+    */
     private function saveStudent(Student &$Student, $isUpdate = false) 
     {
         // 写入要更新的数据

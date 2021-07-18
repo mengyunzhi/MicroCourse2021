@@ -8,18 +8,23 @@ use app\common\model\Room;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\KlassCourse;
+use app\common\model\Mould;
+use think\Db;
 
 class TeacherController extends IndexController
-{
+{	
 	public function index()
 	{	
+		$teacher_id=session('id');
 		//实例化对象
+		$rooms=new Room;
 		$Course=new Course;
 		$Klass=new Klass;
-		//向v层传值
-		$this->assign([
+        		$this->assign([
 			'Course'=>$Course,
-			'Klass'=>$Klass
+			'Klass'=>$Klass,
+			'rooms'=>$rooms,
+			'teacher_id'=>$teacher_id
 		]);
 		//返回
 		return $this->fetch();
@@ -28,12 +33,13 @@ class TeacherController extends IndexController
 	public function onclass()
 	{
 		//接收数据
-		$postDate=Request::instance()->post();
+		$postData=Request::instance()->post();
 		//实例化对象
-		$Course=Course::get($postDate['course_id']);
-		$Room=new Room;
-		$Teacher=new Teacher;
-		$rooms=$Room->select();
+		$Teacher=Teacher::get($postData['teacher_id']);
+		$Course=Course::get($postData['course_id']);
+		
+		$room=Room::get($postData['room_id']);
+
 		//应到人数
 		//获取班级信息并计算人数
 		$studentNumber=0;
@@ -47,16 +53,37 @@ class TeacherController extends IndexController
 			}
 
 		}
+		 //获取所有模板信息
+        $Moulds = Db::name('mould')->select();
+
+        //获取座位信息
+        $Seats = Db::name('seat')->select();
+
+        //获取过道信息
+        $Aisles = Db::name('aisle')->select();
+       
+        // 将数据传给V层
+       
+
+        $this->assign('Moulds', $Moulds);
+
+        $this->assign('room', $room);
+
+        $this->assign('Seats',$Seats);
+        
+        $this->assign('Aisles',$Aisles);
 		//随机点名
-		$studentName=$this->getStudent($postDate['course_id']);
+		$studentName=$this->getStudent($postData['course_id']);
 		//向v层传数据
 		$this->assign([
-			'postDate'=>$postDate,
+			'postData'=>$postData,
 			'Course'=>$Course,
 			'studentNumber'=>$studentNumber,
-			'rooms'=>$rooms,
-			'time'=>$postDate['time'],
-			'studentName'=>$studentName
+			'time'=>$postData['time'],
+			'room_id'=>$room->id,
+			'studentName'=>$studentName,
+			'teacherName'=>$Teacher->name,
+			'teacher_id'=>$postData['teacher_id']
 		]);
 		return $this->fetch();
 	}
@@ -94,11 +121,13 @@ class TeacherController extends IndexController
         //随机选择学生
         $studentNumber=count($studentIds);
         if ($studentNumber===0) {
-        	return $this->error('该班级学生人数为0，请重新点名');
+        	$studentName='';
+        }else{
+        	$studentId=(int)$this->dc_rand1(0,$studentNumber-0.1,5)[3];
+        	$Student=Student::get($studentIds[$studentId]);
+        	$studentName=$Student->name;
         }
-        $studentId=(int)$this->dc_rand1(0,$studentNumber-0.1,5)[3];
-        $Student=Student::get($studentIds[$studentId]);
-        return $Student->name;
+        return $studentName;
              
     }
 	//获得随机数

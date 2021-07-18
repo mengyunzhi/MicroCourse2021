@@ -6,6 +6,7 @@ use think\Db;
 use app\common\model\Course;
 use app\common\model\Teacher;
 use app\common\model\KlassCourse;
+use app\common\model\Score;
 
 //教师端课程管理
 class TeacherCourseController extends Controller
@@ -33,7 +34,10 @@ class TeacherCourseController extends Controller
                     ],
                 ]);
             // 向V层传数据
-            $this->assign('courses', $courses);
+            $this->assign([
+                'courses'=> $courses,
+                'Teacher'=>new Teacher
+            ]);
 
             // 取回打包后的数据
             $htmls = $this->fetch();
@@ -53,7 +57,10 @@ class TeacherCourseController extends Controller
     //添加数据
 	public function add()
 	{
-		$this->assign('Course', new Course);
+		$this->assign([
+            'Course'=> new Course,
+            'Teacher'=>new Teacher
+        ]);
         return $this->fetch();
 	} 
 	public function edit()
@@ -90,12 +97,22 @@ class TeacherCourseController extends Controller
        		}	
             if (!$Course->delete()) {
                 $message = '删除失败:' . $Course->getError();
+            }else{
+                $Score=new Score;
+                $course_id=$id;
+                $scores=$Score->select();
+                $number=count($scores);
+                for ($i=0; $i <$number ; $i++) { 
+                    if($scores[$i]->course_id===$course_id){
+                        $scores[$i]->delete();
+                    }
+                }
             }
             // 进行跳转
             return $this->success('删除成功', $Request->header('referer')); 
         } catch(\think\Exception\HttpResponseException $e){
-			throw $e;
-		}catch (\Exception $e) {
+            throw $e;
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
 
