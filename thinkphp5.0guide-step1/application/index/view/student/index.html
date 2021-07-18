@@ -48,15 +48,20 @@
                     <th>课程名称</th>
                     <th>上课地点</th>
                     <th>总成绩</th>
-                    <th>操作</th
+                    <th>操作</th>
                 </tr>
+                
+                
+                {volist name="course" id="_course" key="key"}
                 <tr>
-                    <td>1</td>
-                    <td>高数</td>
-                    <td>A201</td>
-                    <td>98</td>
+                    <td>{$key}</td>
+                    <td>{$_course->getData('name')}</td>
+                    <td>{}</td>
+                    <td>{}</td>
+                    
                     <td><a href="{:url('check')}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
                 </tr>
+                {/volist}
             </table>
         </div>
     </div>

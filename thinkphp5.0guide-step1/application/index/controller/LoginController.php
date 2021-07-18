@@ -39,7 +39,7 @@ class LoginController extends Controller
             if($tag===1){
 
                         session('id', $User->getData('id'));
-                        return $this->success('登录成功', url('teacher/index'));
+                        return $this->success('登录成功', url('teacher/index?id='.$User->getData('id')));
                     }
             if($tag===2){
                         

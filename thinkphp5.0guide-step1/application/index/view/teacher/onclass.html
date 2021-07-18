@@ -4,12 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>教师端</title>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style type="text/css">
+    .seat {
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+        width: 80px;
+        height: 40px;
+        cursor: default;
+    }
+    .style1 {
+        position: relative;
+        left: 50px;
+    }
+    </style>
 </head>
 
-<body class="contanier">
+<body >
     <!-- 菜单导航 -->
-    <div class="text left">
+    <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
@@ -25,7 +41,7 @@
                             <li><a href="{:url('Teacher/index')}">上课</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="{:url('TeacherCenter/center')}">个人中心</a></li>
+                            <li><a href="{:url('TeacherCenter/center')}">个人中心</a></li>
                             <li><a href="{:url('Login/logout')}">注销</a></li>
                         </ul>
                     </div>
@@ -39,53 +55,47 @@
     <div class="row">
         <table class="table table-hover table-bordered">
             <tr class="info">
-                <th></th>
-                <th>教师姓名：张三</th>
+                <th ><label style="position: relative;left: 67px;">教师姓名：{$teacherName}</label></th>
                 <th>
-                    <label>教室：</label>
-                    <select name="course_id">
-                        {volist name='rooms' id='room'}
-                        <option>{$room->name}</option>
-                        {/volist}
-                    </select>
+                    <label style="position: relative;right: 265px;">教室：{$room['name']}</label>
                 </th>
-                <th><button type="button" class="btn btn-info">查看座位表</button></th>
             </tr>
         </table>
-        <div >
-            <div class="col-md-4">
+        <div>
+            <div class="col-md-4 " style="position: relative;left: 60px;">
                 <font size="3">课程名称：</font>
                 <label>{$Course->name}</label>
             </div>
         </div>
-        <div class="col-md-4">
-            <label>上课班级：</label>
-            <label>
+        <div class="col-md-4 ">
+            <font size="3">应到人数:</font>
+            <input class="form-inline" type="text" style="position: relative;left: 12px;" placeholder="{$studentNumber}" disabled>
+        </div>
+        <form action="{:url('onClass')}" method="post">
+            <div class="col-md-4">
+                <input type="hidden" name="course_id" value="{$Course->id}">
+                <input type="hidden" name="teacher_id" value="{$teacher_id}">
+                <input type="hidden" name="room_id" value="{$room_id}">
+                <font size="3">签到时间:</font>
+                <input class="form-inline" type="text" name="time">
+                <font size="3">分钟</font>
+                <button type="submit" class="btn btn-info">开始签到</button>
+            </div>
+        </form>
+        <div>
+            <div class="col-md-4 " style="position: relative;left: 60px;">
+                <font size="3">上课班级：</font>
+                <label>
                     {volist name="Course->Klasses()->select()" id="klass"}
                     <tr>
                         {eq name="$Course->getIsChecked($klass)" value="true"}<td>{$klass->name}</td>{/eq}
                     </tr>
                     {/volist}
-            </label>
-            </div>
-            
-            <form action="{:url('onClass')}" method="post">
-                <div class="col-md-4">
-                    <input type="hidden" name="course_id" value="{$Course->id}">
-                    <font size="3">签到时间:</font>
-                    <input class="form-inline" type="text" name="time">
-                    <font size="3">分钟</font>
-                    <button type="submit" class="btn btn-info">开始签到</button>
-                </div>
-            </form>
-        <div >     
-            <div class="col-md-4 ">
-                <font size="3">应到人数:</font>
-                <input class="form-inline" type="text" placeholder="{$studentNumber}" disabled>
+                </label>
             </div>
             <div class="col-md-4">
                 <font size="3">实到人数:</font>
-                <input class="form-inline" type="text" placeholder="40"  disabled>
+                <input class="form-inline" style="position: relative;left: 12px;" type="text" placeholder="40" disabled>
             </div>
             <div class="col-md-4">
                 <font size="3">剩余时间:</font>
@@ -93,81 +103,120 @@
                 <font size="3">分钟</font>
             </div>
         </div>
-        <hr/>
+        <hr />
         <div class="col-md-12">
             <form action="{:url('onClass')}" method="post">
                 <input type="hidden" name="time" value="$time">
+                <input type="hidden" name="teacher_id" value="{$teacher_id}">
+                <input type="hidden" name="room_id" value="{$room_id}">
                 <input type="hidden" name="course_id" value="{$Course->id}">
-                <button type="submit" class="btn btn-info">随机点名</button>
-                <input class="form-inline" type="text" placeholder="{$studentName}"  disabled>
+                <button type="submit" class="btn btn-info" style="position: relative;top: 17px; left: 55px;">随机点名</button>
+                <input class="form-inline" type="text" style="position: relative;top: 20px;left: 60px;" placeholder="{$studentName}" disabled>
             </form>
         </div>
-        
-        <div class="col-md-12">
-            <p><center>讲台</center></p>
+        <div class="col-md-12 col-md-offset-5">
+            <h3>
+                <p style="color: green; position: relative;left: 40px;">讲台</p>
+            </h3>
+            <hr style="position: relative;right: 650px;">
         </div>
-        
         <!-- 座位表-->
-        <div class="container"style="padding-right:100px">
-        <table style="margin:0 auto;margin-bottom: 50px;">
-            <tr>
-                <th>
-                    <button class="btn btn-info seat" >student1
-                    </button>
-                </th>
-                <th>
-                   <button class="btn btn-info seat" >student2
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-info seat" >student3
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-default seat" style=" border:none;">
-                    </button>
-                </th>
-                 <th>
-                    <button class="btn btn-info seat ">student4
-                    </button>
-                </th>
-            </tr>
-             <tr>
-                <th>
-                    <button class="btn btn-info seat" >student5
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-info seat" >student6
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-info seat" >student7
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-default seat" style=" border:none;">
-                    </button>
-                </th>
-                 <th>
-                    <button class="btn btn-info seat" >student8
-                    </button>
-                </th>
-            </tr>
-        </table>
+        <div class="container" style="padding-right:100px">
+            <table style="margin:0 auto;margin-bottom: 50px;">
+                <tr>
+                    <th>
+                        <button class="btn btn-info seat">student1
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-info seat">student2
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-info seat">student3
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-default seat" style=" border:none;">
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-info seat ">student4
+                        </button>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <button class="btn btn-info seat">student5
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-info seat">student6
+                        </button>
+                    </th>
+                       
+                    <th>
+                        <button class="btn btn-info seat ">student7
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-default seat" style=" border:none;">
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-info seat">student8
+                        </button>
+                    </th>
+                </tr>
+                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">student8</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">学生信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="control-label ">学生姓名:</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="control-label ">学生学号:</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="control-label ">学生班级:</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </table>
         </div>
     </div>
     <script type="text/javascript">
-        (function(){
-            var wait = document.getElementById('wait'),
-                href = document.getElementById('href').href;
-            var interval = setInterval(function(){
-                var time = --wait.innerHTML;
-                if(time < 0) {
-                    time=++wait.innerHTML;
-                };
-            }, 60000);
-        })();
+    (function() {
+        var wait = document.getElementById('wait'),
+            href = document.getElementById('href').href;
+        var interval = setInterval(function() {
+            var time = --wait.innerHTML;
+            if (time < 0) {
+                time = ++wait.innerHTML;
+            };
+        }, 60000);
+    })();
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('whatever') instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </body>
+
 </html>

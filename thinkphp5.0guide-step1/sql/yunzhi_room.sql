@@ -11,7 +11,11 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
+<<<<<<< HEAD
+ Date: 17/07/2021 17:33:08
+=======
  Date: 17/07/2021 18:27:39
+>>>>>>> origin
 */
 
 SET NAMES utf8mb4;

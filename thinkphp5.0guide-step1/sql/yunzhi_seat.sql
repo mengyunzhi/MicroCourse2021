@@ -11,7 +11,11 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
+<<<<<<< HEAD
+ Date: 17/07/2021 17:35:32
+=======
  Date: 17/07/2021 18:27:55
+>>>>>>> origin
 */
 
 SET NAMES utf8mb4;
@@ -29,28 +33,11 @@ CREATE TABLE `yunzhi_seat`  (
   `create_time` int(0) NULL DEFAULT 0,
   `update_time` int(0) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2628 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2678 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of yunzhi_seat
 -- ----------------------------
-INSERT INTO `yunzhi_seat` VALUES (57, 2, 1, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (58, 1, 1, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (64, 2, 5, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (115, 1, 2, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (125, 2, 2, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2242, 2, 3, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2243, 2, 4, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2244, 1, 5, 1, 0, NULL);
-INSERT INTO `yunzhi_seat` VALUES (2245, 1, 3, 1, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2498, 1, 1, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2499, 1, 2, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2500, 1, 3, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2502, 1, 5, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2503, 2, 1, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2504, 2, 2, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2505, 2, 3, 100, 0, 0);
-INSERT INTO `yunzhi_seat` VALUES (2507, 2, 5, 100, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2508, 1, 1, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2509, 1, 2, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2510, 1, 3, 101, 0, 0);
@@ -65,6 +52,10 @@ INSERT INTO `yunzhi_seat` VALUES (2527, 4, 5, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2528, 5, 1, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2529, 5, 2, 101, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2530, 5, 3, 101, 0, 0);
+<<<<<<< HEAD
+INSERT INTO `yunzhi_seat` VALUES (2531, 5, 4, 101, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2532, 5, 5, 101, 0, 0);
+=======
 INSERT INTO `yunzhi_seat` VALUES (2533, 1, 1, 102, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2534, 1, 2, 102, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2535, 1, 3, 102, 0, 0);
@@ -87,6 +78,7 @@ INSERT INTO `yunzhi_seat` VALUES (2560, 1, 3, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2562, 1, 5, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2563, 2, 1, 103, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2564, 2, 2, 103, 0, 0);
+>>>>>>> origin
 INSERT INTO `yunzhi_seat` VALUES (2568, 1, 1, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2569, 1, 2, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2570, 1, 3, 104, 0, 0);
@@ -109,6 +101,49 @@ INSERT INTO `yunzhi_seat` VALUES (2596, 4, 2, 105, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2597, 4, 3, 105, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2598, 4, 4, 105, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2599, 4, 5, 105, 0, 0);
+<<<<<<< HEAD
+INSERT INTO `yunzhi_seat` VALUES (2628, 1, 1, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2629, 1, 2, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2630, 1, 3, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2631, 1, 4, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2632, 1, 5, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2633, 2, 1, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2634, 2, 2, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2635, 2, 3, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2636, 2, 4, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2637, 2, 5, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2638, 3, 1, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2639, 3, 2, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2640, 3, 3, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2641, 3, 4, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2642, 3, 5, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2643, 4, 1, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2644, 4, 2, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2645, 4, 3, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2646, 4, 4, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2647, 4, 5, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2648, 5, 1, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2649, 5, 2, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2650, 5, 3, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2651, 5, 4, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2652, 5, 5, 107, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2653, 1, 1, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2654, 1, 2, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2655, 1, 3, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2656, 1, 4, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2657, 1, 5, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2658, 2, 1, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2662, 2, 5, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2663, 3, 1, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2667, 3, 5, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2668, 4, 1, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2672, 4, 5, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2673, 5, 1, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2674, 5, 2, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2675, 5, 3, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2676, 5, 4, 108, 0, 0);
+INSERT INTO `yunzhi_seat` VALUES (2677, 5, 5, 108, 0, 0);
+=======
 INSERT INTO `yunzhi_seat` VALUES (2601, 1, 1, 106, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2602, 1, 2, 106, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2603, 1, 3, 106, 0, 0);
@@ -142,3 +177,4 @@ INSERT INTO `yunzhi_seat` VALUES (2633, 3, 4, 104, 0, 0);
 INSERT INTO `yunzhi_seat` VALUES (2634, 3, 3, 104, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
+>>>>>>> origin
