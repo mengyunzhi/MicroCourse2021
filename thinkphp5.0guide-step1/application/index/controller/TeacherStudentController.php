@@ -10,7 +10,7 @@ use app\common\model\Score;
 use app\index\controller\ExcelController;
 use app\common\model\Course;
 
-class TeacherStudentController extends controller
+class TeacherStudentController extends IndexController
 {
 	public function index()
     {

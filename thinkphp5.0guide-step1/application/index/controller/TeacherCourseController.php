@@ -9,7 +9,7 @@ use app\common\model\KlassCourse;
 use app\common\model\Score;
 
 //教师端课程管理
-class TeacherCourseController extends Controller
+class TeacherCourseController extends IndexController
 {
 	 public function index()
     {

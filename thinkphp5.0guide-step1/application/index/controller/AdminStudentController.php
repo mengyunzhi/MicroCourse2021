@@ -4,7 +4,7 @@ use think\Controller;
 use app\common\model\Student;
 use think\Request;
 
-class AdminStudentController extends IndexController
+class AdminStudentController extends Index3Controller
 {
 	public function index()
 	{	

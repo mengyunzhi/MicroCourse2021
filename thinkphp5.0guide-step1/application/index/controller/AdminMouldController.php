@@ -8,7 +8,7 @@ use app\common\model\Aisle;
 use think\Db; 
 use app\common\model\Room;
 
-class AdminMouldController extends IndexController
+class AdminMouldController extends Index3Controller
 {
 	public function index()
 	{
