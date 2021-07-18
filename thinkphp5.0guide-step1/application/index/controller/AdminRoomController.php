@@ -7,7 +7,7 @@ use app\common\model\Room;
 use app\common\model\Aisle;
 use app\common\model\Seat;
 use think\Request;  
-class AdminRoomController extends IndexController
+class AdminRoomController extends Index3Controller
 {
 	public function index()
 	{
