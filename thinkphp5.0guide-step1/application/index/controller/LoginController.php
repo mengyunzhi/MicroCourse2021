@@ -21,7 +21,7 @@ class LoginController extends Controller
         $postData = Request::instance()->post();
 
         // 验证用户名是否存在
-        $map = array('username'  => $postData['username']);
+        $map = array('number'  => $postData['username']);
         $User = Teacher::get($map);
         $tag=1;
         if(is_null($User)){

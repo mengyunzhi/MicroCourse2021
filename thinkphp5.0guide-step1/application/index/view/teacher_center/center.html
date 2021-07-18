@@ -14,7 +14,7 @@
     <h1 class="head1">个人中心</h1>
     <div class="in">
     <ul>
-        <li><font size="5" >教师工号:<td>{:$teachers->id}</td></font></li>
+        <li><font size="5" >教师工号:<td>{:$teachers->number}</td></font></li>
         <li><font size="5" >姓名：{:$teachers->name}<td></td></font></li>
 
         <li><font size="5" >性别：{eq name='$teachers->getData("sex")' value='0'}男{else /}女{/eq}<td></td></font></li>
