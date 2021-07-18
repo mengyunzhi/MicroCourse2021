@@ -71,8 +71,9 @@ class StudentController extends IndexController
                 ]);
 
             // 向V层传数据
-            $this->assign('teacher', $teachers);
-
+            if(!empty($name)){
+            $this->assign('course', $teachers);
+        }
             // 取回打包后的数据
             $htmls = $this->fetch();
 
