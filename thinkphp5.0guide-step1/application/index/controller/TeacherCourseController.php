@@ -153,11 +153,11 @@ class TeacherCourseController extends Controller
         return $this->success('更新成功', url('index'));
     }
 	public function save()
-    {
+    {    
         // 存课程信息
         $Course = new Course();
         $Course->name = Request::instance()->post('name');
-
+        $Course->teacher_id=session('id');
         // 新增数据并验证。验证类我们好像还没有写呢。自己参考其它的验证类，写一下吧。
         if (!$Course->validate(true)->save()) {
             return $this->error('课程保存错误：' . $Course->getError());
