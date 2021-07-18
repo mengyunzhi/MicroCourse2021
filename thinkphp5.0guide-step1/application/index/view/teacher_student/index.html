@@ -20,13 +20,13 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="{:url('TeacherCourse/index')}">课程管理</a></li>
-                            <li><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
+                            <li class="active"><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
                             <li><a href="{:url('Klass/index')}">班级管理</a></li>
                             <li><a href="{:url('Teacher/index')}">上课</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{:url('TeacherCenter/center')}">个人中心</a></li>
-                            <li><a href="#">注销</a></li>
+                            <li><a href="{:url('Login/logout')}">注销</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -39,14 +39,16 @@
         <div class="col-md-12">
             <hr />
             <div class="row">
-                <form class="form-inline">
+                <form class="form-inline" action="{:url('getFile')}" enctype="multipart/form-data" method="post">
                     <div>
+                        <div><label >导入学生成绩：</label></div>
+                        <div><button type="submit" class="form-control">模板下载</button></div>
+                        <div>
+                            <input type="hidden" name="MAX_FILE_SIZE"  value="30000" />
+                            <input name="userfile"  type="file" style="position: relative;top:10px;" /><br>
+                        </div>
                         <div><label>导入学生成绩：</label></div>
-                        <div><button type="submit">模板下载</button></div>
-                        <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                        <input name="userfile" type="file" /></div>
-                        <div><label>导入学生成绩：</label></div>
-                        <div><button type="submit">导出成绩</button></div>
+                        <div><button type="submit" class="form-control">导入成绩</button></div>
                         <div></div>
                     </div>
                     <hr />
@@ -81,7 +83,7 @@
                     <td>{$Student->Klass->name}</td>
                     <td>
                         <a class="btn btn-primary" href="{:url('edit?id='.$Student->id)}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
-                        <a class="btn btn-primary" href="{:url('Score/index?id='.$Student->id)}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;查看成绩</a>
+                        <a class="btn btn-primary btn-success" href="{:url('Score/index?id='.$Student->id)}"><i class="glyphicon glyphicon-search"></i>&nbsp;查看成绩</a>
                         <a class="btn btn-danger" href="{:url('delete?id='.$Student->id)}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </td>
                 </tr>

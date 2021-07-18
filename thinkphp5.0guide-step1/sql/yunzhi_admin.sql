@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : tp1
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100113
+ Source Server Version : 80022
  Source Host           : localhost:3306
  Source Schema         : tp1
 
  Target Server Type    : MySQL
- Target Server Version : 100113
+ Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 17/07/2021 10:11:31
+ Date: 17/07/2021 18:25:58
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `yunzhi_admin`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `id` int(11) NOT NULL,
+  `id` int(0) NOT NULL,
   `sex` tinyint(1) NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
