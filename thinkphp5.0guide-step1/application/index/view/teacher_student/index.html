@@ -42,13 +42,14 @@
                 <form class="form-inline" action="{:url('getFile')}" enctype="multipart/form-data" method="post">
                     <div>
                         <div><label>导入学生成绩：</label></div>
-                        <div><button type="submit">模板下载</button></div>
+                        <div><a href="{:url('getModel')}"><button type="button">模板下载</button></a></div>
                         <div>
                             <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                             <input name="userfile" type="file" /><br>
                         </div>
                         <div><label>导入学生成绩：</label></div>
                         <div><button type="submit">导入成绩</button></div>
+                        <div><a href="{:url('select')}"><button type="button">导出成绩</button></a></div>
                         <div></div>
                     </div>
                     <hr />

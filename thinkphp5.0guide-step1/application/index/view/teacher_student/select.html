@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>选择班级和课程</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body  class="container">
+    <form action="{:url('exportFile')}" method='post'>
+        <font size="3">课程:</font>
+            <select name="course_id">
+                {volist name='courses' id='course'}
+                <option value="{$course->getData('id')}" >{$course->name}</option>
+                {/volist}
+            </select>
+        <font size="3">班级:</font>
+            <select name="klass_id">
+                {volist name='Klass->select()' id='klass'}
+                <option value="{$klass->getData('id')}" >{$klass->name}</option>
+                {/volist}
+            </select>
+        <button type="sumbit">导出</button>     
+        <a href="{:url('index')}"><button type="button">取消</button></a>     
+    </form>
+</body>
+</html>
+

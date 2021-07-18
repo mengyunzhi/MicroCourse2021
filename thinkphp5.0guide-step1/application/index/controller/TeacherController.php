@@ -86,7 +86,7 @@ class TeacherController extends IndexController
         $studentIds=array();
         $klassNumber=count($klassIds);
         //随机生成班级
-        $klassId=(int)$this->dc_rand1(0,$klassNumber-0.1,2)[0];
+        $klassId=(int)$this->dc_rand1(0,$klassNumber,2)[0];
         //获取学生
         for ($j=0,$i=0; $i <count($students); $i++) { 
             if($students[$i]->klass_id==$klassIds[$klassId]){
@@ -100,7 +100,7 @@ class TeacherController extends IndexController
         if ($studentNumber===0) {
         	$studentName='';
         }else{
-        	$studentId=(int)$this->dc_rand1(0,$studentNumber-0.1,5)[3];
+        	$studentId=(int)$this->dc_rand1(0,$studentNumber,5)[3];
         	$Student=Student::get($studentIds[$studentId]);
         	$studentName=$Student->name;
         }
