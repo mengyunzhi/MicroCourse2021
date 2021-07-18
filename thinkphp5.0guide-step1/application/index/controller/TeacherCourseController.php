@@ -21,10 +21,11 @@ class TeacherCourseController extends Controller
 
             // 实例化Teacher
             $Course = new Course; 
-
+            //教师id
+            $teacher_id=session('id');
             // 定制查询信息
             if (!empty($name)) {
-                $Course->where('name', 'like', '%' . $name . '%');
+                $Course->where('name', 'like', '%' . $name . '%')->where('teacher_id');
             }
 
             // 按条件查询数据并调用分页
@@ -33,9 +34,17 @@ class TeacherCourseController extends Controller
                     'name' => $name,
                     ],
                 ]);
+            //根据教师id筛选
+            $Courses=array();
+            for ($j=0 ,$i=0; $i <count($courses) ; $i++) { 
+                if($courses[$i]->teacher_id==$teacher_id){
+                    $Courses[$j]=$courses[$i];
+                    $j++;
+                }
+            }
             // 向V层传数据
             $this->assign([
-                'courses'=> $courses,
+                'courses'=> $Courses,
                 'Teacher'=>new Teacher
             ]);
 
@@ -128,6 +137,7 @@ class TeacherCourseController extends Controller
 
         // 更新课程名
         $Course->name = Request::instance()->post('name');
+        $course->teacher_id=$teacher_id;
         if (is_null($Course->validate(true)->save())) {
             return $this->error('课程信息更新发生错误：' . $Course->getError());
         }
