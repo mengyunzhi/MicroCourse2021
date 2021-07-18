@@ -302,4 +302,54 @@ class TeacherStudentController extends controller
         $newScore->sum_score=$newScore->usual_score+$newScore->exam_score;
         $newScore->save();
     }
+    /*
+    *选择导出成绩的班级和课程
+    */
+    public function select()
+    {
+        $Course= new Course;
+        $Klass= new Klass;
+        $courses=$Course->select();
+        $klasses=$Klass->select();
+        $teacher_id=session('id');
+        $Courses=array();
+        for ($j=0,$i=0; $i <count($courses) ; $i++) { 
+            if($courses[$i]->teacher_id==$teacher_id){
+                $Courses[$j]=$courses[$i];
+                $j++;
+            }
+        }
+        $this->assign([
+            'courses'=>$Courses,
+            'Klass'=>new Klass
+        ]);
+        return $this->fetch();
+    }
+    /*
+    *导出成绩
+    */
+    public function exportFile()
+    {   
+        $postData=Request::instance()->post();
+        $Score=new Score;
+        $scores=$Score->select();
+        $lists=array();
+        for ($j=0,$i=0; $i <count($scores) ; $i++) { 
+            $Student=Student::get($scores[$i]->student_id);
+            if($scores[$i]->course_id==$postData['course_id'] And $Student->klass_id==$postData['klass_id']){
+                $lists[$j]=$scores[$i];
+            }
+        }
+        $ExcelController=new ExcelController;
+        $ExcelController->exportExcel($lists);
+    }
+    /*
+    *下载模板
+    */
+    public function getModel()
+    {
+        $scores=null;
+        $ExcelController=new ExcelController;
+        $ExcelController->exportExcel($scores);
+    }
 }
