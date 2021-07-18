@@ -50,11 +50,12 @@
                     <th>总成绩</th>
                     <th>操作</th>
                 </tr>
-                {$student->getklass()}
-                {volist name="teachers" id="_Teacher" key="key"}
+                
+                
+                {volist name="course" id="_course" key="key"}
                 <tr>
                     <td>{$key}</td>
-                    <td>{$_Teacher->getData('name')}</td>
+                    <td>{$_course->getData('name')}</td>
                     <td>{}</td>
                     <td></td>
                     
