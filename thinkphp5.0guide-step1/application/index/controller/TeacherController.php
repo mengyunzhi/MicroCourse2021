@@ -10,10 +10,10 @@ use app\common\model\Student;
 use app\common\model\KlassCourse;
 
 class TeacherController extends IndexController
-{
+{	
 	public function index()
 	{	
-		$teacher_id=Request::instance()->param('id'); 
+		$teacher_id=Request::instance()->param('id');
 		//实例化对象
 		$Course=new Course;
 		$Klass=new Klass;
@@ -59,7 +59,8 @@ class TeacherController extends IndexController
 			'rooms'=>$rooms,
 			'time'=>$postDate['time'],
 			'studentName'=>$studentName,
-			'teacherName'=>$Teacher->name
+			'teacherName'=>$Teacher->name,
+			'teacher_id'=>$postDate['teacher_id']
 		]);
 		return $this->fetch();
 	}
