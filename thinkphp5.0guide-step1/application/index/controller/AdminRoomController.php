@@ -162,7 +162,7 @@ class AdminRoomController extends IndexController
 
     public function save()
     {
-        $postData = Request::instance()->post();
+        $postData = Request::instance()->param();
 
         $id = $postData['room_id'];
 
@@ -175,7 +175,7 @@ class AdminRoomController extends IndexController
         $room->mid=$postData['mid'];
 
         $Seats = Db::name('seat_room')->select();
- 
+
         // 保存数据
         $result= $room->validate(true)->save();
             
@@ -187,15 +187,16 @@ class AdminRoomController extends IndexController
         } else {
          //修改的座位列表
         foreach ($Seats as $value) {
-            if($value['mid'] === $room->mid)
-            {
+            if($value['room_id'] ===  $room->id)
+            {   
                 $SeatRoom = SeatRoom::get($value['id']);
-                $SeatRoom->room_id=$value['room_id'];
+                $SeatRoom->mid=$room->mid;
                 $SeatRoom->save();
             }
+        } 
             // 提示操作成功，并跳转至管理列表
             return $this->success('教室'. $room->name . '更新成功。', url('index'));
-        } 
+        
      }
 }
     public function insert ()
@@ -210,7 +211,7 @@ class AdminRoomController extends IndexController
         // 为对象赋值
         $room->name = $postData['room_name'];
         $room->num = $postData['num'];
-        $room->mid = $postData['mid'];
+        $room->mid = (int)$postData['mid'];
         // 新增对象至数据表
         $result = $room->validate(true)->save();
 
@@ -236,7 +237,7 @@ class AdminRoomController extends IndexController
                 $SeatRoom->x=$value['x'];
                 $SeatRoom->y=$value['y'];
                 $SeatRoom->mid=$value['mid'];
-                $SeatRoom->room_id=$value['room_id'];
+                $SeatRoom->room_id=$room->id;
                 $SeatRoom->save();
             }
         }
