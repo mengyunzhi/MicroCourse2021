@@ -39,14 +39,16 @@
         <div class="col-md-12">
             <hr />
             <div class="row">
-                <form class="form-inline">
+                <form class="form-inline" action="{:url('getFile')}" enctype="multipart/form-data" method="post">
                     <div>
                         <div><label>导入学生成绩：</label></div>
                         <div><button type="submit">模板下载</button></div>
-                        <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                        <input name="userfile" type="file" /></div>
+                        <div>
+                            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                            <input name="userfile" type="file" /><br>
+                        </div>
                         <div><label>导入学生成绩：</label></div>
-                        <div><button type="submit">导出成绩</button></div>
+                        <div><button type="submit">导入成绩</button></div>
                         <div></div>
                     </div>
                     <hr />
@@ -81,7 +83,7 @@
                     <td>{$Student->Klass->name}</td>
                     <td>
                         <a class="btn btn-primary" href="{:url('edit?id='.$Student->id)}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
-                        <a class="btn btn-primary" href="{:url('Score/index?id='.$Student->id)}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;查看成绩</a>
+                        <a class="btn btn-primary btn-success" href="{:url('Score/index?id='.$Student->id)}"><i class="glyphicon glyphicon-search"></i>&nbsp;查看成绩</a>
                         <a class="btn btn-danger" href="{:url('delete?id='.$Student->id)}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </td>
                 </tr>
