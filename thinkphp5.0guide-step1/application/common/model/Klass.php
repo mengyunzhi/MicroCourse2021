@@ -6,5 +6,8 @@ use think\Model;
  */
 class Klass extends Model
 {
-
+    public function courses()
+    {
+        return $this->belongsToMany('Course',  config('database.prefix') . 'klass_course');
+    }
 }

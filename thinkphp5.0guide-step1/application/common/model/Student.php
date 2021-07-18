@@ -10,7 +10,11 @@ class Student extends Model
         $Klass = Klass::get($klassId);
         return $Klass;
     }
-
+    public function getKlassCourse(){
+        $klassId = $this->getData('klass_id');
+        $KlassCourse = KlassCourse::get($klassId);
+        return $KlassCourse;
+    }
 
 
 
