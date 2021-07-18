@@ -270,20 +270,73 @@ class AdminRoomController extends IndexController
         return $this->success('删除成功',url('index')); 
     }
 
-        public function QRCode()
+    public function isSeated()
     {
+        // 获取座位id，并对座位进行实例化
+        $seatId = Request::instance()->param('id/d');
+        $Seat = Seat::get($seatId);
+
+        // 判断座位是否被坐，并将其改为相反状态
+        if ($Seat->isseated === 1) {
+            $Seat->isseated = 0;
+        } else {
+            $Seat->isseat = 1;
+        }
+        return $Seat->save();
+    }
+
+    //     public function qrcode()
+    // {
+
+    //     // 获取传入ID
+    //     $id = Request::instance()->param('id/d');
+    //     $room = room::get($id);
+
+    //     //获得查询信息
+    //     $mid=Request::instance()->get('mid');
+    //     dump($mid);
+    //     $postData = Request::instance()->param();
+    //     // $Room = Room::get($id);
+    //     // $Room->$mid = $postData['mid'];
+
+    //     // //获取教室id
+    //     // $id = Request::instance()->param('id/d');
+    //     // $Room = Room::get($id);
+    //     // $Rooms = Db::name('room')->select();
+    //     // dump($Rooms);
+    //     // $mid = Request::instance()->param('mid/d');
+    //     $seats = Seat::where('mid', '=', $mid)->order('id desc')->select();
+    //     if (empty($seats)) {
+    //         return $this->error('当前教室无座位', url('index'));
+    //     }
+    //     $Mould = Mould::get($Room->mid);
+    //     $Moulds = Db::name('mould')->select();
+    //     $Aisles = Db::name('aisle')->select();
+    //     $this->assign('seats', $seats);
+    //     $this->assign('room', $room);
+    //     $this->assign('Moulds', $Moulds);
+    //     $this->assign('Mould', $Mould);
+    //     $this->assign('Aisles',$Aisles);
+    //     $url = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/studentWx?seatId=';
+    //     $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/teacherIndex?roomId=' . $Room->id;
+    //     $this->assign('url', $url);
+    //     $this->assign('urlTeacher', $urlTeacher);
+    //     return $this->fetch();
+    // }
+    public function QRCode()
+    {   
         $id = input('param.id/d');
-        $AdminRoom = AdminRoom::get($id);
-        $seats = Seat::where('classroom_id', '=', $id)->order('id desc')->select();
+        $Room = Room::get($id);
+        $seats =Db::name('seat_room')->where('room_id', '=', $id)->order('id desc')->select();
         if (empty($seats)) {
             return $this->error('当前教室无座位', url('index'));
         }
-        $SeatMap = SeatMap::get($Classroom->seat_map_id);
+        $Mould = Mould::get($Room->mid);
         $this->assign('seats', $seats);
-        $this->assign('SeatMap', $SeatMap);
-        $this->assign('Classroom', $Classroom);
+        $this->assign('Mould', $Mould);
+        $this->assign('Room', $Room);
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/studentWx?seatId=';
-        $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/teacherIndex?classroomId=' . $Classroom->id;
+        $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/teacherIndex?roomId=' . $Room->id;
         $this->assign('url', $url);
         $this->assign('urlTeacher', $urlTeacher);
         return $this->fetch();

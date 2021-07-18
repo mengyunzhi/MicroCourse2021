@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>教室二维码</title>
+    <title>查看教室二维码</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../../../../static/jquery-qrcode-0.17.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,17 +19,42 @@
 </head>
 
 <body class="container">
-    <?php use app\common\view\MenuView; ?>
-    <?php $MenuView = new MenuView; ?>
-    <?php echo $MenuView->render(); ?>
+<!-- 菜单导航 -->
+    <div class="text left">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">梦云智</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                          <li><a href="{:url('admin_term/index')}">学期管理</a></li>
+                            <li><a href="{:url('admin_teacher/index')}">教师管理</a></li>
+                            <li ><a href="{:url('admin_student/index')}">学生管理</a></li>
+                            <li  class="active"><a href="{:url('admin_room/index')}">教室管理</a></li>
+                            <li><a href="{:url('admin_mould/index')}">模板管理</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{:url('admin_center/center')}">个人中心</a></li>
+                            <li><a href="{:url('Login/logout')}">注销</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <h3 style="padding-left: auto;padding-right: auto;"><?php echo($Classroom->name) ?></h3>
+            <h3 style="padding-left: auto;padding-right: auto;"><?php echo($Room->name) ?></h3>
             <hr>
             <h2 style="color: green; padding-left: 50px" >讲台</h2>
             <div id="pla"></div>
             <div>
-                <b><?php echo('教室：' . $Classroom->name . '    ');echo($urlTeacher);?></b>
+                <b><?php echo('教室：' . $Room->name . '    ');echo($urlTeacher);?></b>
             </div>
             <script>
             $("#pla").qrcode({
@@ -45,23 +70,20 @@
     <table class="table table-bordered table-condensed ">
         <?php $count = sizeof($seats); $x = 1; $y = 0; $index = 0; $col = 0; $x1 = 0; $y1 = 0;?>
         {volist name="seats" id="Seat"}
-        {eq name="Seat->is_seat" value="0"}
         <div class="col-md-3">
-            <div id="{$Seat->id}"></div>
-            <?php echo('第'); echo($Seat->x - $x1 + 1); echo('行/');echo ("第"); echo($Seat->y - $y1 + 1); echo('列'); echo($url . $Seat->id); ?>
+            <div id="{$Seat['id']}"></div>
+            <?php echo('第'); echo($Seat['x'] - $x1 ); echo('行/');echo ("第"); echo($Seat['y']); echo('列'); echo($url . $Seat['id']); ?>
             <script>
-            $("#{$Seat->id}").qrcode({
+            $("#{$Seat['id']}").qrcode({
                 render: 'div',
                 size: 160,
-                text: '<?php echo($url . $Seat->id); ?>'
+                text: '<?php echo($url . $Seat['id']); ?>'
             });
             </script>
         </div>
-        {else /}
-        <?php $y1++;if ($y1 === $SeatMap->y_map): ?>
+        <?php $y1++;if ($y1 === $Mould->line): ?>
         <?php $x++; endif; ?>
-        {/eq}
-        <?php $col++;if($col === $SeatMap->y_map): ?>
+        <?php $col++;if($col === $Mould->line): ?>
         <?php $y1 = 0; $col = 0; endif; ?>
         <?php $x = $y === 4? ++$x : $x; ?>
         <?php $y = $y === 4? 0 : $y; ?>
