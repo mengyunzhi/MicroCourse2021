@@ -47,6 +47,13 @@
                             <input type="hidden" name="MAX_FILE_SIZE"  value="30000" />
                             <input name="userfile"  type="file" style="position: relative;top:10px;" /><br>
                         </div>
+                        <div>
+                            <select name="klass_id" class="form-control">
+                                {volist name='Klass->select()' id='Klass'}
+                                <option value="{$Klass->id}">{$Klass->name}</option>
+                                {/volist}
+                            </select>
+                        </div>
                         <div><label>导入学生成绩：</label></div>
                         <div><button type="submit">导入成绩</button></div>
                         <div><a href="{:url('select')}"><button type="button">导出成绩</button></a></div>
