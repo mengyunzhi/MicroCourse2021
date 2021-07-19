@@ -39,13 +39,14 @@
         <div class="col-md-12">
             <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
             <hr />
-            <form class="form-inline">
+            <form class="form-inline" action="{:url('getFile')}" enctype="multipart/form-data" method="post">
                 <div>
-                    <div style="float: left;"><label>导入学生：</label></div>
-                    <div style="float: left;"><button type="submit">模板下载</button></div>
+                    <input type="hidden" name="klass_id" value="{$Klass->id}">
+                    <div style="float: left;"><lable>导入学生信息：</lable></div>
                     <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                    <div style="float: left;"><button type="submit">模板下载</button></div>               
                     <input name="userfile" type="file" /></div>
-                    <div style="clear: left;"></div>
+                    <div style="clear: left;"><button type="submit">上传</button></div>
                 </div>
             </form>
             <form action="{:url('update')}" method="post">

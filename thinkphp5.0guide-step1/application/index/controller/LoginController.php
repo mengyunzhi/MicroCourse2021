@@ -12,7 +12,7 @@ class LoginController extends Controller
         
         return $this->fetch();
     }
-
+    
     // 处理用户提交的登录数据  
     public function login()
     {
