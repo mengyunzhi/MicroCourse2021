@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>编辑班级</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style type="text/css">
+       .style1{
+         position: relative;
+     }
+    </style>
 </head>
 
 <body class="container">
@@ -37,24 +42,27 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
+            <input id="return"  name="Submit" type="submit" class="btn btn-default" onclick="javascript:history.back();" value="返回"/>
             <hr />
             <form class="form-inline" action="{:url('getFile')}" enctype="multipart/form-data" method="post">
                 <div>
                     <input type="hidden" name="klass_id" value="{$Klass->id}">
-                    <div style="float: left;"><lable>导入学生信息：</lable></div>
+                    <div style="float: left;"><lable><b> 导入学生：</b></lable></div>
                     <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                    <div style="float: left;"><a href="{:url('getModel')}"><button type="button">模板下载</button></a></div>               
-                    <input name="userfile" type="file" /></div>
-                    <div style="clear: left;"><button type="submit">上传</button></div>
+                    <div style="top: -8px;"><a href="{:url('getModel')}"><button type="button" class="form-control  style1 btn-default" >模板下载</button></a></div> <br>  
+                    <div style="float: left;"><lable for="userfile" ><b> 选择文件：</b></lable></div>            
+                    <input name="userfile" type="file" />
+                    <button type="submit" style="left: 69px;top: 20px;" class="form-control style1 btn-default">上传文件</button>
+                    </div>
                 </div>
             </form>
-            <form action="{:url('update')}" method="post">
+            <br><br>
+            <form action="{:url('update')}" method="post" class="form-inline">
                     <input type="hidden" name="id" value="{$Klass->getData('id')}" />
-                    <label for="name">班级:</label>
-                    <input type="hidden" name="student_number" value="{$Klass->getData('student_number')}" />
-                    <input type="text" name="name" id="name" value="{$Klass->getData('name')}"/>
-                    <button type="submit">保存</button>
+                    <label >班级姓名:</label>
+                    <input type="hidden" name="student_number"  value="{$Klass->getData('student_number')}" />
+                    <input type="text" name="name" id="name" style="left: 5px;" class="form-control style1" value="{$Klass->getData('name')}"/>
+                    <button type="submit" class="form-control btn-default">保存</button>
             </form>
         </div>
     </div>

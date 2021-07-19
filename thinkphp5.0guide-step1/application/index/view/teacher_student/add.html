@@ -38,22 +38,22 @@
     <div class="row">
         <div class="col-md-12">
         <hr />
-            <form action="save" method="post">
+            <form class="form-inline " action="save" method="post" class="form-inline ">
                 <label>姓名:</label>
-                <input type="hidden" name="id" value="" />
-                <input type="text" name="name" value="" />
+                <input type="hidden" name="id" value="" class="form-control" />
+                <input type="text" name="name" value=""  class="form-control"/>
                 <label>学号:</label>
-                <input type="text" name="number" value="" />
+                <input type="text" name="number" value=""  class="form-control"/>
                 <label>班级:</label>
-                <select name="klass_id">
+                <select name="klass_id" class="form-control">
                     {volist name='klasses' id='Klass'}
                     <option value="{$Klass->getData('id')}" >{$Klass->name}</option>
                     {/volist}
                 </select> 
                 <label>邮箱:</label>
-                <input type="email" name="email" value="" />
-                <button type="submit">保存</button>
-                <a href="{:url('index')}"><button type="button">取消</button></a>
+                <input type="email" name="email" value="" class="form-control"/>
+                <button type="submit" class="form-control btn btn-success"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
+                <a href="{:url('index')}"><button type="button" class="form-control btn btn-default">取消</button></a>
             </form>
         </div>
     </div>
