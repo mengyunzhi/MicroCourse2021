@@ -11,7 +11,7 @@ class ExcelController
 {
 	public function readExcel($file)
 	{
-		$reader = PHPExcel_IOFactory::createReader('Excel5');
+	       $reader = PHPExcel_IOFactory::createReader('Excel5');
 		$excel = PHPExcel_IOFactory::load('/readfile/www/upload/'.$file);
 		$data=$excel->getActiveSheet()->toArray();
 		return $data;
@@ -67,5 +67,33 @@ class ExcelController
         $objWriter->save('php://output');
         exit;
 	}
+        public function getModel()
+        {
+                $objPHPExcel=new \PHPExcel();
+                $objPHPExcel->setActiveSheetIndex(0);
+        //5.设置表格头（即excel表格的第一行）
+        $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', '姓名')
+                ->setCellValue('B1', '学号')
+                ->setCellValue('C1', '邮件');
+        //水平居中
+        $objPHPExcel->setActiveSheetIndex(0)->getStyle('A')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->setActiveSheetIndex(0)->getStyle('B')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->setActiveSheetIndex(0)->getStyle('C')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        //7.设置保存的Excel表格名称
+        $filename = '学生信息模板'.date('ymd',time()).'.xls';
+        //8.设置当前激活的sheet表格名称；
+        $objPHPExcel->getActiveSheet()->setTitle('学生信息模板');
+        //9.设置浏览器窗口下载表格
+        header("Content-Type: application/force-download");  
+        header("Content-Type: application/octet-stream");  
+        header("Content-Type: application/download");  
+        header('Content-Disposition:inline;filename="'.$filename.'"');  
+        //生成excel文件
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        //下载文件在浏览器窗口
+        $objWriter->save('php://output');
+        exit;
+        }
 
 }

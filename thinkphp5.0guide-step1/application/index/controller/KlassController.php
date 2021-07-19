@@ -300,5 +300,12 @@ class KlassController extends IndexController
         }
         return true;
     }
-    
+    /*
+    *下载模板
+    */
+    public function getModel()
+    {
+        $ExcelController=new ExcelController;
+        $ExcelController->getModel();
+    }
 }

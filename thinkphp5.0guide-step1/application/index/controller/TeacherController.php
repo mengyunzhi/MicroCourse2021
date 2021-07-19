@@ -92,6 +92,7 @@ class TeacherController extends IndexController
 		]);
 		return $this->fetch();
 	}
+
 	//下课
     public function OffClass ()
     {    //接收数据
@@ -128,6 +129,9 @@ class TeacherController extends IndexController
         $klassNumber=count($klassIds);
         //随机生成班级
         $klassId=(int)$this->dc_rand1(0,$klassNumber,2)[0];
+        if($klassId==$klassNumber){
+        	$klassId--;
+        }
         //获取学生
         for ($j=0,$i=0; $i <count($students); $i++) { 
             if($students[$i]->klass_id==$klassIds[$klassId]){
@@ -142,6 +146,9 @@ class TeacherController extends IndexController
         	$studentName='';
         }else{
         	$studentId=(int)$this->dc_rand1(0,$studentNumber,5)[3];
+        	if($studentId==$studentNumber){
+        		$studentId--;
+        	}
         	$Student=Student::get($studentIds[$studentId]);
         	$studentName=$Student->name;
         }
