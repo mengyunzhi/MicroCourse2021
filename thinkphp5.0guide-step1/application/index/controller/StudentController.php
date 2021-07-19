@@ -123,10 +123,11 @@ class StudentController extends Index2Controller
 	
 	public function check()
 	{	
-		$id = Request::instance()->get('id');
+        $name = Request::instance()->get('name');
+        $id = Request::instance()->get('id');
         $Teacher = new Course; 
         $teachers = Course::get($id);
-
+        
         // 向V层传数据
         $this->assign('teachers', $teachers);
 		return $this->fetch();
