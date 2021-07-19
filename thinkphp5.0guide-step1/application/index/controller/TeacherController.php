@@ -31,7 +31,8 @@ class TeacherController extends IndexController
 
 	}
 	public function onclass()
-	{
+	{   
+       
 		//接收数据
 		$postData=Request::instance()->post();
 		//实例化对象
@@ -53,6 +54,10 @@ class TeacherController extends IndexController
 			}
 
 		}
+        //把教室改为占用
+        $room->is_occupy = 1;
+        $room->save();
+
 		 //获取所有模板信息
         $Moulds = Db::name('mould')->select();
 
@@ -87,6 +92,20 @@ class TeacherController extends IndexController
 		]);
 		return $this->fetch();
 	}
+
+	//下课
+    public function OffClass ()
+    {    //接收数据
+		$postData=Request::instance()->post();
+         //把教室改为未占用
+         $room=Room::get($postData['room_id']);
+         $room->is_occupy = 0;
+         $room->save();
+         $this->success('下课，老师您辛苦了', url('index'));
+    }
+
+
+
 	//获取学生
 	public function getStudent($course_id)
     {
@@ -110,6 +129,9 @@ class TeacherController extends IndexController
         $klassNumber=count($klassIds);
         //随机生成班级
         $klassId=(int)$this->dc_rand1(0,$klassNumber,2)[0];
+        if($klassId==$klassNumber){
+        	$klassId--;
+        }
         //获取学生
         for ($j=0,$i=0; $i <count($students); $i++) { 
             if($students[$i]->klass_id==$klassIds[$klassId]){
@@ -124,6 +146,9 @@ class TeacherController extends IndexController
         	$studentName='';
         }else{
         	$studentId=(int)$this->dc_rand1(0,$studentNumber,5)[3];
+        	if($studentId==$studentNumber){
+        		$studentId--;
+        	}
         	$Student=Student::get($studentIds[$studentId]);
         	$studentName=$Student->name;
         }

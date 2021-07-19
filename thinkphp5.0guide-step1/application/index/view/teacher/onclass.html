@@ -20,6 +20,11 @@
         position: relative;
         left: 50px;
     }
+     .style2 {
+        position: relative;
+        left: 70px;
+        top: 10px;
+    }
     </style>
 </head>
 
@@ -35,15 +40,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="{:url('TeacherCourse/index')}">课程管理</a></li>
-                            <li><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
-                            <li><a href="{:url('Klass/index')}">班级管理</a></li>
-                            <li><a href="{:url('Teacher/index')}">上课</a></li>
+                            <li><a >正在上课中</a></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{:url('TeacherCenter/center')}">个人中心</a></li>
-                            <li><a href="{:url('Login/logout')}">注销</a></li>
-                        </ul>
+                        
                     </div>
                     <!-- /.navbar-collapse -->
                 </div>
@@ -57,7 +56,34 @@
             <tr class="info">
                 <th ><label style="position: relative;left: 67px;">教师姓名：{$teacherName}</label></th>
                 <th>
-                    <label style="position: relative;right: 265px;">教室：{$room['name']}</label>
+                    <label style="position: relative;left: 8px;">教室：{$room['name']}</label>
+                </th>
+                <th>
+                    <form action="{:url('OffClass')}" method="post">
+                        <input type="hidden" name="room_id" value="{$room_id}">
+                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="position: relative;left: 25px;"  > 点击下课</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="control-label style2"><h4> 是否确定下课?</h4></label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                    </form>
                 </th>
             </tr>
         </table>
@@ -168,8 +194,8 @@
                         </button>
                     </th>
                 </tr>
-                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">student8</button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#example" data-whatever="@mdo">student8</button>
+                <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

@@ -12,22 +12,21 @@ class AdminTeacherController extends Index3Controller
     {
         try {
             // 获取查询信息
-            $name = Request::instance()->get('name');
-
+            $number = Request::instance()->get('number');
             $pageSize = 5; // 每页显示5条数据
 
             // 实例化Teacher
             $Teacher = new Teacher; 
 
             // 定制查询信息
-            if (!empty($name)) {
-                $Teacher->where('name', 'like', '%' . $name . '%');
+            if (!empty($number)) {
+                $Teacher->where('number', $number);
             }
 
             // 按条件查询数据并调用分页
             $teachers = $Teacher->paginate($pageSize, false, [
                 'query'=>[
-                    'name' => $name,
+                    'number' => $number,
                     ],
                 ]);
 

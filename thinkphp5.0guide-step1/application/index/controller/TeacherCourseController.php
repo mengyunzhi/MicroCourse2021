@@ -7,6 +7,7 @@ use app\common\model\Course;
 use app\common\model\Teacher;
 use app\common\model\KlassCourse;
 use app\common\model\Score;
+use app\common\model\Term;
 
 //教师端课程管理
 class TeacherCourseController extends IndexController
@@ -15,17 +16,15 @@ class TeacherCourseController extends IndexController
     {
         try {
             // 获取查询信息
-            $name = Request::instance()->get('name');
-
-            $pageSize = 5; // 每页显示5条数据
-
+            $name = Request::instance()->post('name');
+            $pageSize = 15; // 每页显示5条数据
             // 实例化Teacher
             $Course = new Course; 
             //教师id
             $teacher_id=session('id');
             // 定制查询信息
             if (!empty($name)) {
-                $Course->where('name', 'like', '%' . $name . '%')->where('teacher_id');
+                $Course->where('name', 'like', '%' . $name . '%');
             }
 
             // 按条件查询数据并调用分页
@@ -34,6 +33,22 @@ class TeacherCourseController extends IndexController
                     'name' => $name,
                     ],
                 ]);
+
+            $Terms = Db::name('term')->select();
+            $flag=0;
+
+            foreach ($Terms as $term) {
+                if($term['effect']===1){
+                    $flag=1;
+                    $this->assign("term",$term);
+                }
+            }
+            if($flag===0){
+                $term1= new Term;
+                $term1->name = "暂无";
+                $this->assign("term",$term1);
+            }
+
             //根据教师id筛选
             $Courses=array();
             for ($j=0 ,$i=0; $i <count($courses) ; $i++) { 
@@ -137,7 +152,7 @@ class TeacherCourseController extends IndexController
 
         // 更新课程名
         $Course->name = Request::instance()->post('name');
-        $course->teacher_id=$teacher_id;
+        $Course->teacher_id=session('id');
         if (is_null($Course->validate(true)->save())) {
             return $this->error('课程信息更新发生错误：' . $Course->getError());
         }
