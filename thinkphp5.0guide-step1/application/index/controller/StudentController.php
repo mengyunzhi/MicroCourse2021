@@ -106,6 +106,10 @@ class StudentController extends Index2Controller
             if(!empty($name)&&$j!=0){
             $this->assign('course', $teachers);
         }
+        if($j==0){
+            $teachers=null;
+            $this->assign('course',$teachers);
+        }
             // 取回打包后的数据
             $htmls = $this->fetch();
 
