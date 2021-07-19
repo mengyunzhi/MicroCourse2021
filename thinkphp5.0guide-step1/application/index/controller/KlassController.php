@@ -300,5 +300,5 @@ class KlassController extends IndexController
         }
         return true;
     }
-
+    
 }
