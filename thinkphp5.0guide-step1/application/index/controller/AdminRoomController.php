@@ -6,6 +6,7 @@ use think\Db;
 use app\common\model\Room;
 use app\common\model\Aisle;
 use app\common\model\Seat;
+use app\common\model\SeatRoom;
 use think\Request;  
 class AdminRoomController extends Index3Controller
 {
@@ -161,7 +162,7 @@ class AdminRoomController extends Index3Controller
 
     public function save()
     {
-        $postData = Request::instance()->post();
+        $postData = Request::instance()->param();
 
         $id = $postData['room_id'];
 
@@ -172,7 +173,9 @@ class AdminRoomController extends Index3Controller
         $room->name=$postData['room_name'];
 
         $room->mid=$postData['mid'];
- 
+
+        $Seats = Db::name('seat_room')->select();
+
         // 保存数据
         $result= $room->validate(true)->save();
             
@@ -182,11 +185,20 @@ class AdminRoomController extends Index3Controller
             $message = '更新失败:' . $room->getError();
             return $this->error($message);
         } else {
+         //修改的座位列表
+        foreach ($Seats as $value) {
+            if($value['room_id'] ===  $room->id)
+            {   
+                $SeatRoom = SeatRoom::get($value['id']);
+                $SeatRoom->mid=$room->mid;
+                $SeatRoom->save();
+            }
+        } 
             // 提示操作成功，并跳转至管理列表
             return $this->success('教室'. $room->name . '更新成功。', url('index'));
-        } 
+        
      }
-
+}
     public function insert ()
     {
        $message = '';  // 提示信息
@@ -199,10 +211,17 @@ class AdminRoomController extends Index3Controller
         // 为对象赋值
         $room->name = $postData['room_name'];
         $room->num = $postData['num'];
-        $room->mid = $postData['mid'];
+        $room->mid = (int)$postData['mid'];
         // 新增对象至数据表
         $result = $room->validate(true)->save();
+
+        //获取座位信息
+        $Seats = Db::name('seat')->select();
+
+        $Mould = Mould::get($room->mid);
+
         
+
         // 反馈结果
         if (false === $result)
         {   
@@ -210,6 +229,18 @@ class AdminRoomController extends Index3Controller
             $message = '新增失败:' . $room->getError();
             return $this->error($message);
         } else {
+            //增加的座位列表
+        foreach ($Seats as $value) {
+            if($value['mid'] === $room->mid)
+            {
+                $SeatRoom = new SeatRoom;
+                $SeatRoom->x=$value['x'];
+                $SeatRoom->y=$value['y'];
+                $SeatRoom->mid=$value['mid'];
+                $SeatRoom->room_id=$room->id;
+                $SeatRoom->save();
+            }
+        }
             // 提示操作成功，并跳转至管理列表
             return $this->success( $room->name . '新增成功。', url('index'));
         } 
