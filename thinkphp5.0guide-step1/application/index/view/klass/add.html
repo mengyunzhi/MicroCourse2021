@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>增加班级</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style type="text/css">
+       .style1{
+         position: relative;
+     }
+    </style>
 </head>
 
 <body class="container">
@@ -37,21 +42,24 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-        <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
+        <input id="return"  name="Submit" type="submit" class="btn btn-default" onclick="javascript:history.back();" value="返回"/>
         <hr />
             <form class="form-inline">
                 <div>
                     <div style="float: left;"><label>导入学生：</label></div>
-                    <div style="float: left;"><button type="submit">模板下载</button></div>
+                    <div style="top: -5px;"><button type="submit" class="form-control style1 btn btn-default">模板下载</button></div>
+                    <br>
+                    <div style="float: left;"><label>选择文件：</label></div>
                     <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                     <input name="userfile" type="file" /></div>
                     <div style="clear: left;"></div>
                 </div>
             </form>
-            <form action="{:url('save')}" method="post">
-                    <label for="name">班级:</label>
-                    <input type="text" name="name" id="name" />
-                    <button type="submit">保存</button>
+            <br>
+            <form action="{:url('save')}" method="post" class="form-inline">
+                    <label for="name">班级名字:</label>
+                    <input type="text" style="left: 5px;" name="name" id="name" class="style1 form-control " />
+                    <button type="submit" style="left: 5px;" class="form-control  style1 btn btn-default">保存</button>
             </form>
 
         </div>
