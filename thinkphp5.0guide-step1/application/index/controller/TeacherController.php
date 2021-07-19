@@ -31,7 +31,8 @@ class TeacherController extends IndexController
 
 	}
 	public function onclass()
-	{
+	{   
+       
 		//接收数据
 		$postData=Request::instance()->post();
 		//实例化对象
@@ -53,6 +54,10 @@ class TeacherController extends IndexController
 			}
 
 		}
+        //把教室改为占用
+        $room->is_occupy = 1;
+        $room->save();
+
 		 //获取所有模板信息
         $Moulds = Db::name('mould')->select();
 
@@ -87,6 +92,19 @@ class TeacherController extends IndexController
 		]);
 		return $this->fetch();
 	}
+	//下课
+    public function OffClass ()
+    {    //接收数据
+		$postData=Request::instance()->post();
+         //把教室改为未占用
+         $room=Room::get($postData['room_id']);
+         $room->is_occupy = 0;
+         $room->save();
+         $this->success('下课，老师您辛苦了', url('index'));
+    }
+
+
+
 	//获取学生
 	public function getStudent($course_id)
     {
