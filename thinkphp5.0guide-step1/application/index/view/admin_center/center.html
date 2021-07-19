@@ -11,7 +11,7 @@
 <out>
 
 <div  class="out">
-    <div class="email"><button class="btn btn-default col-md-offset-0"><a href="{:url('admin_term/index')}"><font size="3">返回</font></a></button></div>
+    <div class="email"><a href="{:url('admin_term/index')}"><font size="3"><button class="btn btn-default col-md-offset-0">返回</font></button></a></div>
 
 <body class="container">
     <h1 class="head1">个人中心</h1>
@@ -24,9 +24,12 @@
 
         <li><font size="5" >邮箱：{:$teachers->email}<td></td></font></li>
     </ul>
-    <div class="email"><button class="btn btn-default col-md-offset-12"><a href="{:url('updateemail?id=' . $teachers->getData('id'))}"><font size="3">修改邮箱</font></a></button></div>
+    <br>
+    <br>
+    
+    <div class="email"><a href="{:url('updateemail?id=' . $teachers->getData('id'))}"><button class="btn btn-default col-md-offset-12"><font size="3">修改邮箱</font></button></a></div>
 <br>
-    <div class="code"><button class="btn btn-default col-md-offset-12"><a href="{:url('update?id=' . $teachers->getData('id'))}"><font size="3">修改密码</font></a></button></div>
+    <div class="code"><a href="{:url('update?id=' . $teachers->getData('id'))}"><button class="btn btn-default col-md-offset-12"><font size="3">修改密码</font></button></a></div>
 
 </div>
 </div>

@@ -11,7 +11,7 @@
 <out>
     
 <div  class="out">
-<div class="email"><button class="btn btn-default col-md-offset-0"><a href="{:url('student/index')}"><font size="3">返回</font></a></button></div>
+<div class="email"><a href="{:url('student/index')}"><button class="btn btn-default col-md-offset-0"><font size="3">返回</font></button></a></div>
 <body class="container">
     <h1 class="head1">个人中心</h1>
 
@@ -24,11 +24,12 @@
         <li><font size="5" >学生学号:<td>{:$teachers->number}</td></font></li>
         <li><font size="5" >姓名：{:$teachers->name}<td></td></font></li>
         <li><font size="5" >性别：{eq name='$teachers->getData("sex")' value='0'}男{else /}女{/eq}<td></td></font></li>
+        <li><font size="5" >班级：{:$teachers->getklass()->name}<td></td></font></li>
         <li><font size="5" >邮箱：{:$teachers->email}<td></td></font></li>
     </ul>
-    <div class="email"><button class="btn btn-default col-md-offset-12"><a href="{:url('updateemail?id=' . $teachers->getData('id'))}"><font size="3">修改邮箱</font></a></button></div>
+    <div class="email"><a href="{:url('updateemail?id=' . $teachers->getData('id'))}"><button class="btn btn-default col-md-offset-12"><font size="3">修改邮箱</font></button></a></div>
     <br>
-    <div class="code"><button class="btn btn-default col-md-offset-12"><a href="{:url('update?id=' . $teachers->getData('id'))}"><font size="3">修改密码</font></a></button></div>
+    <div class="code"><a href="{:url('update?id=' . $teachers->getData('id'))}"><button class="btn btn-default col-md-offset-12"><font size="3">修改密码</font></button></a></div>
 
 </div>
 </div>
