@@ -10,7 +10,7 @@ use app\common\model\Klass;
 use app\common\model\Course;
 use app\common\model\KlassCourse;
 use app\common\model\Score;
-class StudentController extends IndexController
+class StudentController extends Index2Controller
 {
     public function getCourse($klass_id)
     {

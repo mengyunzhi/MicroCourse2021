@@ -6,7 +6,7 @@ use app\common\model\Student;
 use app\common\model\Score;
 use app\common\model\Course;
 
-class ScoreController extends Controller
+class ScoreController extends IndexController
 {
 	public function index()
     {
