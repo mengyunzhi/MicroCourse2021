@@ -94,12 +94,16 @@ class StudentController extends Index2Controller
             $numberk=count($course);
             for($i=0,$j=0;$i<$number;$i++){
                 for($k=0;$k<$numberk;$k++){
-                if($course[$k]->name==$teachers[$i]->name){
-                    $j=1;
+                if($course[$k]->id==$teachers[$i]->id&&$course[$k]->name==$teachers[$i]->name){
+                    $j++;
                 }
                 }
             }
-            if(!empty($name)&&$j==1){
+            
+            for(;$j<$number;$j++){
+            unset($teachers[$j]);
+        }
+            if(!empty($name)&&$j!=0){
             $this->assign('course', $teachers);
         }
             // 取回打包后的数据
@@ -115,9 +119,9 @@ class StudentController extends Index2Controller
 	
 	public function check()
 	{	
-		$id = session('id');
-        $Teacher = new Student; 
-        $teachers = Student::get($id);
+		$id = Request::instance()->get('id');
+        $Teacher = new Course; 
+        $teachers = Course::get($id);
 
         // 向V层传数据
         $this->assign('teachers', $teachers);

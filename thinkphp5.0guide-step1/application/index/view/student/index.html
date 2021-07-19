@@ -18,7 +18,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="{:url('check')}">我的课程</a></li>
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{:url('student_center/center')}">个人中心</a></li>
@@ -58,10 +58,10 @@
                     <td>{$key}</td>
                     <td>{$_course->getData('name')}</td>
 
-                    <td>{$_course->getscore($_course->id,$student->id)->sum_score}</td>
+                    <td>{$_course->id}</td>
                     <td>{$_course->getscore($_course->id,$student->id)->sum_score}</td>
                     
-                    <td><a href="{:url('check')}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
+                    <td><a href="check? id={$_course->id}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
                 </tr>
                 {/volist}
                 
