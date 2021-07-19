@@ -15,17 +15,15 @@ class TeacherCourseController extends IndexController
     {
         try {
             // 获取查询信息
-            $name = Request::instance()->get('name');
-
-            $pageSize = 5; // 每页显示5条数据
-
+            $name = Request::instance()->post('name');
+            $pageSize = 15; // 每页显示5条数据
             // 实例化Teacher
             $Course = new Course; 
             //教师id
             $teacher_id=session('id');
             // 定制查询信息
             if (!empty($name)) {
-                $Course->where('name', 'like', '%' . $name . '%')->where('teacher_id');
+                $Course->where('name', 'like', '%' . $name . '%');
             }
 
             // 按条件查询数据并调用分页
@@ -137,7 +135,7 @@ class TeacherCourseController extends IndexController
 
         // 更新课程名
         $Course->name = Request::instance()->post('name');
-        $course->teacher_id=$teacher_id;
+        $Course->teacher_id=session('id');
         if (is_null($Course->validate(true)->save())) {
             return $this->error('课程信息更新发生错误：' . $Course->getError());
         }
