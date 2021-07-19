@@ -10,7 +10,7 @@ use app\common\model\Score;
 use app\index\controller\ExcelController;
 use app\common\model\Course;
 
-class TeacherStudentController extends controller
+class TeacherStudentController extends IndexController
 {
 	public function index()
     {
@@ -36,7 +36,10 @@ class TeacherStudentController extends controller
                 ]);
 
             // 向V层传数据
-            $this->assign('students', $students);
+            $this->assign([
+                'students'=>$students,
+                'Klass'=>new Klass   
+            ]);
             // 取回打包后的数据
             $htmls = $this->fetch();
 
@@ -187,7 +190,11 @@ class TeacherStudentController extends controller
     public function getFile()
     {
         try{
+            $klass_id=Request::instance()->post('klass_id');
             $userfile=request()->file('userfile');
+            if(is_null($userfile)){
+                return $this->error('请先选择文件');
+            }
             if($userfile){
                 $info=$userfile->move('/readfile/www/upload/','');
                 }else{
@@ -198,7 +205,7 @@ class TeacherStudentController extends controller
             $ExcelController=new ExcelController;
             $data=$ExcelController->readExcel($info->getSavename());
             $TeacherStudentController=new TeacherStudentController;
-            if(true==$TeacherStudentController->saveFile($data)){
+            if(true==$TeacherStudentController->saveFile($data,$klass_id)){
                 return $this->success('操作成功');
             }else{
                 throw new \Exception('错误', 1);}
@@ -212,7 +219,7 @@ class TeacherStudentController extends controller
     /*
     *保存文件信息
     */
-    public function saveFile($fileData)
+    public function saveFile($fileData,$klass_id)
     {
         $lineNumber=count($fileData);
         $Student=new Student;
@@ -224,6 +231,7 @@ class TeacherStudentController extends controller
         $studentNumber=count($students);
         $courseNumber=count($courses);
         $scoreNumber=count($scores);
+        $teacher_id=session('id');
         for ($i=1; $i<$lineNumber; $i++) { 
             $n=0;
             //遍历分数信息，判断是否有相同的
@@ -235,10 +243,11 @@ class TeacherStudentController extends controller
                     }
                 }
                 for($k=0;$k<$courseNumber;$k++){
-                    if($courses[$k]->name==$fileData[$i][2]){
+                    if($courses[$k]->name==$fileData[$i][2] And $courses[$k]->teacher_id==$teacher_id){
                         $course_id=$courses[$k]->id;
                     }
                 }
+                //数据库有对应的信息
                 if($student_id==$scores[$j]->student_id And $course_id==$scores[$j]->course_id){
                     $scores[$j]->usual_score=$fileData[$i][3];
                     $scores[$j]->exam_score=$fileData[$i][4];
@@ -264,18 +273,35 @@ class TeacherStudentController extends controller
                         $b=1;
                     }
                 }
-                if ($a===0) {
-                    return $this->error('不存在学号为'.$fileData[$i][1].'的学生');
-                }
                 if($b===0){
                     return $this->error('不存在名字为'.$fileData[$i][2].'的课程');
                 }
-                $Score->student_id=$student_id;
-                $Score->course_id=$course_id;
-                $Score->usual_score=$fileData[$i][3];
-                $Score->exam_score=$fileData[$i][4];
-                $Score->sum_score=$fileData[$i][3]+$fileData[$i][4];
-                $Score->validate(true)->save();
+                if ($a===0) {
+                    $Student=new Student;
+                    $Student->name=$fileData[$i][0];
+                    $Student->number=$fileData[$i][1];
+                    $Student->klass_id=$klass_id;
+                    $Student->password=$fileData[$i][1];
+                    if(!$Student->validate(true)->save()){
+                        return $this->error('学生信息错误');
+                    }else{
+                        $Score=new Score;
+                        $Score->student_id=$Student->id;
+                        $Score->course_id=$course_id;
+                        $Score->usual_score=$fileData[$i][3];
+                        $Score->exam_score=$fileData[$i][4];
+                        $Score->sum_score=$fileData[$i][3]+$fileData[$i][4];
+                        $Score->validate(true)->save();
+                    }
+                }
+                if($a!==0 And $b!==0){
+                    $Score->student_id=$student_id;
+                    $Score->course_id=$course_id;
+                    $Score->usual_score=$fileData[$i][3];
+                    $Score->exam_score=$fileData[$i][4];
+                    $Score->sum_score=$fileData[$i][3]+$fileData[$i][4];
+                    $Score->validate(true)->save();
+                }
             }
         }
         return true;
@@ -292,6 +318,9 @@ class TeacherStudentController extends controller
         $Student->klass_id=Request::instance()->post('klass_id');
         return $Student->validate(true)->save();
     }
+    /*
+    *保存成绩
+    */
     	public function saveScore(Score $Score)
     {
     	$newScore=new Score;

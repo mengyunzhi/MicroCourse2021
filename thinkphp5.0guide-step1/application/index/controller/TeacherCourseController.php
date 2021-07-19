@@ -9,7 +9,7 @@ use app\common\model\KlassCourse;
 use app\common\model\Score;
 
 //教师端课程管理
-class TeacherCourseController extends Controller
+class TeacherCourseController extends IndexController
 {
 	 public function index()
     {
@@ -21,10 +21,11 @@ class TeacherCourseController extends Controller
 
             // 实例化Teacher
             $Course = new Course; 
-
+            //教师id
+            $teacher_id=session('id');
             // 定制查询信息
             if (!empty($name)) {
-                $Course->where('name', 'like', '%' . $name . '%');
+                $Course->where('name', 'like', '%' . $name . '%')->where('teacher_id');
             }
 
             // 按条件查询数据并调用分页
@@ -33,9 +34,17 @@ class TeacherCourseController extends Controller
                     'name' => $name,
                     ],
                 ]);
+            //根据教师id筛选
+            $Courses=array();
+            for ($j=0 ,$i=0; $i <count($courses) ; $i++) { 
+                if($courses[$i]->teacher_id==$teacher_id){
+                    $Courses[$j]=$courses[$i];
+                    $j++;
+                }
+            }
             // 向V层传数据
             $this->assign([
-                'courses'=> $courses,
+                'courses'=> $Courses,
                 'Teacher'=>new Teacher
             ]);
 
@@ -128,6 +137,7 @@ class TeacherCourseController extends Controller
 
         // 更新课程名
         $Course->name = Request::instance()->post('name');
+        $course->teacher_id=$teacher_id;
         if (is_null($Course->validate(true)->save())) {
             return $this->error('课程信息更新发生错误：' . $Course->getError());
         }
@@ -153,11 +163,11 @@ class TeacherCourseController extends Controller
         return $this->success('更新成功', url('index'));
     }
 	public function save()
-    {
+    {    
         // 存课程信息
         $Course = new Course();
         $Course->name = Request::instance()->post('name');
-
+        $Course->teacher_id=session('id');
         // 新增数据并验证。验证类我们好像还没有写呢。自己参考其它的验证类，写一下吧。
         if (!$Course->validate(true)->save()) {
             return $this->error('课程保存错误：' . $Course->getError());
