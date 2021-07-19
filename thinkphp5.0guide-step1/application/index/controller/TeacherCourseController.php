@@ -7,6 +7,7 @@ use app\common\model\Course;
 use app\common\model\Teacher;
 use app\common\model\KlassCourse;
 use app\common\model\Score;
+use app\common\model\Term;
 
 //教师端课程管理
 class TeacherCourseController extends Controller
@@ -33,6 +34,23 @@ class TeacherCourseController extends Controller
                     'name' => $name,
                     ],
                 ]);
+            
+            $Terms = Db::name('term')->select();
+            $flag=0;
+
+            foreach ($Terms as $term) {
+                if($term['effect']===1){
+                    $flag=1;
+                    $this->assign("term",$term);
+                }
+            }
+            if($flag===0){
+                $term1= new Term;
+                $term1->name = "暂无";
+                $this->assign("term",$term1);
+            }
+
+
             // 向V层传数据
             $this->assign([
                 'courses'=> $courses,

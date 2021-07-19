@@ -37,7 +37,7 @@ class LoginController extends Controller
             // 用户名密码正确，将userId存session，并跳转至用户界面
             session('userId', $User->getData('id'));
             if($tag===1){
-
+                         
                         session('id', $User->getData('id'));
                         return $this->success('登录成功', url('teacher/index?id='.$User->getData('id')));
                     }
@@ -47,8 +47,9 @@ class LoginController extends Controller
                         return $this->success('登录成功', url('student/index'));
                     }
             if($tag===3)
-                    session('id', $User->getData('id'));
 
+                    session('id', $User->getData('id'));
+                    
                     return $this->success('登录成功', url('admin_term/index'));
         } else {
             // 用户名不存在，跳转到登录界面。
