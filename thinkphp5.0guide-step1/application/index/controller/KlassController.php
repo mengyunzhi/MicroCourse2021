@@ -26,7 +26,6 @@ class KlassController extends IndexController
                 'name' => $name,
                 ],
             ]); 
-
 		//向v层传数据
 		$this->assign('klasses',$klasses);
 
