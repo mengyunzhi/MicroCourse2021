@@ -10,19 +10,18 @@ use app\common\model\Score;
 use app\common\model\Term;
 
 //教师端课程管理
-class TeacherCourseController extends Controller
+class TeacherCourseController extends IndexController
 {
 	 public function index()
     {
         try {
             // 获取查询信息
-            $name = Request::instance()->get('name');
-
-            $pageSize = 5; // 每页显示5条数据
-
+            $name = Request::instance()->post('name');
+            $pageSize = 15; // 每页显示5条数据
             // 实例化Teacher
             $Course = new Course; 
-
+            //教师id
+            $teacher_id=session('id');
             // 定制查询信息
             if (!empty($name)) {
                 $Course->where('name', 'like', '%' . $name . '%');
@@ -34,7 +33,6 @@ class TeacherCourseController extends Controller
                     'name' => $name,
                     ],
                 ]);
-            
             $Terms = Db::name('term')->select();
             $flag=0;
 
@@ -51,9 +49,17 @@ class TeacherCourseController extends Controller
             }
 
 
+            //根据教师id筛选
+            $Courses=array();
+            for ($j=0 ,$i=0; $i <count($courses) ; $i++) { 
+                if($courses[$i]->teacher_id==$teacher_id){
+                    $Courses[$j]=$courses[$i];
+                    $j++;
+                }
+            }
             // 向V层传数据
             $this->assign([
-                'courses'=> $courses,
+                'courses'=> $Courses,
                 'Teacher'=>new Teacher
             ]);
 
@@ -146,6 +152,7 @@ class TeacherCourseController extends Controller
 
         // 更新课程名
         $Course->name = Request::instance()->post('name');
+        $Course->teacher_id=session('id');
         if (is_null($Course->validate(true)->save())) {
             return $this->error('课程信息更新发生错误：' . $Course->getError());
         }

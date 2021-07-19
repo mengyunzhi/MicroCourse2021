@@ -8,7 +8,7 @@ use app\common\model\Aisle;
 use app\common\model\Seat;
 use app\common\model\SeatRoom;
 use think\Request;  
-class AdminRoomController extends IndexController
+class AdminRoomController extends Index3Controller
 {
 	public function index()
 	{
@@ -286,44 +286,6 @@ class AdminRoomController extends IndexController
         return $Seat->save();
     }
 
-    //     public function qrcode()
-    // {
-
-    //     // 获取传入ID
-    //     $id = Request::instance()->param('id/d');
-    //     $room = room::get($id);
-
-    //     //获得查询信息
-    //     $mid=Request::instance()->get('mid');
-    //     dump($mid);
-    //     $postData = Request::instance()->param();
-    //     // $Room = Room::get($id);
-    //     // $Room->$mid = $postData['mid'];
-
-    //     // //获取教室id
-    //     // $id = Request::instance()->param('id/d');
-    //     // $Room = Room::get($id);
-    //     // $Rooms = Db::name('room')->select();
-    //     // dump($Rooms);
-    //     // $mid = Request::instance()->param('mid/d');
-    //     $seats = Seat::where('mid', '=', $mid)->order('id desc')->select();
-    //     if (empty($seats)) {
-    //         return $this->error('当前教室无座位', url('index'));
-    //     }
-    //     $Mould = Mould::get($Room->mid);
-    //     $Moulds = Db::name('mould')->select();
-    //     $Aisles = Db::name('aisle')->select();
-    //     $this->assign('seats', $seats);
-    //     $this->assign('room', $room);
-    //     $this->assign('Moulds', $Moulds);
-    //     $this->assign('Mould', $Mould);
-    //     $this->assign('Aisles',$Aisles);
-    //     $url = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/studentWx?seatId=';
-    //     $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/teacherIndex?roomId=' . $Room->id;
-    //     $this->assign('url', $url);
-    //     $this->assign('urlTeacher', $urlTeacher);
-    //     return $this->fetch();
-    // }
     public function QRCode()
     {   
         $id = input('param.id/d');
@@ -336,8 +298,8 @@ class AdminRoomController extends IndexController
         $this->assign('seats', $seats);
         $this->assign('Mould', $Mould);
         $this->assign('Room', $Room);
-        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/studentWx?seatId=';
-        $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/index/login/teacherIndex?roomId=' . $Room->id;
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/MicroCourse2021/thinkphp5.0guide-step1/public/index/login/studentWx?seatId=';
+        $urlTeacher = 'http://' . $_SERVER['HTTP_HOST'] . '/MicroCourse2021/thinkphp5.0guide-step1/public/index/login/teacherIndex?roomId=' . $Room->id;
         $this->assign('url', $url);
         $this->assign('urlTeacher', $urlTeacher);
         return $this->fetch();

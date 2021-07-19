@@ -54,13 +54,16 @@
                                 {/volist}
                             </select>
                         </div>
-                        <div><label>导入学生成绩：</label></div>
+                        
                         <div><button type="submit">导入成绩</button></div>
-                        <div><a href="{:url('select')}"><button type="button">导出成绩</button></a></div>
+                        
                         <div></div>
                     </div>
-                    <hr />
+                    
                 </form>
+                <div><label>导出学生成绩：</label></div>
+                <div><a href="{:url('select')}"><button type="button">导出成绩</button></a></div>
+                <hr/>
                 <div class="col-md-8">
                     <form class="form-inline" action="{:url('index')}" method="post">
                          <div class="form-group">
