@@ -237,4 +237,68 @@ class KlassController extends IndexController
         // 进行跳转
         return $this->success('删除成功', url('index'));
     }
+    /*
+    *获取文件信息
+    */
+    public function getFile()
+    {
+        try{
+            $klass_id=Request::instance()->post('klass_id');
+            $userfile=request()->file('userfile');
+            if(is_null($userfile)){
+                return $this->error('请先选择文件');
+            }
+            if($userfile){
+                $info=$userfile->move('/readfile/www/upload/','');
+                }else{
+                    // 上传失败获取错误信息
+                    echo $file->getError();
+                }
+
+            $ExcelController=new ExcelController;
+            $data=$ExcelController->readExcel($info->getSavename());
+            if(true==$this->saveFile($data,$klass_id)){
+                return $this->success('操作成功');
+            }else{
+                throw new \Exception('错误', 1);}
+        }catch(\think\Exception\HttpResponseException $e){
+            throw $e;
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+        
+    }
+    /*
+    *保存文件信息
+    */
+    public function saveFile( $data,$klass_id)
+    {
+        $dataNumber=count($data);
+        $Student=new Student;
+        $students=$Student->select();
+        for($i=1;$i<$dataNumber;$i++){
+            $n=0;
+            for($j=0;$j<count($students);$j++){
+                if($data[$i][1]==$students[$j]->number){
+                    $n=1;
+                    $students[$j]->name=$data[$i][0];
+                    $students[$j]->email=$data[$i][2];
+                    $students[$j]->klass_id=$klass_id;
+                    $students[$j]->validate(true)->save();
+                }
+            }
+        if($n===0){
+            $Student=new Student;
+            $Student->name=$data[$i][0];
+            $Student->number=$data[$i][1];
+            $Student->email=$data[$i][2];
+            $Student->klass_id=$klass_id;
+            if(!$Student->validate(true)->save()){
+                return $this->error('学生信息错误2');
+            }
+        }    
+        }
+        return true;
+    }
+    
 }

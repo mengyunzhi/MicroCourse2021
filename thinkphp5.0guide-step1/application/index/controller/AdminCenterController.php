@@ -7,7 +7,7 @@ use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
 
-class AdminCenterController extends IndexController/*管理员端个人中心*/
+class AdminCenterController extends Index3Controller/*管理员端个人中心*/
 {
 
 

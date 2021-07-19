@@ -9,16 +9,19 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <out>
+
 <div  class="out">
+    <div class="email"><button class="btn btn-default col-md-offset-0"><a href="{:url('teacher/index')}"><font size="3">返回</font></a></button></div>
+
 <body class="container">
     <h1 class="head1">个人中心</h1>
     <div class="in">
     <ul>
-        <li><font size="5" >教师工号:<td>{:$teachers->id}</td></font></li>
+        <li><font size="5" >教师工号:<td>{:$teachers->number}</td></font></li>
         <li><font size="5" >姓名：{:$teachers->name}<td></td></font></li>
 
         <li><font size="5" >性别：{eq name='$teachers->getData("sex")' value='0'}男{else /}女{/eq}<td></td></font></li>
-        <li><font size="5" >用户名：{:$teachers->username}<td></td></font></li>
+
         <li><font size="5" >邮箱：{:$teachers->email}<td></td></font></li>
     </ul>
     <div class="email"><button class="btn btn-default col-md-offset-12"><a href="{:url('updateemail?id=' . $teachers->getData('id'))}"><font size="3">修改邮箱</font></a></button></div>
