@@ -132,3 +132,5 @@ INSERT INTO `yunzhi_seat_room` VALUES (2631, 2, 5, 103, 0, 0, 0);
 INSERT INTO `yunzhi_seat_room` VALUES (2632, 2, 3, 103, 0, 0, 0);
 INSERT INTO `yunzhi_seat_room` VALUES (2633, 3, 4, 104, 5, 0, 0);
 INSERT INTO `yunzhi_seat_room` VALUES (2634, 3, 3, 104, 5, 0, 0);
+
+SET FOREIGN_KEY_CHECKS = 1;
