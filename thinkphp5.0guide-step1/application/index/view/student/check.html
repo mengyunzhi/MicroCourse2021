@@ -37,7 +37,8 @@
                     <form class="form-inline">
                         <div class="form-group">
                             <label class="sr-only" for="name">名称</label>
-                            <input name="name" type="text" class="form-control" placeholder="xx年/xx月/xx日..." value="">
+                            <input name="id" type="hidden"  value="{$teachers->id}">
+                            <input name="name" type="text" class="form-control" placeholder="xx年/xx月/xx日..." value="{:input('get.name')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -47,19 +48,19 @@
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>序号</th>
-                    <th>上课地点</th>
+                    
                     <th>签到时间</th>
                     <th>签到状态</th>
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>A201</td>
+                    
                     <td>2021/7/26 13:55&nbsp;至&nbsp;2021/7/26 14:20</td>
                     <td>签到成功</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>A202</td>
+                    
                     <td>2021/7/27 13:55&nbsp;至&nbsp;2021/7/27 14:20</td>
                     <td>未签到</td>
                 </tr>

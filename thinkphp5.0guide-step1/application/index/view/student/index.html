@@ -46,7 +46,8 @@
                 <tr class="info">
                     <th>序号</th>
                     <th>课程名称</th>
-                    <th>上课地点</th>
+                    <th>平时成绩</th>
+                    <th>考试成绩</th>
                     <th>总成绩</th>
                     <th>操作</th>
                 </tr>
@@ -57,8 +58,8 @@
                 <tr>
                     <td>{$key}</td>
                     <td>{$_course->getData('name')}</td>
-
-                    <td>{$_course->id}</td>
+                    <td>{$_course->getscore($_course->id,$student->id)->usual_score}</td>
+                    <td>{$_course->getscore($_course->id,$student->id)->exam_score}</td>
                     <td>{$_course->getscore($_course->id,$student->id)->sum_score}</td>
                     
                     <td><a href="check? id={$_course->id}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>

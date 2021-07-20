@@ -87,7 +87,7 @@ class TeacherStudentController extends IndexController
 
             // 要删除的对象存在
             if (is_null($Student)) {
-                throw new \Exception('不存在id为' . $id . '的教师，删除失败', 1);
+                throw new \Exception('不存在id为' . $id . '的学生，删除失败', 1);
             }
 
             // 删除对象
@@ -102,8 +102,13 @@ class TeacherStudentController extends IndexController
                 for ($i=0 ; $i < $number; $i++) { 
                     if($scores[$i]->student_id==$student_id){
                         $scores[$i]->delete();
+                    }
                 }
-            }
+                $Klass=Klass::get($Student->klass_id);
+                $Klass->student_number=$Klass->student_number-1;
+                if(!$Klass->validate(true)->save()){
+                    return $this->error('班级信息错误');
+                }
             }
 
             // 进行跳转
@@ -136,13 +141,20 @@ class TeacherStudentController extends IndexController
             //获取当前对象
             $Student=Student::get($id);
             if(!is_null($Student)){
+                $oldKlass=Klass::get($Student->klass_id);
                 $Student->name=input('post.name');
                 $Student->number=input('post.number');
                 $Student->klass_id=input('post.klass_id');
                 $Student->email=input('post.email');
-                    if(false===$Student->validate(true)->save()){
-                        return $this->error('更新失败' . $Student->getError());
-                    }
+                //班级人数变化
+                $newKlass=Klass::get($Student->klass_id);
+                $oldKlass->student_number=$oldKlass->student_number-1;
+                $newKlass->student_number=$newKlass->student_number+1;
+                $oldKlass->validate(true)->save();
+                $newKlass->validate(true )->save();
+                if(false===$Student->validate(true)->save()){
+                    return $this->error('更新失败' . $Student->getError());
+                }
             }else{
                 throw new \Exception("所更新的记录不存在", 1);
                 
@@ -316,7 +328,15 @@ class TeacherStudentController extends IndexController
         $Student->number = Request::instance()->post('number');
         $Student->email = Request::instance()->post('email');
         $Student->klass_id=Request::instance()->post('klass_id');
-        return $Student->validate(true)->save();
+        $result= $Student->validate(true)->save();
+        if($result){
+            $Klass=Klass::get($Student->klass_id);
+            $Klass->student_number=$Klass->student_number+1;
+            if(!$Klass->validate(true)->save()){
+                return $this->error('班级信息错误');
+            }
+        }
+        return $result;
     }
     /*
     *保存成绩

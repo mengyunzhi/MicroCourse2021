@@ -43,7 +43,7 @@
                     <form class="form-inline" action="{:url('index')}" method="post">
                         <div class="form-group">
                             <label class="sr-only" for="name">名称</label>
-                            <input name="name" type="text" class="form-control" placeholder="名称..." value="">
+                            <input name="name" type="text" class="form-control" placeholder="名称..." value="{:input('get.name')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -57,12 +57,14 @@
                 <tr class="info">
                     <th>序号</th>
                     <th>名称</th>
+                    <th>学期</th>
                     <th>操作</th>
                 </tr>
                 {volist name='courses' id='course'  key='key'}
                 <tr>
                     <td>{$key}</td>
                     <td>{$course->name}</td>
+                    <td>{$term['name']}</td>
                     <td>
                         <a class="btn btn-sm btn-success" href="{:url('klass?id='.$course->getData('id'))}"><i class="glyphicon glyphicon-search"></i>&nbsp;查看班级</a>
                         <a class="btn btn-sm btn-primary" href="{:url('edit?id='.$course->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>

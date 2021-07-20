@@ -20,6 +20,11 @@
         position: relative;
         left: 50px;
     }
+     .style2 {
+        position: relative;
+        left: 70px;
+        top: 10px;
+    }
     </style>
 </head>
 
@@ -35,15 +40,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="{:url('TeacherCourse/index')}">课程管理</a></li>
-                            <li><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
-                            <li><a href="{:url('Klass/index')}">班级管理</a></li>
-                            <li><a href="{:url('Teacher/index')}">上课</a></li>
+                            <li><a >正在上课中</a></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{:url('TeacherCenter/center')}">个人中心</a></li>
-                            <li><a href="{:url('Login/logout')}">注销</a></li>
-                        </ul>
+                        
                     </div>
                     <!-- /.navbar-collapse -->
                 </div>
@@ -57,7 +56,34 @@
             <tr class="info">
                 <th ><label style="position: relative;left: 67px;">教师姓名：{$teacherName}</label></th>
                 <th>
-                    <label style="position: relative;right: 265px;">教室：{$room['name']}</label>
+                    <label style="position: relative;left: 8px;">教室：{$Room->name}</label>
+                </th>
+                <th>
+                    <form action="{:url('OffClass')}" method="post">
+                        <input type="hidden" name="room_id" value="{$room_id}">
+                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="position: relative;left: 25px;"  > 点击下课</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="control-label style2"><h4> 是否确定下课?</h4></label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                    </form>
                 </th>
             </tr>
         </table>
@@ -71,14 +97,17 @@
             <font size="3">应到人数:</font>
             <input class="form-inline" type="text" style="position: relative;left: 12px;" placeholder="{$studentNumber}" disabled>
         </div>
-        <form action="{:url('onClass')}" method="post">
+        <form action="{:url('signIn')}" method="post">
             <div class="col-md-4">
+                <input type="hidden" name="studentNumber" value="{$studentNumber}">
+                <input type="hidden" name="studentName" value="{$studentName}">
                 <input type="hidden" name="course_id" value="{$Course->id}">
                 <input type="hidden" name="teacher_id" value="{$teacher_id}">
                 <input type="hidden" name="room_id" value="{$room_id}">
                 <font size="3">签到时间:</font>
                 <input class="form-inline" type="text" name="time">
                 <font size="3">分钟</font>
+                <input type="hidden" name="remainTime" value="time">
                 <button type="submit" class="btn btn-info">开始签到</button>
             </div>
         </form>
@@ -98,19 +127,18 @@
                 <input class="form-inline" style="position: relative;left: 12px;" type="text" placeholder="40" disabled>
             </div>
             <div class="col-md-4">
-                <font size="3">剩余时间:</font>
-                <a id="href" href="{:url('index')}"></a> <b id="wait">{$time}</b>
-                <font size="3">分钟</font>
+                <font size="3">截止时间:</font>
+                {:date(" H时i分s秒",$time)}
             </div>
         </div>
         <hr />
         <div class="col-md-12">
             <form action="{:url('onClass')}" method="post">
-                <input type="hidden" name="time" value="$time">
+                <input type="hidden" name="time" value="{$time}">
                 <input type="hidden" name="teacher_id" value="{$teacher_id}">
                 <input type="hidden" name="room_id" value="{$room_id}">
                 <input type="hidden" name="course_id" value="{$Course->id}">
-                <button type="submit" class="btn btn-info" style="position: relative;top: 17px; left: 55px;">随机点名</button>
+                <button type="submit"  class="btn btn-info" style="position: relative;top: 17px; left: 55px;">随机点名</button>
                 <input class="form-inline" type="text" style="position: relative;top: 20px;left: 60px;" placeholder="{$studentName}" disabled>
             </form>
         </div>
@@ -168,8 +196,8 @@
                         </button>
                     </th>
                 </tr>
-                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">student8</button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#example" data-whatever="@mdo">student8</button>
+                <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -196,16 +224,23 @@
         </div>
     </div>
     <script type="text/javascript">
-    (function() {
-        var wait = document.getElementById('wait'),
-            href = document.getElementById('href').href;
-        var interval = setInterval(function() {
-            var time = --wait.innerHTML;
-            if (time < 0) {
-                time = ++wait.innerHTML;
-            };
-        }, 60000);
-    })();
+        function myfunction(){
+            var x=document.getElementById('wait').innerHTML;
+            window.location.href="put?data="+x;
+        }
+    </script>
+    <script type="text/javascript">
+        (function() {
+            var wait = document.getElementById('wait');
+            var interval = setInterval(function() {
+                var time = --wait.innerHTML;
+                if (time <=0 ) {
+                    clearInterval(interval); 
+                };
+            }, 1000);
+        })();
+    </script>
+    <script>
     $('#exampleModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
         var recipient = button.data('whatever') instead.
