@@ -33,6 +33,7 @@
             </nav>
         </div>
     </div>
+  <hr /><hr /><hr /><hr />
     <form action="{:url('update')}" method='post' class="form-inline ">
         <input type="hidden" name="id" value="{$Course->getData('id')}">
         <label for="name">name:</label><input type="text" name="name" id="name"  class="form-control" value="{$Course->name}">
@@ -40,7 +41,7 @@
             <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" {eq name="$Course->getIsChecked($klass)" value="true"}checked="checked"{/eq}/>
             <label for="klass_id_{$klass->id}">{$klass->name}</label>
         {/volist}
-        <button type="sumbit" class="form-control btn btn-success"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>     
+        <button type="sumbit" class="form-control btn btn-primary"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>     
         <a href="{:url('index')}"><button type="button" class="form-control btn btn-default">取消</button></a>     
     </form>
 </body>
