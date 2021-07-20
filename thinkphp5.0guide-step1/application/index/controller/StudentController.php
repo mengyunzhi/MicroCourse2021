@@ -50,6 +50,41 @@ class StudentController extends Index2Controller
         $score=Score::get($scoreid);
         return $score;
     }
+    public function index()
+    {
+        $name=Request::instance()->post('name');
+        $id=session('id');
+        $course_id=null;
+        $pageSize = 5; // 每页显示5条数据
+        $Course=new Course;
+        $courses=$Course->select();
+        $Score=new Score;
+        $scores=$Score->select();
+        $assignScore=array();
+        if(!is_null($name)){
+            for ($i=0; $i <count($courses) ; $i++) { 
+                if($courses[$i]->name==$name){
+                    $course_id=$courses[$i]->id;
+                }
+            }
+            for ($i=0; $i <count($scores) ; $i++) { 
+                if($scores[$i]->student_id==$id And $scores[$i]->course_id==$course_id){
+                    $assignScore[0]=$scores[$i];
+                }
+            }
+        }else{
+            $assignScore = $Score->where('student_id',$id )->paginate($pageSize, false, [
+                'query'=>[
+                    'student_id' => $id,
+                    ],
+                ]); 
+        }
+       
+        $this->assign('scores',$assignScore);
+        $this->assign('Course',new Course);
+        return $this->fetch();
+    }
+    /*
 	public function index()
 	{
 		
@@ -121,7 +156,7 @@ class StudentController extends Index2Controller
 
             // 将数据返回给用户
             return $htmls;
-	}
+	}*/
 	public function onclass()
 	{
 		return $this->fetch();
