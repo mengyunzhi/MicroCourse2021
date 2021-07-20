@@ -16,73 +16,39 @@ class StudentController extends Index2Controller
 {
     
 	public function index()
-	{
-		
-		$name = Request::instance()->get('name');
-        $id = Request::instance()->get('id');
-        $pageSize = 5; // 每页显示5条数据
-        $Student=Student::get($id);
-        $this->assign('student',$Student);
-
-            // 实例化Teacher
-        $Teacher = new Course; 
-        $klassid=$Student->getklass()->id;
-        $courseid=$this->getCourse($klassid);
-        $course=array();
-        $scoreids=array();
-        $score=array();
-        $number=count($courseid);
-
-        for ($i=0; $i < $number; $i++) { 
-        $course[$i]=Course::get($courseid[$i]);
-        }
-
-        for($i=0;$i<$number;$i++){
-            $scoreids[$i]=$this->getscore($courseid[$i],$id);
-        }
-            
-        $this->assign('score',$score);
-        $this->assign('course',$course);
-        $this->assign('courseid',$courseid);
-            // 定制查询信息
-        if (!empty($name)) {
-            $Teacher->where('name', 'like', '%' . $name . '%');
-        }
-            
-        // 按条件查询数据并调用分页
-        $teachers = $Teacher->paginate($pageSize, false, [
-            'query'=>[
-                'name' => $name,
-                ],
-            ]);
-
-        // 向V层传数据
-        $number=count($teachers);
-        $numberk=count($course);
-        for($i=0,$j=0;$i<$number;$i++){
-            for($k=0;$k<$numberk;$k++){
-                if($course[$k]->id==$teachers[$i]->id&&$course[$k]->name==$teachers[$i]->name){
-                    $j++;
+        {
+            $name=Request::instance()->post('name');
+            $id=Request::instance()->post('id');
+            $course_id=null;
+            $pageSize = 5; // 每页显示5条数据
+            $Course=new Course;
+            $courses=$Course->select();
+            $Score=new Score;
+            $scores=$Score->select();
+            $assignScore=array();
+            if(!is_null($name)){
+                for ($i=0; $i <count($courses) ; $i++) {
+                    if($courses[$i]->name==$name){
+                        $course_id=$courses[$i]->id;
+                    }
                 }
+                for ($i=0; $i <count($scores) ; $i++) {
+                    if($scores[$i]->student_id==$id And $scores[$i]->course_id==$course_id){
+                        $assignScore[0]=$scores[$i];
+                    }
+                }
+            }else{
+                $assignScore = $Score->where('student_id',$id )->paginate($pageSize, false, [
+                    'query'=>[
+                        'student_id' => $id,
+                        ],
+                    ]);
             }
-        }
-            
-        for(;$j<$number;$j++){
-            unset($teachers[$j]);
-        }
-            if(!empty($name)&&$j!=0){
-            $this->assign('course', $teachers);
-        }
-        if($j==0){
-            $teachers=null;
-            $this->assign('course',$teachers);
-        }
-                // 取回打包后的数据
-            $htmls = $this->fetch();
 
-            // 将数据返回给用户
-            return $htmls;
-    }
+            $this->assign('scores',$assignScore);
+            $this->assign('Course',new Course);
+            return $this->fetch();
+
     public function getCourse($klass_id)
     {
         //获取班级
@@ -119,6 +85,7 @@ class StudentController extends Index2Controller
         $score=Score::get($scoreid);
         return $score;
     }
+
 	public function onclass()
 	{
 		return $this->fetch();

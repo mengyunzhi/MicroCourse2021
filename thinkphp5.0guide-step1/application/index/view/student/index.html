@@ -32,7 +32,7 @@
             <hr />
             <div class="row">
                 <div class="col-md-8">
-                    <form class="form-inline">
+                    <form class="form-inline" action="{:url('index')}" method="post">
                         <div class="form-group">
                             <label class="sr-only" for="name">名称</label>
                             <input name="name" type="text" class="form-control" placeholder="名称..." value="{:input('get.name')}">
@@ -53,16 +53,16 @@
                 </tr>
                 
                 
-                {volist name="course" id="_course" key="key"}
+                {volist name="scores" id="score" key="key"}
                 
                 <tr>
                     <td>{$key}</td>
-                    <td>{$_course->getData('name')}</td>
-                    <td>{$_course->getscore($_course->id,$student->id)->usual_score}</td>
-                    <td>{$_course->getscore($_course->id,$student->id)->exam_score}</td>
-                    <td>{$_course->getscore($_course->id,$student->id)->sum_score}</td>
+                    <td>{$Course->get($score->course_id)->name}</td>
+                    <td>{$score->usual_score}</td>
+                    <td>{$score->exam_score}</td>
+                    <td>{$score->sum_score}</td>
                     
-                    <td><a href="check? id={$_course->id}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
+                    <td><a href="check? id={}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
                 </tr>
                 {/volist}
                 

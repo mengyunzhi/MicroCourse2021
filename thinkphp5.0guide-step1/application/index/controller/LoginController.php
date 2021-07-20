@@ -85,8 +85,10 @@ class LoginController extends Controller
         }
         $seatRoom = SeatRoom::get($seatId);
 
+
         if ($seatRoom->is_seated) {
         return $this->error('此座位已被占用，如需占用可重新扫码', url(''));
+
         }
         // 首先判断当前学生是否session未过期,如果未过期，直接重定向到登录判定界面
 
@@ -107,12 +109,15 @@ class LoginController extends Controller
     }
 
 
+
     /**
      * 学生登陆
      */
     public function wxLogin() {
         // 接收post信息,并获取学生id
+
         $number = Request::instance()->post('username');
+
         $password = Request::instance()->post('password');
         $seatId = Request::instance()->param('seatId/d');
         // 获取学生id，判断session是否过期
@@ -191,6 +196,7 @@ class LoginController extends Controller
         // session如果已经过期状况
         // 接收用户名和密码
         $password = Request::instance()->param('password');
+
         $number = Request::instance()->param('username');
         $roomId = Request::instance()->param('roomId');
 
