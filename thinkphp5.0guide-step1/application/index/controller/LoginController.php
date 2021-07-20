@@ -22,7 +22,7 @@ class LoginController extends Controller
         $postData = Request::instance()->post();
 
         // 验证用户名是否存在
-        $map = array('number'  => $postData['number']);
+        $map = array('number'  => $postData['username']);
         $User = Teacher::get($map);
         $tag=1;
         if(is_null($User)){
@@ -250,11 +250,10 @@ class LoginController extends Controller
      */
     public function teacherIndex() {
         // 首先获取教师id，判断session是否过期
-        $teacherId = session('teacherId');
-
         $roomId = Request::instance()->param('roomId');
+        $id = Request::instance()->param('id/d'); 
+        $teacherId = session('id');
         $Teacher = Teacher::get($teacherId);
-
         // 如果session还没有过期的情况下，直接登陆
         if (!is_null($Teacher) && !is_null($teacherId)) {
             // 绑定教师信息和教室信息
@@ -326,14 +325,5 @@ class LoginController extends Controller
         }
     }
 
-    /**
-     * 微信端教师登出
-     */
-    public function wxLogOut() {
-        if (Teacher::logOut()) {
-            return $this->success('注销成功', url('teacherIndex'));
-        } else {
-            return $this->error('注销失败', Request::instance()->header('referer'));
-        }
-    }
+
 }
