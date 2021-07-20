@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 17/07/2021 18:28:01
+ Date: 20/07/2021 09:38:19
 */
 
 SET NAMES utf8mb4;
@@ -33,17 +33,18 @@ CREATE TABLE `yunzhi_student`  (
   `number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '学号',
   `klass_id` int unsigned NULL COMMENT '所在班级',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of yunzhi_student
 -- ----------------------------
-INSERT INTO `yunzhi_student` VALUES (1, '小红', 1, 'xiaohong', '0123456789@qq.com', 0, 0, '123', '200011', 1);
+INSERT INTO `yunzhi_student` VALUES (16, '张三', NULL, NULL, 'zhangsan@yunzhi.club', 0, 0, '123', '200013', 1);
 INSERT INTO `yunzhi_student` VALUES (2, '小明', 0, 'xiaoming', '23456789012@qq.com', 0, 0, '123', '200002', 1);
 INSERT INTO `yunzhi_student` VALUES (3, '小亮', 0, 'xiaoliang', '3456789012@qq.com', 0, 0, '123', '200004', 2);
-INSERT INTO `yunzhi_student` VALUES (10, '小兰', 1, 'xiaolan', '1234567890@qq.com', 0, 0, '123', '200003', 1);
-INSERT INTO `yunzhi_student` VALUES (7, '小奇', 1, 'xiaoqi', '1234567890@qq.com', 0, 0, '123', '200009', 2);
-INSERT INTO `yunzhi_student` VALUES (9, '小灰', 0, 'xiaohui', '1234567890@qq.com', 0, 0, '123', '200010', 2);
-INSERT INTO `yunzhi_student` VALUES (11, '张三', 0, 'qweqwe', '250@qq.com', 0, 0, 'asdasd', '0', 5);
+INSERT INTO `yunzhi_student` VALUES (13, '张三1', NULL, NULL, '', 0, 0, '200050', '200050', 1);
+INSERT INTO `yunzhi_student` VALUES (14, '李四1', NULL, NULL, '', 0, 0, '200051', '200051', 1);
+INSERT INTO `yunzhi_student` VALUES (17, '张三', NULL, NULL, '1@yunzhi.com', 0, 0, '123', '200000', 6);
+INSERT INTO `yunzhi_student` VALUES (18, '李四', NULL, NULL, '2@yunzhi.com', 0, 0, '123', '200001', 6);
+INSERT INTO `yunzhi_student` VALUES (12, '李四', NULL, NULL, 'zhangsan@yunzhi.club', 0, 0, '123', '123456', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

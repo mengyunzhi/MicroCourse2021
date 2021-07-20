@@ -8,14 +8,13 @@
         <link rel="stylesheet" type="text/css" href="/MicroCourse2021/thinkphp5.0guide-step1/public/static/css/log.css">
     </head>
     <body>
-        <form action="{:url('login/wxlogin')}" method="post" id="myform">
+        <form action="{:url('login')}" method="post" id="myform">
         <div class="login">
             <h1 ><font color="#CEE3F6 ">梦云智 微课堂</font></h1>
             <h2>用户登录</h2>
             <div class="login_box">
                 <input type="text" name="number" id="number" required="/" value="{:$number}" />
                 <label for="number">用户名:</label>
-                <input type="hidden" name="seatId" id="seatId" value="{:$seatId}" />
             </div>
             <div class="login_box">
                 <input type="password" name="password" id="password" required="/" value="{:$number}" />
