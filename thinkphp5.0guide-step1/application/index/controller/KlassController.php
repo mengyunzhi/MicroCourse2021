@@ -137,6 +137,7 @@ class KlassController extends IndexController
         $students = Student::where('klass_id', '=', $id)->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
 
         //向V层传数据
+        $this->assign('id', $id);
         $this->assign('students', $students);
 
         //返回
@@ -146,9 +147,9 @@ class KlassController extends IndexController
     //增加数据
     public function student_add()
     {
-        // 获取所有的学生信息
-        $students = Student::all();
-        $this->assign('students', $students);
+        $klass_id = (int)Request::instance()->param('id');
+        $Klass=Klass::get($klass_id);
+        $this->assign('Klass', $Klass);
         return $this->fetch();
     }
 
@@ -163,24 +164,31 @@ class KlassController extends IndexController
         $Student->klass_id = $Request->post('klass_id');
         $Student->number = $Request->post('number');
 
+        
         // 添加数据
         if (!$Student->validate(true)->save()) {
             return $this->error('数据添加错误：' . $Student->getError());
         }
-
+        //所在班级的人数数量加1
+        $Klass = Klass::get($Student->klass_id );
+        $Klass->student_number++;
+        $Klass->validate()->save();
         return $this->success('操作成功', url('index'));
     }
     public function student_edit()
     {
 
         $id = Request::instance()->param('id/d');
+        $Klass=new Klass;
+        $klasses=$Klass->select();
+        
 
         // 获取用户操作的学生信息
         if (false === $Student = Student::get($id))
         {
             return $this->error('系统未找到ID为' . $id . '的记录');
         }
-
+        $this->assign('klasses', $klasses);
         $this->assign('Student', $Student);
         return $this->fetch();
     }
@@ -191,19 +199,33 @@ class KlassController extends IndexController
 
         // 获取传入的学生信息
         $Student = Student::get($id);
-
-
         if (is_null($Student)) {
             return $this->error('系统未找到ID为' . $id . '的记录');
         }
 
         // 实例化请求信息
         $Request = Request::instance();
-
         // 数据更新
         $Student->name = Request::instance()->post('name');
-        $Student->klass_id = $Request->post('klass_id');
         $Student->number = $Request->post('number');
+        
+        
+        if($Student->klass_id!== $Request->post('klass_id'))
+        {   
+            //将本班人数减一
+            $Klass = Klass::get($Student->klass_id);
+            $Klass->student_number--;
+            $Klass->validate()->save();
+
+            $Student->klass_id = $Request->post('klass_id');
+
+            //将更新的班级人数加一
+            $Klass1 = Klass::get($Student->klass_id);
+            $Klass1->student_number++;
+            $Klass1->validate()->save();
+        } 
+
+
         if (!$Student->validate()->save()) { 
             return $this->error('更新错误：' . $Student->getError());
         } else {
