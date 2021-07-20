@@ -134,6 +134,8 @@
         <hr />
         <div class="col-md-12">
             <form action="{:url('onClass')}" method="post">
+                <input type="hidden" name="y" >
+                <input type="hidden" name="x" >
                 <input type="hidden" name="time" value="{$time}">
                 <input type="hidden" name="teacher_id" value="{$teacher_id}">
                 <input type="hidden" name="room_id" value="{$room_id}">

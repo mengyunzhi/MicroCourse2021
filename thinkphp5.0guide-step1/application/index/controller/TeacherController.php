@@ -35,6 +35,9 @@ class TeacherController extends IndexController
        
         //接收数据
 		$postData=Request::instance()->post();
+        if(count($postData)<6){
+            return $this->error('请正确选择信息');
+        }
 		//实例化对象
 		$Teacher=Teacher::get($postData['teacher_id']);
 		$Course=Course::get($postData['course_id']);
