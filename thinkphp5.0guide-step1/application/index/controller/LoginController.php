@@ -86,7 +86,7 @@ class LoginController extends Controller
         $seatRoom = SeatRoom::get($seatId);
 
         if ($seatRoom->is_seated) {
-        return $this->error('此座位已被占用，如需占用可重新扫码', url('')
+        return $this->error('此座位已被占用，如需占用可重新扫码', url(''));
         }
         // 首先判断当前学生是否session未过期,如果未过期，直接重定向到登录判定界面
 
