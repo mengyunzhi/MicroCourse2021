@@ -76,6 +76,7 @@ class StudentController extends Index2Controller
                 
             }
             
+            
             $this->assign('score',$score);
             $this->assign('course',$course);
             $this->assign('courseid',$courseid);
@@ -94,14 +95,17 @@ class StudentController extends Index2Controller
             // 向V层传数据
             $number=count($teachers);
             $numberk=count($course);
-            for($i=0,$j=0;$i<$number;$i++){
+            $scoreids=array();
+            
+            $scores=array();
+                        for($i=0,$j=0;$i<$number;$i++){
                 for($k=0;$k<$numberk;$k++){
                 if($course[$k]->id==$teachers[$i]->id&&$course[$k]->name==$teachers[$i]->name){
                     $j++;
                 }
                 }
             }
-            
+
             for(;$j<$number;$j++){
             unset($teachers[$j]);
         }
