@@ -291,7 +291,6 @@ class AdminRoomController extends Index3Controller
         $id = input('param.id/d');
         $Room = Room::get($id);
         $seats =Db::name('seat_room')->where('room_id', '=', $id)->order('id desc')->select();
-        dump($seats[0]);
         if (empty($seats)) {
             return $this->error('当前教室无座位', url('index'));
         }
