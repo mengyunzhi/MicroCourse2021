@@ -83,12 +83,19 @@ class LoginController extends Controller
         if (is_null($seatId)) {
             return $this->error('座位信息传递失败,请重新扫码', '');
         }
+        $seatRoom = SeatRoom::get($seatId);
 
+        if ($seatRoom->is_seated) {
+        return $this->error('此座位已被占用，如需占用可重新扫码', url('')
+        }
         // 首先判断当前学生是否session未过期,如果未过期，直接重定向到登录判定界面
 
         $studentId = session('id');
         $Student = Student::get($studentId);
         if (!is_null($studentId) && !is_null($Student)) {
+            $seatRoom -> is_seated = 1;
+            $seatRoom -> student_id = $studentId;
+            $seatRoom -> save();
             return $this->success('操作成功', url('student/index?id=' . $studentId . '&name=' . $Student->name));
         } else {
             // 将$seatId传入V层
@@ -99,45 +106,7 @@ class LoginController extends Controller
 
     }
 
-    /**
-     * 
-     */
-    public function studentAgain()
-    {
-        // 获取从wxLogin传出的seatId
-        $seatId = Request::instance()->param('seatId');
-        if (is_null($seatId)) {
-            return $this->error(
-                '座位信息传递失败,请重新扫码',
-                Request::instance()->header('referer')
-            );
-        }
-        // 首先判断当前学生是否session未过期,如果未过期，直接重定向到登录判定界面
-        $studentId = session('studentId');
-        if (!is_null($studentId) && !is_null($Student = Student::get($studentId))) {
-            $url = url('index/login/wxLogin?seatId=' . $seatId);
-            header("Location: $url");
-            exit();
-        }
 
-        // 获取当前所在的控制器
-        $action = 'studentAgain';
-
-        // 接收上次登陆失败返回的信息
-        $number = Request::instance()->param('username');
-        $name = Request::instance()->param('name');
-        $password = '';
-
-        // 将$seatId传入V层
-        $this->assign('password', $password);
-        $this->assign('username', $username);
-        $this->assign('name', $name);
-        $this->assign('action', $action);
-        $this->assign('seatId', $seatId);
-        // 直接到V层渲染
-        return $this->fetch();
-    }
-    
     /**
      * 学生登陆
      */
@@ -156,6 +125,10 @@ class LoginController extends Controller
                 if($Student->password === $password) {
                     $id = $Student->id;
                     session('id', $id);
+                    $seatRoom = SeatRoom::get($seatId);
+                    $seatRoom -> is_seated = 1;
+                    $seatRoom -> student_id = $studentId;
+                    $seatRoom -> save();
                      return $this->success(
                     '操作成功',
                     url('student/index?=' . $number . '&password=' . $password . '&seatId=' . $seatId));
