@@ -22,7 +22,7 @@ class LoginController extends Controller
         $postData = Request::instance()->post();
 
         // 验证用户名是否存在
-        $map = array('number'  => $postData['username']);
+        $map = array('number'  => $postData['number']);
         $User = Teacher::get($map);
         $tag=1;
         if(is_null($User)){
@@ -265,7 +265,7 @@ class LoginController extends Controller
                     ''
                 );
             }
-            return $this->success('登陆成功', url('teacherwx/index'));
+            return $this->success('登陆成功', url('teacher/onclass'));
         }
 
         // 接收用户名和密码,避免二次登陆重新输入账号密码
