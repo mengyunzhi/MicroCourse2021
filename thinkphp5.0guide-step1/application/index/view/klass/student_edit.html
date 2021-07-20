@@ -41,15 +41,17 @@
         <hr />
             <form action="{:url('student_update')}" method="post" class="form-inline ">
                 <input type="hidden" name="id" id="id" class="form-control" value="{$Student->getData('id')}" />
-                <label for="klass_id">班级:</label>
-                <input type="text" name="klass_id" id="klass_id" class="form-control" value="{$Student->getKlass->getData('name')}" />
+                
                 <label for="name">姓名:</label>
                 <input type="text" name="name" id="name" class="form-control" value="{$Student->getData('name')}" />
                 <label for="number">学号:</label>
                 <input type="text" name="number" id="number"  class="form-control"value="{$Student->getData('number')}" />
-                <input type="hidden" name="sex" value="" />
-                <input type="hidden" name="email" value="" />
-                <input type="hidden" name="username" value="" />
+                <label for="klass_id">班级:</label>
+                <select name="klass_id" class="form-control">
+                    {volist name='klasses' id='Klass'}
+                    <option value="{$Klass->getData('id')}" >{$Klass->name}</option>
+                    {/volist}
+                </select> 
                 <button type="submit" class="form-control btn btn-success"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
             </form>
         </div>

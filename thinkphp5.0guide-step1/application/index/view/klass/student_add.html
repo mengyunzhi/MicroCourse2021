@@ -40,15 +40,15 @@
             <input id="return"  name="Submit" type="submit" class="btn btn-default" onclick="javascript:history.back();" value="返回"/>
             <hr />
             <form action="{:url('student_save')}" class="form-inline "  method="post">
-                <label for="klass_id">班级:</label>
-                <input type="text" class="form-control" name="klass_id" id="klass_id" />
+                <input type="hidden" name="klass_id" value="{$Klass->getData('id')}" />
                 <label for="name">姓名:</label>
                 <input type="text" class="form-control" name="name" id="name" />
                 <label for="number">学号:</label>
                 <input type="text" class="form-control" name="number" id="number" />
-                <input type="hidden" name="sex" value="" />
-                <input type="hidden" name="email" value="" />
-                <input type="hidden" name="username" value="" />
+                <label for="klass_id">班级:</label>
+                <select name="" class="form-control" disabled="" >
+                    <option value="{$Klass->getData('id')}" selected="selected">{$Klass->name}</option>
+                </select> 
                 <button type="submit" class="form-control btn btn-success"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
             </form>
         </div>
