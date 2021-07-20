@@ -71,37 +71,34 @@ class LoginController extends Controller
     }
 
     /**
+     * studentId seatId 
+     */
+
+    /**
      * 学生登陆首页
      */
     public function studentWx() {
-        // 获取从wxLogin传出的seatId
-        $seatId = Request::instance()->param('seatId');
-        $id = Request::instance()->param('id/d'); 
+        
+        $seatId = Request::instance()->param('seatId/d');
         if (is_null($seatId)) {
             return $this->error('座位信息传递失败,请重新扫码', '');
         }
+
         // 首先判断当前学生是否session未过期,如果未过期，直接重定向到登录判定界面
         $studentId = session('id');
-        if (!is_null($studentId) && !is_null($Student = Student::get($studentId))) {
-            $url = url('index/login/wxLogin?seatId=' . $seatId);
-            header("Location: $url");
-            exit();
+        $Student = Student::get($studentId);
+        if (!is_null($studentId) && !is_null($Student)) {
+            return $this->success('操作成功', url('student/index?id=' . $studentId . '&name=' . $Student->name));
+        } else {
+            // 将$seatId传入V层
+            $this->assign('seatId', $seatId);
+            // 直接到V层渲染
+            return $this->fetch();
         }
-
-        // 接收上次登陆失败返回的信息
-        $number = Request::instance()->param('username');
-        $password = '';
-
-        // 将$seatId传入V层
-        $this->assign('password', $password);
-        $this->assign('number', $number);
-        $this->assign('seatId', $seatId);
-        // 直接到V层渲染
-        return $this->fetch();
     }
 
     /**
-     * 多条相同学号学生登录
+     * 
      */
     public function studentAgain()
     {
@@ -145,106 +142,33 @@ class LoginController extends Controller
      */
     public function wxLogin() {
         // 接收post信息,并获取学生id
-        $id = Request::instance()->param('id/d'); 
         $number = Request::instance()->post('username');
         $password = Request::instance()->post('password');
         $seatId = Request::instance()->param('seatId/d');
-        $name = Request::instance()->param('name');
-        $action = Request::instance()->param('action');
-
         // 获取学生id，判断session是否过期
-        $studentId = session('id');
-        $Student = Student::get($id);
-        // dump($studentId);
-        // dump($Student);
-        // dump($seatId);
-        // die();
         
-        // 首先判断是不是没登录或登录信息过期且存在多个相同学号情况
-        if (is_null($Student) || is_null($studentId)) {
-            // 首先根据学号判断是否有多个为当前学号的
+        if (!is_null($number)) {
             $students = Student::where('number', '=', $number)->select();
-            if (sizeof($students) > 1 && is_null($action)) {
-                return $this->success(
-                    '检测到其他学号相同注册信息，请填写完整信息',
-                    url('studentagain?number=' . $number . '&seatId=' . $seatId)
-                );
-            }
-            if (sizeof($students) > 1) {
-                // 如果是从studentAgain跳过来的直接登录
-                if ($action === 'studentAgain') {
-                    // 此种情况需要通过name和用户名和密码共同判断学生信息
-                    if (Student::login($number, $password, $name)) {
-                        // 登录成功，直接跳转到签到页面
-                        $studentId = session('studentId');
-                        return $this->success(
-                            '登陆成功',
-                            url('Seat/sign?studentId=' . $studentId . '&seatId=' . $seatId)
-                        );
-                    }
+            $Student = $students[0];
+            if (!is_null($Student)) {
+                if($Student->password === $password) {
+                    $id = $Student->id;
+                    session('id', $id);
+                     return $this->success(
+                    '操作成功',
+                    url('student/index?=' . $number . '&password=' . $password . '&seatId=' . $seatId));
                 } else {
-                    return $this->error(
-                        '登录信息不正确',
-                        url('studentagain?number=' . $number . '&seatId=' . $seatId . '&name=' . $name)
-                    );
+                    return $this->error( '密码或学号错误，请重新输入', url('index/login/studentWx?seatId=' . $seatId));
                 }
-            }
-        }
-
-        // 第2种session已经过期，输入用户名密码登陆
-        if (is_null($Student) || is_null($studentId)) {
-            if (empty($number) || empty($password)) {
-                return $this->error(
-                    '请先输入完整的登陆信息',
-                    url('studentwx?number=' . $number . '&password=' . $password . '&seatId=' . $seatId)
-                );
             } else {
-                if (Student::login($number, $password)) {
-                    // 登陆成功
-                    $Student = Student::get($studentId = session('studentId'));
-                    // 首先判断座位id是否接收成功,如果没成功即为修改密码情况
-                    if (empty($seatId) || $seatId === 0) {
-                        return $this->error(
-                            '座位信息不存在，请重新扫码',
-                            url('studentwx?number=' . $number . '&password=' . $password)
-                        );
-                    }
-                    return $this->success(
-                        '登陆成功',
-                        url('Seat/sign?studentId=' . $Student->id . '&seatId=' . $seatId)
-                    );
-                } else {
-                    if ($action !== 'studentAgain') {
-                        return $this->error(
-                            '用户名或密码不正确',
-                            url('studentwx?number=' . $number . '&password=' . $password . '&seatId=' . $seatId)
-                        );
-                    } else {
-                        return $this->error(
-                            '用户名或密码不正确',
-                            url('studentAgain?number=' . $number . '&name=' . $name . '&seatId=' . $seatId)
-                        );
-                    }
-                }
+                return $this->error( '无此学生，请重新输入', url('index/login/studentWx?seatId=' . $seatId));
             }
-
-            // 第二种session未过期，直接登陆
         } else {
-         // 首先判断座位id是否接收成功,如果没成功即为修改密码情况
-            if (empty($seatId) || $seatId === 0) {
-                return $this->error(
-                    '座位信息不存在，请重新扫码',
-                    url('studentwx?number=' . $number . '&password=' . $password)
-                );
-            }
-            return $this->success(
-                '登陆成功',
-                url('Seat/sign?studentId=' . $Student->id . '&seatId=' . $seatId)
-            );
+            return $this->error( '请输入完整的信息', url('index/login/studentWx?seatId=' . $seatId));
         }
     }
+               
 
-    
     /**
      * 老师微信端登陆
      */

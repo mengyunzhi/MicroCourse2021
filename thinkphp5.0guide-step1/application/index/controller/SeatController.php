@@ -45,8 +45,8 @@ class SeatController extends controller {
      */
     public function sign() {
         // 首先根据微信端的Cookie值判断是否该该学生信息，并获取该学生的id信息 
-        $studentId = Request::instance()->param('id/d');
-
+        $studentId = Request::instance()->param('studentId/d');
+        dump($studentId);
         // 获取学生id和教室座位id,并实例化教室座位对象
         $seatId = Request::instance()->param('seatId');
         if (is_null($Seat = SeatRoom::get($seatId)) || is_null($seatId)) {
@@ -96,6 +96,7 @@ class SeatController extends controller {
                     'student_id' => $studentId,
                     'course_id' => $room->course_id
                 );
+                dump($que);
                 $Score = Score::get($que);
                 if (is_null($Score)) {
                     return $this->error('您不在当前上课名单中,请检查上课地点是否正确', url('Student/afterSign?studentId=' . $studentId));
