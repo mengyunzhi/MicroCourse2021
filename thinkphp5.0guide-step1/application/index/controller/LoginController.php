@@ -87,7 +87,9 @@ class LoginController extends Controller
         }
 
         // 接收上次登陆失败返回的信息
+
         $username = Request::instance()->param('username');
+
         $password = '';
 
         // 将$seatId传入V层
@@ -123,7 +125,9 @@ class LoginController extends Controller
         $action = 'studentAgain';
 
         // 接收上次登陆失败返回的信息
-        $username = Request::instance()->param('username');
+
+        $number = Request::instance()->param('username');
+
         $name = Request::instance()->param('name');
         $password = '';
 
@@ -142,7 +146,10 @@ class LoginController extends Controller
      */
     public function wxLogin() {
         // 接收post信息,并获取学生id
-        $username = Request::instance()->post('username');
+
+        $id = Request::instance()->param('id/d'); 
+        $number = Request::instance()->post('username');
+
         $password = Request::instance()->post('password');
         $seatId = Request::instance()->param('seatId/d');
         $name = Request::instance()->param('name');
@@ -245,11 +252,12 @@ class LoginController extends Controller
      */
     public function teacherIndex() {
         // 首先获取教师id，判断session是否过期
-        $teacherId = session('teacherId');
 
-        $classroomId = Request::instance()->param('classroomId');
+        $roomId = Request::instance()->param('roomId');
+        $id = Request::instance()->param('id/d'); 
+        $teacherId = session('id');
+
         $Teacher = Teacher::get($teacherId);
-
         // 如果session还没有过期的情况下，直接登陆
         if (!is_null($Teacher) && !is_null($teacherId)) {
             // 绑定教师信息和教室信息
@@ -264,7 +272,9 @@ class LoginController extends Controller
         }
 
         // 接收用户名和密码,避免二次登陆重新输入账号密码
-        $username = Request::instance()->param('username');
+
+        $number = Request::instance()->param('username');
+
         $password = '';
 
         $this->assign('username', $username);
@@ -282,8 +292,10 @@ class LoginController extends Controller
         // session如果已经过期状况
         // 接收用户名和密码
         $password = Request::instance()->param('password');
-        $username = Request::instance()->param('username');
-        $classroomId = Request::instance()->param('classroomId');
+
+        $number = Request::instance()->param('username');
+        $roomId = Request::instance()->param('roomId');
+
 
         // 通过判断用户名密码是否为空来区分登陆和密码不正确重新登陆状况
         if (!empty($username) && !empty($password)) {
@@ -321,14 +333,5 @@ class LoginController extends Controller
         }
     }
 
-    /**
-     * 微信端教师登出
-     */
-    public function wxLogOut() {
-        if (Teacher::logOut()) {
-            return $this->success('注销成功', url('teacherIndex'));
-        } else {
-            return $this->error('注销失败', Request::instance()->header('referer'));
-        }
-    }
+
 }
