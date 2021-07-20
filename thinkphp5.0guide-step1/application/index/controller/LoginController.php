@@ -89,7 +89,7 @@ class LoginController extends Controller
         }
 
         // 接收上次登陆失败返回的信息
-        $number = Request::instance()->param('number');
+        $number = Request::instance()->param('username');
         $password = '';
 
         // 将$seatId传入V层
@@ -126,7 +126,7 @@ class LoginController extends Controller
         $action = 'studentAgain';
 
         // 接收上次登陆失败返回的信息
-        $number = Request::instance()->param('number');
+        $number = Request::instance()->param('username');
         $name = Request::instance()->param('name');
         $password = '';
 
@@ -146,7 +146,7 @@ class LoginController extends Controller
     public function wxLogin() {
         // 接收post信息,并获取学生id
         $id = Request::instance()->param('id/d'); 
-        $number = Request::instance()->post('number');
+        $number = Request::instance()->post('username');
         $password = Request::instance()->post('password');
         $seatId = Request::instance()->param('seatId/d');
         $name = Request::instance()->param('name');
@@ -268,7 +268,7 @@ class LoginController extends Controller
         }
 
         // 接收用户名和密码,避免二次登陆重新输入账号密码
-        $number = Request::instance()->param('number');
+        $number = Request::instance()->param('username');
         $password = '';
 
         $this->assign('number', $number);
@@ -286,7 +286,7 @@ class LoginController extends Controller
         // session如果已经过期状况
         // 接收用户名和密码
         $password = Request::instance()->param('password');
-        $number = Request::instance()->param('number');
+        $number = Request::instance()->param('username');
         $roomId = Request::instance()->param('roomId');
 
         // 通过判断用户名密码是否为空来区分登陆和密码不正确重新登陆状况
