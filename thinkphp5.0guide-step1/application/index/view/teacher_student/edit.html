@@ -38,22 +38,22 @@
     <div class="row">
         <div class="col-md-12">
         <hr />
-            <form action="{:url('update')}" method="post">
+            <form  class="form-inline " action="{:url('update')}" method="post">
                 <label>姓名:</label>
-                <input type="hidden" name="id" value="{$Student->id}" />
-                <input type="text" name="name" value="{$Student->name}">
+                <input type="hidden" name="id" class="form-control" value="{$Student->id}" />
+                <input type="text" name="name"  class="form-control" value="{$Student->name}">
                 <label>学号:</label>
-                <input type="text" name="number" value="{$Student->number}">
+                <input type="text" name="number" class="form-control" value="{$Student->number}">
                 <label>班级:</label>
-                <select name="klass_id">
+                <select name="klass_id" class="form-control">
                     {volist name='klasses' id='Klass'}
                     <option value="{$Klass->getData('id')}" >{$Klass->name}</option>
                     {/volist}
                 </select> 
                 <label>邮箱：</label>
-                <input type="email" name="email" value="{$Student->email}" />
-                <button type="submit">保存</button>
-                <a href="{:url('index')}"><button type="button">取消</button></a>
+                <input type="email" name="email" class="form-control" value="{$Student->email}" />
+                <button type="submit" class="form-control btn btn-success"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
+                <a href="{:url('index')}"><button type="button" class="form-control btn btn-default"> 取消</button></a>
             </form>
         </div>
     </div>

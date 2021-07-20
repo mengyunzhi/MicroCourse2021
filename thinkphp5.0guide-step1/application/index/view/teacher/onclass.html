@@ -20,6 +20,11 @@
         position: relative;
         left: 50px;
     }
+     .style2 {
+        position: relative;
+        left: 70px;
+        top: 10px;
+    }
     </style>
 </head>
 
@@ -55,9 +60,29 @@
                 </th>
                 <th>
                     <form action="{:url('OffClass')}" method="post">
-                        <input type="hidden" name="room_id" value="{$Room->id}">
-                        <button class="btn btn-info" type="submit" style="position: relative;left: 25px;">
-                        点击下课</button>
+                        <input type="hidden" name="room_id" value="{$room_id}">
+                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="position: relative;left: 25px;"  > 点击下课</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="control-label style2"><h4> 是否确定下课?</h4></label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                              </div>
+                        </div>
+                    </div>
+                </div>
                     </form>
                 </th>
             </tr>
@@ -171,8 +196,8 @@
                         </button>
                     </th>
                 </tr>
-                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">student8</button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#example" data-whatever="@mdo">student8</button>
+                <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

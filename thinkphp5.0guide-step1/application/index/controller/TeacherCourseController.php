@@ -33,7 +33,7 @@ class TeacherCourseController extends IndexController
                     'name' => $name,
                     ],
                 ]);
-            
+
             $Terms = Db::name('term')->select();
             $flag=0;
 
@@ -48,6 +48,7 @@ class TeacherCourseController extends IndexController
                 $term1->name = "暂无";
                 $this->assign("term",$term1);
             }
+
             //根据教师id筛选
             $Courses=array();
             for ($j=0 ,$i=0; $i <count($courses) ; $i++) { 
