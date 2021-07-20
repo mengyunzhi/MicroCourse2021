@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use app\common\model\Klass;
 use app\common\model\Student;        
+use app\common\model\Score;
 use think\Controller;
 use think\Request;
 use think\Db;
@@ -106,14 +107,34 @@ class KlassController extends IndexController
 
         // 要删除的对象不存在
         if (is_null($Klass)) {
-            return $this->error('不存在id为' . $id . '的教师，删除失败');
+            return $this->error('不存在id为' . $id . '的班级，删除失败');
         }
 
         // 删除对象
         if (!$Klass->delete()) {
             return $this->error('删除失败:' . $Klass->getError());
         }
-
+        //删除学生
+        $Student=new Student;
+        $students=$Student->select();
+        for ($i=0; $i <count($students) ; $i++) { 
+            if($students[$i]->klass_id==$id){
+                //删除分数信息
+                $Score=new Score;
+                $scores=$Score->select();
+                $number=count($scores);
+                for ($j=0 ; $j < $number; $j++) { 
+                    if($scores[$j]->student_id==$students[$i]->id){
+                        if(!$scores[$j]->delete()){
+                            return $this->error('学生分数信息错误');
+                        }
+                    }
+                }
+                if(!$students[$i]->delete()){
+                    return $this->error('学生信息错误');
+                }
+            }
+        }
         // 进行跳转
         return $this->success('删除成功', url('index'));
     }
