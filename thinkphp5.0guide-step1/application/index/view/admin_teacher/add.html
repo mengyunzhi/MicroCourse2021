@@ -26,7 +26,7 @@
                                     <li><a href="{:url('admin_mould/index')}">模板管理</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="{:url('admin_center/center')}">个人中心</a></li>
+                                    <li><a href="{:url('admin_center/center')}"><i class="glyphicon glyphicon-user" style="position: relative;top: 2px;"></i>个人中心</a></li>
                                     <li><a href="{:url('Login/logout')}">注销</a></li>
                                 </ul>
                             </div>
@@ -38,20 +38,20 @@
             </div>
     <!-- /菜单导航 -->
         <hr />
-            <form action="{:url('save')}" method="post">
+            <form action="{:url('save')}" method="post" class="form-inline">
                 <label>姓名:</label>
-                <input type="text" name="name"  />
+                <input type="text" name="name"  class="form-control" />
                 <label>性别:</label>
-                <select name="sex">
+                <select name="sex" class="form-control">
                     <option value="0">男</option>
                     <option value="1">女</option>
                 </select>
                 <label>工号:</label>
-                <input type="text" name="number" value="" />
+                <input type="text" name="number" value="" class="form-control" />
                 <label>邮箱:</label>
                 <input type="email" name="email"  />
-                <button type="submit">保存</button>
-                <a href="{:url('index')}"><button type="button" >取消</button></a>
+                <button type="submit" class="form-control btn-default btn-primary">保存</button>
+                <a href="{:url('index')}"><button type="button"  class="form-control btn btn-default">取消</button></a>
             </form>
         </div>
     </div>
