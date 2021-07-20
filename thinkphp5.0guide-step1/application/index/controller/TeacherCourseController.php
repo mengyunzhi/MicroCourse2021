@@ -8,6 +8,7 @@ use app\common\model\Teacher;
 use app\common\model\KlassCourse;
 use app\common\model\Score;
 use app\common\model\Term;
+use app\common\model\Student;
 
 //教师端课程管理
 class TeacherCourseController extends IndexController
@@ -174,7 +175,7 @@ class TeacherCourseController extends IndexController
                 return $this->error('课程-班级信息保存错误：' . $Course->Klasses()->getError());
             }
         }
-
+        
         return $this->success('更新成功', url('index'));
     }
 	public function save()
@@ -191,7 +192,6 @@ class TeacherCourseController extends IndexController
         // -------------------------- 新增班级课程信息 -------------------------- 
         // 接收klass_id这个数组
         $klassIds = Request::instance()->post('klass_id/a');       // /a表示获取的类型为数组
-
         // 利用klass_id这个数组，拼接为包括klass_id和course_id的二维数组。
         if (!is_null($klassIds)) {
             if (!$Course->Klasses()->saveAll($klassIds)) {
@@ -199,7 +199,19 @@ class TeacherCourseController extends IndexController
             }
         }
         // -------------------------- 新增班级课程信息(end) -------------------------- 
-        
+        //学生成绩信息增加
+        $Student=new Student;
+        $students=$Student->select();
+        for ($i=0; $i <count($klassIds) ; $i++) { 
+            for($j=0;$j<count($students);$j++){
+                if($students[$j]->klass_id==$klassIds[$i]){
+                    $Score=new Score;
+                    $Score->course_id=$Course->id;
+                    $Score->student_id=$students[$j]->id;
+                    $Score->save();
+                }
+            }
+        }
         unset($Course); // unset出现的位置和new语句的缩进量相同，在返回前，最后被执行。
         return $this->success('操作成功', url('index'));
     }
