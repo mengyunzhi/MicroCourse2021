@@ -293,7 +293,6 @@ class TeacherStudentController extends IndexController
                     $Student->name=$fileData[$i][0];
                     $Student->number=$fileData[$i][1];
                     $Student->klass_id=$klass_id;
-                    $Student->password=$fileData[$i][1];
                     if(!$Student->validate(true)->save()){
                         return $this->error('学生信息错误');
                     }else{

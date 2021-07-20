@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <title>增加班级</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style type="text/css">
+    .style1 {
+        position: relative;
+    }
+    </style>
 </head>
 
 <body class="container">
-<!-- 菜单导航 -->
+    <!-- 菜单导航 -->
     <div class="text left">
         <div class="col-md-12">
             <nav class="navbar navbar-default" role="navigation">
@@ -37,25 +42,51 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-        <input id="return"  name="Submit" type="submit" class="btn " onclick="javascript:history.back();" value="返回"/>
-        <hr />
-            <form class="form-inline">
-                <div>
-                    <div style="float: left;"><label>导入学生：</label></div>
-                    <div style="float: left;"><button type="submit">模板下载</button></div>
-                    <div><input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                    <input name="userfile" type="file" /></div>
-                    <div style="clear: left;"></div>
+            <input id="return" name="Submit" type="submit" class="btn btn-default" onclick="javascript:history.back();" value="返回" />
+            <hr />
+            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> <i class="glyphicon  glyphicon-tag"></i>&nbsp;提示</a></button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">提示</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="control-label ">
+                                        <h4>增加班级后可在编辑界面导入学生。<br>可在查看学生界面增加、编辑学生信息<br> </h4>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
             </form>
-            <form action="{:url('save')}" method="post">
-                    <label for="name">班级:</label>
-                    <input type="text" name="name" id="name" />
-                    <button type="submit">保存</button>
+            <form action="{:url('save')}" method="post" class="form-inline" style="position: relative;top: 15px;">
+                <label for="name">班级名字:</label>
+                <input type="text" style="left: 5px;" name="name" id="name" class="style1 form-control " />
+                <button type="submit" style="left: 5px;" class="form-control  style1 btn btn-default">保存</button>
             </form>
-
         </div>
     </div>
+    <script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('whatever') instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </body>
 
 </html>

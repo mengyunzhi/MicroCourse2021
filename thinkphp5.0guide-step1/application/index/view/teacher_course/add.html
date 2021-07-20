@@ -33,16 +33,16 @@
             </nav>
         </div>
     </div>
-    <form action="{:url('save')}" method='post'>
+    <form class="form-inline " action="save" method='post'>
         <label for="name">课程:</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" class="form-control" >
         <label>班级：</label>
         {volist name="Course->Klasses()->select()" id="klass"}
             <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" />
-            <label for="klass_id_{$klass->id}">{$klass->name}</label>
+            <label for="klass_id_{$klass->id}" >{$klass->name}</label>
         {/volist}
-        <button type="sumbit">保存</button>    
-        <a href="{:url('index')}"><button type="button">取消</button></a>     
+        <button type="sumbit" class="form-control btn btn-primary"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>    
+        <a href="{:url('index')}"><button type="button" class="form-control  btn btn-default">取消</button></a>     
     </form>
 </body>
 </html>

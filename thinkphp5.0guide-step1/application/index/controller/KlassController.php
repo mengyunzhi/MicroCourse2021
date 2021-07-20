@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use app\common\model\Klass;
 use app\common\model\Student;        
+use app\common\model\Score;
 use think\Controller;
 use think\Request;
 use think\Db;
@@ -106,14 +107,34 @@ class KlassController extends IndexController
 
         // 要删除的对象不存在
         if (is_null($Klass)) {
-            return $this->error('不存在id为' . $id . '的教师，删除失败');
+            return $this->error('不存在id为' . $id . '的班级，删除失败');
         }
 
         // 删除对象
         if (!$Klass->delete()) {
             return $this->error('删除失败:' . $Klass->getError());
         }
-
+        //删除学生
+        $Student=new Student;
+        $students=$Student->select();
+        for ($i=0; $i <count($students) ; $i++) { 
+            if($students[$i]->klass_id==$id){
+                //删除分数信息
+                $Score=new Score;
+                $scores=$Score->select();
+                $number=count($scores);
+                for ($j=0 ; $j < $number; $j++) { 
+                    if($scores[$j]->student_id==$students[$i]->id){
+                        if(!$scores[$j]->delete()){
+                            return $this->error('学生分数信息错误');
+                        }
+                    }
+                }
+                if(!$students[$i]->delete()){
+                    return $this->error('学生信息错误');
+                }
+            }
+        }
         // 进行跳转
         return $this->success('删除成功', url('index'));
     }
@@ -137,6 +158,7 @@ class KlassController extends IndexController
         $students = Student::where('klass_id', '=', $id)->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
 
         //向V层传数据
+        $this->assign('id', $id);
         $this->assign('students', $students);
 
         //返回
@@ -146,9 +168,9 @@ class KlassController extends IndexController
     //增加数据
     public function student_add()
     {
-        // 获取所有的学生信息
-        $students = Student::all();
-        $this->assign('students', $students);
+        $klass_id = (int)Request::instance()->param('id');
+        $Klass=Klass::get($klass_id);
+        $this->assign('Klass', $Klass);
         return $this->fetch();
     }
 
@@ -163,24 +185,31 @@ class KlassController extends IndexController
         $Student->klass_id = $Request->post('klass_id');
         $Student->number = $Request->post('number');
 
+        
         // 添加数据
         if (!$Student->validate(true)->save()) {
             return $this->error('数据添加错误：' . $Student->getError());
         }
-
+        //所在班级的人数数量加1
+        $Klass = Klass::get($Student->klass_id );
+        $Klass->student_number++;
+        $Klass->validate()->save();
         return $this->success('操作成功', url('index'));
     }
     public function student_edit()
     {
 
         $id = Request::instance()->param('id/d');
+        $Klass=new Klass;
+        $klasses=$Klass->select();
+        
 
         // 获取用户操作的学生信息
         if (false === $Student = Student::get($id))
         {
             return $this->error('系统未找到ID为' . $id . '的记录');
         }
-
+        $this->assign('klasses', $klasses);
         $this->assign('Student', $Student);
         return $this->fetch();
     }
@@ -191,19 +220,33 @@ class KlassController extends IndexController
 
         // 获取传入的学生信息
         $Student = Student::get($id);
-
-
         if (is_null($Student)) {
             return $this->error('系统未找到ID为' . $id . '的记录');
         }
 
         // 实例化请求信息
         $Request = Request::instance();
-
         // 数据更新
         $Student->name = Request::instance()->post('name');
-        $Student->klass_id = $Request->post('klass_id');
         $Student->number = $Request->post('number');
+        
+        
+        if($Student->klass_id!== $Request->post('klass_id'))
+        {   
+            //将本班人数减一
+            $Klass = Klass::get($Student->klass_id);
+            $Klass->student_number--;
+            $Klass->validate()->save();
+
+            $Student->klass_id = $Request->post('klass_id');
+
+            //将更新的班级人数加一
+            $Klass1 = Klass::get($Student->klass_id);
+            $Klass1->student_number++;
+            $Klass1->validate()->save();
+        } 
+
+
         if (!$Student->validate()->save()) { 
             return $this->error('更新错误：' . $Student->getError());
         } else {
