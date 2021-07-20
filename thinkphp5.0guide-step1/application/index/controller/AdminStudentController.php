@@ -11,7 +11,7 @@ class AdminStudentController extends Index3Controller
 		//获得查询信息
 		$name=Request::instance()->get('name');
 		//分页数
-		$pageSize=15;
+		$pageSize=5;
 		//实例化Student
 		$Student=new Student;
 		// 按条件查询数据并调用分页
