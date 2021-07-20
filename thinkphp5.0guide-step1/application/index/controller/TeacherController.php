@@ -166,7 +166,6 @@ class TeacherController extends IndexController
 
         //获取座位信息
         $Seats = Db::name('seat')->select();
-
         //获取过道信息
         $Aisles = Db::name('aisle')->select();
         return $this->fetch('onClass',[
