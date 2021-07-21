@@ -2,9 +2,13 @@
 namespace app\index\controller;
 use think\Controller;
 use think\Request; 
+use think\Db; 
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
+use app\common\model\Seat;
+use app\common\model\SeatRoom;
+use app\common\model\Room;
 class LoginController extends Controller
 {
     public function index()
@@ -80,10 +84,16 @@ class LoginController extends Controller
 
         $seatId = Request::instance()->param('seatId/d');
 
+
         if (is_null($seatId)) {
             return $this->error('座位信息传递失败,请重新扫码', '');
         }
         $seatRoom = SeatRoom::get($seatId);
+        $Room = Room::get($seatRoom->room_id);
+        if($Room->sign_time>time())
+        {
+            return $this->error('签到失败，签到未开始');
+        }
 
 
         if ($seatRoom->is_seated) {
@@ -93,12 +103,23 @@ class LoginController extends Controller
         // 首先判断当前学生是否session未过期,如果未过期，直接重定向到登录判定界面
 
         $studentId = session('id');
+        $tag=session('tag');
         $Student = Student::get($studentId);
-        if (!is_null($studentId) && !is_null($Student)) {
+        if (!is_null($studentId) && !is_null($Student) &&!is_null($tag)&&$tag===2) {
+            $seatRooms = Db::name('seat_room')->select();
+            foreach($seatRooms as $seatRoom1)
+            {
+                if($seatRoom1['student_id']===$Student->id)
+                {
+                    return $this->error('扫码失败,您已占座');
+                }
+            }
             $seatRoom -> is_seated = 1;
             $seatRoom -> student_id = $studentId;
+            
+            
             $seatRoom -> save();
-            return $this->success('操作成功', url('student/index?id=' . $studentId . '&name=' . $Student->name));
+            return $this->success('签到成功', url('student/index'));
         } else {
             // 将$seatId传入V层
             $this->assign('seatId', $seatId);
@@ -126,13 +147,16 @@ class LoginController extends Controller
                 if($Student->password === $password) {
                     $id = $Student->id;
                     session('id', $id);
+                    session('tag', 2);
                     $seatRoom = SeatRoom::get($seatId);
+                    $seatRoom = new seatRoom();
                     $seatRoom -> is_seated = 1;
-                    $seatRoom -> student_id = $studentId;
+                    $seatRoom -> student_id = $id;
+                    $seatRoom -> sign_time =time();
                     $seatRoom -> save();
                      return $this->success(
-                    '操作成功',
-                    url('student/index?=' . $number . '&password=' . $password . '&seatId=' . $seatId));
+                    '签到成功',
+                    url('student/index'));
                 } else {
                     return $this->error( '密码或学号错误，请重新输入', url('index/login/studentWx?seatId=' . $seatId));
                 }
@@ -164,9 +188,10 @@ class LoginController extends Controller
         }
 
         $teacherId = session('teacherId');
+        $tag=session('tag');
         $Teacher = Teacher::get($teacherId);
         // 如果session还没有过期的情况下，直接登陆
-        if (!is_null($Teacher) && !is_null($teacherId)) {
+        if (!is_null($Teacher) && !is_null($teacherId)&&!is_null($tag)&&$tag===1) {
             $Teacher -> room_id = $id;
             $Room -> is_occupy = 1;
             $Teacher -> save();
@@ -179,7 +204,7 @@ class LoginController extends Controller
             }
         }else{   
             //传到V层
-            $this->assign('roomId', $roomId);
+            $this->assign('roomId', $id);
 
             // V层渲染
             return $this->fetch();  
@@ -196,14 +221,15 @@ class LoginController extends Controller
         $number = Request::instance()->param('username');
         $roomId = Request::instance()->param('roomId');
 
-
+        $Room = Room::get($roomId);
         if(!is_null($number)) {
-            $teachers = Student::where('number', '=', $number)->select();
-            $teacher = $teachers[0];
+            $teachers = Teacher::where('number', '=', $number)->select();
+            $Teacher = $teachers[0];
             if (!is_null($Teacher)) {
                 if ($Teacher->password === $password) {
                     $teacherId = $Teacher->id;
                     session('teacherId', $teacherId);
+                    session('tag', 1);
                     $Room->is_occupy = 1;
                     return $this->success('操作成功',url('teacher/index?=' . $number . '&password=' . $password . '&roomId=' . $roomId));
                 }else {

@@ -38,13 +38,5 @@ CREATE TABLE `yunzhi_student`  (
 -- ----------------------------
 -- Records of yunzhi_student
 -- ----------------------------
-INSERT INTO `yunzhi_student` VALUES (16, '张三', NULL, NULL, 'zhangsan@yunzhi.club', 0, 0, '123', '200013', 1);
-INSERT INTO `yunzhi_student` VALUES (2, '小明', 0, 'xiaoming', '23456789012@qq.com', 0, 0, '123', '200002', 1);
-INSERT INTO `yunzhi_student` VALUES (3, '小亮', 0, 'xiaoliang', '3456789012@qq.com', 0, 0, '123', '200004', 2);
-INSERT INTO `yunzhi_student` VALUES (13, '张三1', NULL, NULL, '', 0, 0, '200050', '200050', 1);
-INSERT INTO `yunzhi_student` VALUES (14, '李四1', NULL, NULL, '', 0, 0, '200051', '200051', 1);
-INSERT INTO `yunzhi_student` VALUES (17, '张三', NULL, NULL, '1@yunzhi.com', 0, 0, '123', '200000', 6);
-INSERT INTO `yunzhi_student` VALUES (18, '李四', NULL, NULL, '2@yunzhi.com', 0, 0, '123', '200001', 6);
-INSERT INTO `yunzhi_student` VALUES (12, '李四', NULL, NULL, 'zhangsan@yunzhi.club', 0, 0, '123', '123456', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

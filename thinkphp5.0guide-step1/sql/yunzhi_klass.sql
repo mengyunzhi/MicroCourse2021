@@ -33,13 +33,5 @@ CREATE TABLE `yunzhi_klass`  (
 -- ----------------------------
 -- Records of yunzhi_klass
 -- ----------------------------
-INSERT INTO `yunzhi_klass` VALUES (1, '1班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (2, '2班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (3, '3班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (4, '4班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (7, '7班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (5, '5班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (6, '6班', NULL, 0, 0);
-INSERT INTO `yunzhi_klass` VALUES (34, '8班', NULL, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

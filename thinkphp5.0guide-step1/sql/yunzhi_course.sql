@@ -24,20 +24,15 @@ DROP TABLE IF EXISTS `yunzhi_course`;
 CREATE TABLE `yunzhi_course`  (
   `id` int unsigned NOT NULL,
   `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `term_id` int(0) NOT NULL,
-  `teacher_id` int(0) NOT NULL,
-  `create_time` int(0) NOT NULL DEFAULT 0,
-  `update_time` int(0) NOT NULL DEFAULT 0,
+  `term_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `create_time` int(11) NOT NULL DEFAULT 0,
+  `update_time` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of yunzhi_course
 -- ----------------------------
-INSERT INTO `yunzhi_course` VALUES (9, '英语', 0, 1, 0, 0);
-INSERT INTO `yunzhi_course` VALUES (2, '大学物理', 2, 1, 0, 0);
-INSERT INTO `yunzhi_course` VALUES (7, '高数', 0, 1, 0, 0);
-INSERT INTO `yunzhi_course` VALUES (10, '离散', 0, 1, 0, 0);
-INSERT INTO `yunzhi_course` VALUES (12, '高数', 0, 2, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

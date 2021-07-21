@@ -34,4 +34,5 @@ CREATE TABLE `yunzhi_mould`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
+
 SET FOREIGN_KEY_CHECKS = 1;

@@ -31,14 +31,12 @@ CREATE TABLE `yunzhi_teacher`  (
   `create_time` int unsigned NOT NULL COMMENT '创建时间',
   `update_time` int unsigned NOT NULL COMMENT '更新时间',
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `room_id` int(0) NOT NULL,
+  `room_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of yunzhi_teacher
 -- ----------------------------
-INSERT INTO `yunzhi_teacher` VALUES (1, 'teacher', '123456', 0, '2@da.com', 'teacher', 0, 0, 'teacher', 5);
-INSERT INTO `yunzhi_teacher` VALUES (2, 'teacher2', '654321', 0, '1@da.com', 'teacher2', 0, 0, 'teacher2', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
