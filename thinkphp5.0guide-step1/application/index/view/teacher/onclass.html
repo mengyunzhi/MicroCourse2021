@@ -113,6 +113,7 @@
         </div>
         <form action="{:url('signIn')}" method="post">
             <div class="col-md-4">
+                <input type="hidden" name="cnt" value="{$cnt}">
                 <input type="hidden" name="studentNumber" value="{$studentNumber}">
                 <input type="hidden" name="studentName" value="{$studentName}">
                 <input type="hidden" name="course_id" value="{$Course->id}">
@@ -138,7 +139,7 @@
             </div>
             <div class="col-md-4">
                 <font size="3">实到人数:</font>
-                <input class="form-inline" style="position: relative;left: 12px;" type="text" placeholder="40" disabled>
+                <input class="form-inline" style="position: relative;left: 12px;" type="text" value="{$cnt}" disabled>
             </div>
             <div class="col-md-4">
                 <font size="3">截止时间:</font>
@@ -148,6 +149,7 @@
         <hr />
         <div class="col-md-12">
             <form action="{:url('onClass')}" method="post">
+                <input type="hidden" name="cnt" value="{$cnt}">
                 <input type="hidden" name="y">
                 <input type="hidden" name="x">
                 <input type="hidden" name="time" value="{$time}">
