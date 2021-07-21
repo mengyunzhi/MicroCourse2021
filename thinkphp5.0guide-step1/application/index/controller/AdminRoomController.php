@@ -37,9 +37,11 @@ class AdminRoomController extends Index3Controller
     {   $id = Request::instance()->param('id/d');
         $postData = Request::instance()->param();
 
+
+
         if(!$postData['room_name']){
             $this->error('教室名字不能为空');
-        }
+        } 
 
         $room_name = $postData['room_name'];
         $room_id = $postData['room_id'];
@@ -49,6 +51,10 @@ class AdminRoomController extends Index3Controller
 
         //获取模板信息
         $Mould = Mould::get($id);
+
+        if(!$Mould){
+            $this->error('模板库暂无模板，请先新增模板',url('add'));
+        }
 
         //获取座位信息
         $Seats = Db::name('seat')->select();
