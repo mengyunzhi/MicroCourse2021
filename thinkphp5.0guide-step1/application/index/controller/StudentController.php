@@ -18,7 +18,12 @@ class StudentController extends Index2Controller
 	public function index()
         {
             $name=Request::instance()->post('name');
-            $id=Request::instance()->post('id');
+            $postId=Request::instance()->post('id');
+            if(is_null($postId)){
+                $id=session('id');
+            }else{
+                $id=$postId;
+            }
             $course_id=null;
             $pageSize = 5; // 每页显示5条数据
             $Course=new Course;
@@ -26,7 +31,7 @@ class StudentController extends Index2Controller
             $Score=new Score;
             $scores=$Score->select();
             $assignScore=array();
-            if(!is_null($name)){
+            if(!$name==null){
                 for ($i=0; $i <count($courses) ; $i++) {
                     if($courses[$i]->name==$name){
                         $course_id=$courses[$i]->id;
@@ -44,7 +49,6 @@ class StudentController extends Index2Controller
                         ],
                     ]);
             }
-
             $this->assign('scores',$assignScore);
             $this->assign('Course',new Course);
             return $this->fetch();
