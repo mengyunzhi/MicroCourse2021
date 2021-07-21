@@ -5,6 +5,9 @@ use think\Request;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\Admin;
+use app\common\model\Seat;
+use app\common\model\SeatRoom;
+use app\common\model\Room;
 class LoginController extends Controller
 {
     public function index()
@@ -127,8 +130,9 @@ class LoginController extends Controller
                     $id = $Student->id;
                     session('id', $id);
                     $seatRoom = SeatRoom::get($seatId);
+                    $seatRoom = new seatRoom();
                     $seatRoom -> is_seated = 1;
-                    $seatRoom -> student_id = $studentId;
+                    $seatRoom -> student_id = $id;
                     $seatRoom -> save();
                      return $this->success(
                     '操作成功',
@@ -179,7 +183,7 @@ class LoginController extends Controller
             }
         }else{   
             //传到V层
-            $this->assign('roomId', $roomId);
+            $this->assign('roomId', $id);
 
             // V层渲染
             return $this->fetch();  
@@ -196,10 +200,10 @@ class LoginController extends Controller
         $number = Request::instance()->param('username');
         $roomId = Request::instance()->param('roomId');
 
-
+        $Room = Room::get($roomId);
         if(!is_null($number)) {
-            $teachers = Student::where('number', '=', $number)->select();
-            $teacher = $teachers[0];
+            $teachers = Teacher::where('number', '=', $number)->select();
+            $Teacher = $teachers[0];
             if (!is_null($Teacher)) {
                 if ($Teacher->password === $password) {
                     $teacherId = $Teacher->id;

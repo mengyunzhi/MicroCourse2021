@@ -33,17 +33,5 @@ CREATE TABLE `yunzhi_klass_course`  (
 -- ----------------------------
 -- Records of yunzhi_klass_course
 -- ----------------------------
-INSERT INTO `yunzhi_klass_course` VALUES (107, 4, 9, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (106, 3, 9, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (83, 2, 0, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (84, 7, 0, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (85, 5, 0, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (105, 2, 9, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (104, 1, 9, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (92, 1, 10, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (93, 2, 10, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (99, 3, 12, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (98, 2, 12, 0, 0);
-INSERT INTO `yunzhi_klass_course` VALUES (97, 1, 12, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -23,14 +23,14 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `yunzhi_seat_room`;
 CREATE TABLE `yunzhi_seat_room`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '座位id',
-  `x` int(11) NOT NULL,
-  `y` int(11) NOT NULL,
+  `x` int(11) NOT NULL DEFAULT 0,
+  `y` int(11) NOT NULL DEFAULT 0,
   `mid` int(11) NOT NULL DEFAULT 0,
   `room_id` int(11) NOT NULL DEFAULT 0,
   `create_time` int(11) NOT NULL DEFAULT 0,
   `update_time` int(11) NOT NULL DEFAULT 0,
-  `is_seated` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
+  `is_seated` int(11) NOT NULL DEFAULT 0,
+  `student_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2635 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
