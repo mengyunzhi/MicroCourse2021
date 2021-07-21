@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="/MicroCourse2021/thinkphp5.0guide-step1/public/static/css/log.css">
     </head>
     <body>
-        <form class="form-inline" action="{:url('wxLogin')}" method="post" id="myform">
+        <form class="form-inline" action="{:url('wxLogin?seatId='.$seatId)}" method="post" id="myform">
         <div class="login">
             <h1 ><font color="#CEE3F6 ">梦云智 微课堂</font></h1>
             <h2>用户登录</h2>
@@ -19,7 +19,7 @@
             </div>
             <br>
             <div>
-                <label for="password">密码:</label>
+                <label for="password">密码:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input class="form-control" type="password" name="password" id="password" required="/"/>
             </div>
             <br>

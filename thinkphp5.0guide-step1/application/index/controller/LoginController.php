@@ -83,6 +83,7 @@ class LoginController extends Controller
     public function studentWx() {
 
         $seatId = Request::instance()->param('seatId/d');
+        $this->assign('seatId', $seatId);
 
 
         if (is_null($seatId)) {
@@ -105,7 +106,7 @@ class LoginController extends Controller
         $studentId = session('id');
         $tag=session('tag');
         $Student = Student::get($studentId);
-        if (!is_null($studentId) && !is_null($Student) &&!is_null($tag)&&$tag===2) {
+        if (!is_null($studentId) && !is_null($Student) &&!is_null($tag)&&$tag===2 ) {
             $seatRooms = Db::name('seat_room')->select();
             foreach($seatRooms as $seatRoom1)
             {
@@ -149,7 +150,6 @@ class LoginController extends Controller
                     session('id', $id);
                     session('tag', 2);
                     $seatRoom = SeatRoom::get($seatId);
-                    $seatRoom = new seatRoom();
                     $seatRoom -> is_seated = 1;
                     $seatRoom -> student_id = $id;
                     $seatRoom -> sign_time =time();
@@ -228,7 +228,7 @@ class LoginController extends Controller
             if (!is_null($Teacher)) {
                 if ($Teacher->password === $password) {
                     $teacherId = $Teacher->id;
-                    session('teacherId', $teacherId);
+                    session('id', $teacherId);
                     session('tag', 1);
                     $Room->is_occupy = 1;
                     return $this->success('操作成功',url('teacher/index?=' . $number . '&password=' . $password . '&roomId=' . $roomId));

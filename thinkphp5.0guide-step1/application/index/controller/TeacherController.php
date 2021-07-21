@@ -41,14 +41,13 @@ class TeacherController extends IndexController
             return $this->error('请正确选择信息');
         }
 		//实例化对象
-		$Teacher=Teacher::get($postData['teacher_id']);
+		$Teacher=Teacher::get((int)$postData['teacher_id']);
 		$Course=Course::get($postData['course_id']);
 		$time=$postData['time'];
 		$Room=Room::get($postData['room_id']);
         $start = (int)$postData['start'];
-  
         if($start===0){
-	    $Room->sigin_time = time();
+	    $Room->sign_time = time();
 	    $Room->save();
 	    }
         $start++;
@@ -76,6 +75,7 @@ class TeacherController extends IndexController
 
         //获取座位信息
         $Seats = Db::name('seat_room')->select();
+
 
         //计算实到人数
         $cnt=0;
