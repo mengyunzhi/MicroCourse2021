@@ -19,10 +19,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
+                            <li class="active"><a href="{:url('Teacher/index')}">上课</a></li>
+                            <li><a href="{:url('Klass/index')}">班级管理</a></li>
                             <li><a href="{:url('TeacherCourse/index')}">课程管理</a></li>
                             <li><a href="{:url('TeacherStudent/index')}">学生管理</a></li>
-                            <li><a href="{:url('Klass/index')}">班级管理</a></li>
-                            <li class="active"><a href="{:url('Teacher/index')}">上课</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{:url('TeacherCenter/center')}">个人中心</a></li>
@@ -39,7 +39,7 @@
     <form action="{:url('onClass')}" method="post" class="form-inline col-md-4 col-md-offset-4">
         <div class="text left">
             <div class="col-md-12 ">
-                <font size="3">上课时间:</font>
+                <font size="3">上课日期:</font>
                 <input type="hidden" name="data" value="0">
                 <input type="date" class="form-control" name="startTime" value='{:date("Y-m-d",time())}'>
                 <input type="hidden" name="time" value="0">  
@@ -57,7 +57,7 @@
             </div>
             <div class="col-md-12 form-group" style="position: relative;top:40px;left:32px">
                 <font size="3" style="position: relative;right: 25px;">教室:</font>
-                <select name="room_id" class="form-control" >
+                <select name="room_id" class="form-control" value='-1' >
                     {volist name='rooms->select()' id='room'}
                     {eq name="$room->is_occupy" value="0"}
                     <option value="{$room->getData('id')}" >{$room->name}</option>
