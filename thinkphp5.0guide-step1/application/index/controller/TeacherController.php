@@ -2,9 +2,11 @@
 namespace app\index\controller;
 use think\Controller;
 use think\Request;
-use app\common\model\Course;
 use app\common\model\Klass;
+use app\common\model\Seat;
+use app\common\model\SeatRoom;
 use app\common\model\Room;
+use app\common\model\Course;
 use app\common\model\Teacher;
 use app\common\model\Student;
 use app\common\model\KlassCourse;
@@ -65,15 +67,21 @@ class TeacherController extends IndexController
         $Moulds = Db::name('mould')->select();
 
         //获取座位信息
-        $Seats = Db::name('seat')->select();
+        $Seats = Db::name('seat_room')->select();
+
 
         //获取过道信息
         $Aisles = Db::name('aisle')->select();
+
+        //获取模板信息
+        $Mould =Mould::get($Room->mid);
        
         // 将数据传给V层
        
 
         $this->assign('Moulds', $Moulds);
+
+        $this->assign('Mould', $Mould);
 
         $this->assign('Room', $Room);
 
@@ -104,6 +112,21 @@ class TeacherController extends IndexController
          $room=Room::get($postData['room_id']);
          $room->is_occupy = 0;
          $room->save();
+         
+         //把所有座位的is_seated和student_id改为0
+         $SeatRooms = Db::name('seat_room')->select();
+
+         foreach ($SeatRooms as $SeatRoom) {
+         	if($SeatRoom['room_id']===$room->id)
+         	{
+         		$seat_room = SeatRoom::get($SeatRoom['id']);
+         		$seat_room->is_seated=0;
+         		$seat_room->student_id=0;
+         		$seat_room->save();
+         	}
+         }
+
+
          $this->success('下课，老师您辛苦了', url('index'));
     }
 
@@ -167,8 +190,12 @@ class TeacherController extends IndexController
         //获取所有模板信息
         $Moulds = Db::name('mould')->select();
 
+        $Room=Room::get($postData['room_id']);
+
+        $Mould =Mould::get($Room->mid);
+
         //获取座位信息
-        $Seats = Db::name('seat')->select();
+        $Seats = Db::name('seat_room')->select();
         //获取过道信息
         $Aisles = Db::name('aisle')->select();
         return $this->fetch('onClass',[
@@ -180,7 +207,8 @@ class TeacherController extends IndexController
             'studentNumber'=>$postData['studentNumber'],
             'Moulds'=>$Moulds,
             'Seats'=>$Seats,
-            '$Aisles'=>$Aisles,
+            'Mould'=>$Mould,
+            'Aisles'=>$Aisles,
             'teacher_id'=>$postData['teacher_id'],
             'room_id'=>$postData['room_id']
         ]);
