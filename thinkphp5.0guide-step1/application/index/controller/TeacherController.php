@@ -111,6 +111,7 @@ class TeacherController extends IndexController
          //把教室改为未占用
          $room=Room::get($postData['room_id']);
          $room->is_occupy = 0;
+         $room->sign_time=2542005150; 
          $room->save();
          
          //把所有座位的is_seated和student_id改为0
