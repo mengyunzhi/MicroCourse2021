@@ -117,6 +117,7 @@
         <form action="{:url('signIn')}" method="post">
             <div class="col-md-4">
                 <input type="hidden" name="cnt" value="{$cnt}">
+                 <input type="hidden" name="start" value="{$start}">
                 <input type="hidden" name="studentNumber" value="{$studentNumber}">
                 <input type="hidden" name="studentName" value="{$studentName}">
                 <input type="hidden" name="course_id" value="{$Course->id}">
@@ -152,6 +153,7 @@
         <hr />
         <div class="col-md-12">
             <form action="{:url('onClass')}" method="post">
+                <input type="hidden" name="start" value="{$start}">
                 <input type="hidden" name="cnt" value="{$cnt}">
                 <input type="hidden" name="y">
                 <input type="hidden" name="x">
