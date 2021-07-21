@@ -265,8 +265,13 @@ class AdminMouldController extends Index3Controller
             $Mould2->is_last = 0;
             $Mould2->validate()->save();
          } 
-
+          //如果数据库没有数据 is_first改为1l
+          if(!$Moulds){
+            $Mould->is_first = 1;
+          }        
          $Mould->is_last = 1;
+        
+
         // 新增对象至数据表
         $result = $Mould->validate(true)->save();
          
