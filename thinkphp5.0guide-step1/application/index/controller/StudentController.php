@@ -37,10 +37,12 @@ class StudentController extends Index2Controller
                         $course_id=$courses[$i]->id;
                     }
                 }
+                if($course_id!=null){
                 for ($i=0; $i <count($scores) ; $i++) {
                     if($scores[$i]->student_id==$id And $scores[$i]->course_id==$course_id){
                         $assignScore[0]=$scores[$i];
                     }
+                }
                 }
             }else{
                 $assignScore = $Score->where('student_id',$id )->paginate($pageSize, false, [
@@ -49,6 +51,7 @@ class StudentController extends Index2Controller
                         ],
                     ]);
             }
+
             $this->assign('scores',$assignScore);
             $this->assign('Course',new Course);
             return $this->fetch();
