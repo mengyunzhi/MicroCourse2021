@@ -386,6 +386,7 @@ class TeacherStudentController extends IndexController
             $Student=Student::get($scores[$i]->student_id);
             if($scores[$i]->course_id==$postData['course_id'] And $Student->klass_id==$postData['klass_id']){
                 $lists[$j]=$scores[$i];
+                $j++;
             }
         }
         $ExcelController=new ExcelController;
