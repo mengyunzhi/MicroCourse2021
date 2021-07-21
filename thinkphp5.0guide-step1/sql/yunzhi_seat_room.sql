@@ -22,15 +22,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_seat_room`;
 CREATE TABLE `yunzhi_seat_room`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT '座位id',
-  `x` int(0) NOT NULL,
-  `y` int(0) NOT NULL,
-  `mid` int(0) NOT NULL DEFAULT 0,
-  `room_id` int(0) NOT NULL DEFAULT 0,
-  `create_time` int(0) NOT NULL DEFAULT 0,
-  `update_time` int(0) NOT NULL DEFAULT 0,
-  `is seated` int(0) NOT NULL,
-  `student_id` int(0) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '座位id',
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `mid` int(11) NOT NULL DEFAULT 0,
+  `room_id` int(11) NOT NULL DEFAULT 0,
+  `create_time` int(11) NOT NULL DEFAULT 0,
+  `update_time` int(11) NOT NULL DEFAULT 0,
+  `is seated` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2635 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 

@@ -14,6 +14,41 @@ use app\common\model\Detail;
 use app\common\model\CourseStudent;
 class StudentController extends Index2Controller
 {
+    
+	public function index()
+        {
+            $name=Request::instance()->post('name');
+            $id=Request::instance()->post('id');
+            $course_id=null;
+            $pageSize = 5; // 每页显示5条数据
+            $Course=new Course;
+            $courses=$Course->select();
+            $Score=new Score;
+            $scores=$Score->select();
+            $assignScore=array();
+            if(!is_null($name)){
+                for ($i=0; $i <count($courses) ; $i++) {
+                    if($courses[$i]->name==$name){
+                        $course_id=$courses[$i]->id;
+                    }
+                }
+                for ($i=0; $i <count($scores) ; $i++) {
+                    if($scores[$i]->student_id==$id And $scores[$i]->course_id==$course_id){
+                        $assignScore[0]=$scores[$i];
+                    }
+                }
+            }else{
+                $assignScore = $Score->where('student_id',$id )->paginate($pageSize, false, [
+                    'query'=>[
+                        'student_id' => $id,
+                        ],
+                    ]);
+            }
+
+            $this->assign('scores',$assignScore);
+            $this->assign('Course',new Course);
+            return $this->fetch();
+
     public function getCourse($klass_id)
     {
         //获取班级
@@ -50,6 +85,7 @@ class StudentController extends Index2Controller
         $score=Score::get($scoreid);
         return $score;
     }
+<<<<<<< HEAD
     public function index()
     {
         $name=Request::instance()->get('name');
@@ -153,10 +189,9 @@ class StudentController extends Index2Controller
         }
             // 取回打包后的数据
             $htmls = $this->fetch();
+=======
+>>>>>>> origin
 
-            // 将数据返回给用户
-            return $htmls;
-	}*/
 	public function onclass()
 	{
 		return $this->fetch();
@@ -192,8 +227,6 @@ class StudentController extends Index2Controller
             return $this->error('学生信息不存在,请重新登陆', Request::instance()->header('referer'));
         }
 
-        // 获取成绩信息
-        $Scores = Score::where('student_id', '=', $studentId)->select();
         // 定义课程数组,并将中间表对应的课程存入该数组
         $courses = array();
         foreach ($Scores as $Score) {
