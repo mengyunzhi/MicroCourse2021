@@ -28,11 +28,20 @@ class ScoreController extends IndexController
                     'student_id' => $id,
                     ],
                 ]);
+            //筛选老师的课程
+            $teacher_id=session('id');
+            $Scores=array();
+            for ($i=0,$j=0; $i <count($scores); $i++) { 
+                if(Course::get($scores[$i]->course_id)->teacher_id==$teacher_id){
+                    $Scores[$j]=$scores[$i];
+                    $j++;
+                }
+            }
             // 向V层传数据
             $this->assign([
 				'Student'=>new Student,
 				'Course'=>new Course,
-				'scores'=>$scores
+				'scores'=>$Scores
 			]);
             // 取回打包后的数据
             $htmls = $this->fetch();
