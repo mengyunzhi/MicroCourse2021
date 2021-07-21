@@ -45,6 +45,13 @@ class TeacherController extends IndexController
 		$Course=Course::get($postData['course_id']);
 		$time=$postData['time'];
 		$Room=Room::get($postData['room_id']);
+        $start = (int)$postData['start'];
+  
+        if($start===0){
+	    $Room->sigin_time = time();
+	    $Room->save();
+	    }
+        $start++;
 
 		//应到人数
 		//获取班级信息并计算人数
@@ -63,12 +70,21 @@ class TeacherController extends IndexController
         $Room->is_occupy = 1;
         $Room->save();
 
+
 		 //获取所有模板信息
         $Moulds = Db::name('mould')->select();
 
         //获取座位信息
         $Seats = Db::name('seat_room')->select();
 
+        //计算实到人数
+        $cnt=0;
+        foreach ($Seats  as  $seat) {
+        	if($seat['is_seated']===1)
+        	{
+        		$cnt++;
+        	}
+        }
 
         //获取过道信息
         $Aisles = Db::name('aisle')->select();
@@ -97,6 +113,8 @@ class TeacherController extends IndexController
 			'studentNumber'=>$studentNumber,
 			'time'=>$postData['time'],
 			'room_id'=>$Room->id,
+			'cnt'=>$cnt,
+			'start'=>$start,
 			'studentName'=>$studentName,
 			'teacherName'=>$Teacher->name,
 			'teacher_id'=>$Teacher->id
@@ -188,15 +206,23 @@ class TeacherController extends IndexController
         $postData=Request::instance()->post();
         $time=$postData['time'];
         $time=time()+(int)$time*60;
+
         //获取所有模板信息
         $Moulds = Db::name('mould')->select();
 
         $Room=Room::get($postData['room_id']);
 
+        $Room->end_time = $time;
+
+        $Room->save();
+
         $Mould =Mould::get($Room->mid);
 
         //获取座位信息
         $Seats = Db::name('seat_room')->select();
+        
+        
+
         //获取过道信息
         $Aisles = Db::name('aisle')->select();
         return $this->fetch('onClass',[
@@ -209,7 +235,9 @@ class TeacherController extends IndexController
             'Moulds'=>$Moulds,
             'Seats'=>$Seats,
             'Mould'=>$Mould,
+            'cnt'=>$postData['cnt'],
             'Aisles'=>$Aisles,
+            'start'=>$postData['start'],
             'teacher_id'=>$postData['teacher_id'],
             'room_id'=>$postData['room_id']
         ]);

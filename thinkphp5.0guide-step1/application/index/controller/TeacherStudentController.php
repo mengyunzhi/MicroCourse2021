@@ -272,6 +272,7 @@ class TeacherStudentController extends IndexController
                 $Score=new Score;
                 $a=0;
                 $b=0;
+                //判断有没有对应学生
                 for($k=0;$k<$studentNumber;$k++){
                     if($students[$k]->number==$fileData[$i][1]){
                         $student_id=$students[$k]->id;
@@ -279,6 +280,7 @@ class TeacherStudentController extends IndexController
                     }
 
                 }
+                //判断有没有对应课程
                 for($k=0;$k<$courseNumber;$k++){
                     if($courses[$k]->name==$fileData[$i][2]){
                         $course_id=$courses[$k]->id;
@@ -296,6 +298,9 @@ class TeacherStudentController extends IndexController
                     if(!$Student->validate(true)->save()){
                         return $this->error('学生信息错误');
                     }else{
+                        $Klass=Klass::get($Student->klass_id);
+                        $Klass->student_number=$Klass->student_number+1;
+                        $Klass->save();
                         $Score=new Score;
                         $Score->student_id=$Student->id;
                         $Score->course_id=$course_id;
@@ -304,14 +309,6 @@ class TeacherStudentController extends IndexController
                         $Score->sum_score=$fileData[$i][3]+$fileData[$i][4];
                         $Score->validate(true)->save();
                     }
-                }
-                if($a!==0 And $b!==0){
-                    $Score->student_id=$student_id;
-                    $Score->course_id=$course_id;
-                    $Score->usual_score=$fileData[$i][3];
-                    $Score->exam_score=$fileData[$i][4];
-                    $Score->sum_score=$fileData[$i][3]+$fileData[$i][4];
-                    $Score->validate(true)->save();
                 }
             }
         }

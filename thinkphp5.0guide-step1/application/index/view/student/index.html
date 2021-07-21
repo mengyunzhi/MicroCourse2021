@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 
-<head>
+<head>  
     <meta charset="UTF-8">
     <title>课程查看</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
@@ -62,7 +62,7 @@
                     <td>{$score->exam_score}</td>
                     <td>{$score->sum_score}</td>
                     
-                    <td><a href="check? id={}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
+                    <td><a href="check? id={$Course->get($score->course_id)->id}" class="btn btn-success" ><i class="glyphicon glyphicon-search"></i>&nbsp;查看上课记录</a></td>
                 </tr>
                 {/volist}
                 
