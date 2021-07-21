@@ -2,6 +2,8 @@
 <html lang="zh-cn">
 
 <head>
+    <?php use app\common\model\Student;?>
+    <?php use app\common\model\Klass;?>
     <meta charset="UTF-8">
     <title>教师端</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
@@ -16,11 +18,22 @@
         height: 40px;
         cursor: default;
     }
+    .seat2 {
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+        width: 60px;
+        height: 25px;
+        cursor: default;
+    }
+
     .style1 {
         position: relative;
         left: 50px;
     }
-     .style2 {
+
+    .style2 {
         position: relative;
         left: 70px;
         top: 10px;
@@ -28,7 +41,7 @@
     </style>
 </head>
 
-<body >
+<body>
     <!-- 菜单导航 -->
     <div class="row">
         <div class="col-md-12">
@@ -40,9 +53,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a >正在上课中</a></li>
+                            <li><a>正在上课中</a></li>
                         </ul>
-                        
                     </div>
                     <!-- /.navbar-collapse -->
                 </div>
@@ -54,35 +66,37 @@
     <div class="row">
         <table class="table table-hover table-bordered">
             <tr class="info">
-                <th ><label style="position: relative;left: 67px;">教师姓名：{$teacherName}</label></th>
+                <th><label style="position: relative;left: 67px;">教师姓名：{$teacherName}</label></th>
                 <th>
                     <label style="position: relative;left: 8px;">教室：{$Room->name}</label>
                 </th>
                 <th>
                     <form action="{:url('OffClass')}" method="post">
                         <input type="hidden" name="room_id" value="{$room_id}">
-                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="position: relative;left: 25px;"  > 点击下课</button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="exampleModalLabel"></h4>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="control-label style2"><h4> 是否确定下课?</h4></label>
+                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="position: relative;left: 25px;"> 点击下课</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel"></h4>
                                     </div>
-                                </form>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="control-label style2">
+                                                    <h4> 是否确定下课?</h4>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">确定</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">确定</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                              </div>
                         </div>
-                    </div>
-                </div>
                     </form>
                 </th>
             </tr>
@@ -134,126 +148,125 @@
         <hr />
         <div class="col-md-12">
             <form action="{:url('onClass')}" method="post">
-                <input type="hidden" name="y" >
-                <input type="hidden" name="x" >
+                <input type="hidden" name="y">
+                <input type="hidden" name="x">
                 <input type="hidden" name="time" value="{$time}">
                 <input type="hidden" name="teacher_id" value="{$teacher_id}">
                 <input type="hidden" name="room_id" value="{$room_id}">
                 <input type="hidden" name="course_id" value="{$Course->id}">
-                <button type="submit"  class="btn btn-info" style="position: relative;top: 17px; left: 55px;">随机点名</button>
+                <button type="submit" class="btn btn-info" style="position: relative;top: 17px; left: 55px;">随机点名</button>
                 <input class="form-inline" type="text" style="position: relative;top: 20px;left: 60px;" placeholder="{$studentName}" disabled>
             </form>
         </div>
         <div class="col-md-12 col-md-offset-5">
-            <h3>
-                <p style="color: green; position: relative;left: 40px;">讲台</p>
-            </h3>
+                <p style="color: green; position: relative;left: 42px;margin: 0;display: inline"><font size="5">讲台</font></p>
+                 <b style="position: relative;left: 480px;margin: 0;display: inline">无人:</b>
+                
+                <button class="btn btn-info seat2"  style="position: relative;left: 480px;margin: 0;display: inline;">
+                </button>
+                <b style="position: relative;left: 500px;margin: 0;display: inline">有人:</b>
+                <button class="btn btn-success seat2"  style="position: relative;left: 500px;margin: 0;display: inline;">
+                </button>
             <hr style="position: relative;right: 650px;">
         </div>
-        <!-- 座位表-->
+        <!-- 模板显示 -->
         <div class="container" style="padding-right:100px">
             <table style="margin:0 auto;margin-bottom: 50px;">
+                <?php for ($x=1; $x<=$Mould->getData('row'); $x++) : ?>
                 <tr>
+                    <?php for ($y=1; $y<=$Mould->getData('line'); $y++) :?>
+                    <!-- 输出座位 -->
+                    {volist name="Seats" id="seat" key="key"}
+                    {eq name='$seat["mid"]' value='$Mould->getData("id")'}
+                    {eq name='$seat["x"]' value='$x'}
+                    {eq name='$seat["y"]' value='$y'}
                     <th>
-                        <button class="btn btn-info seat">student1
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-info seat">student2
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-info seat">student3
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-default seat" style=" border:none;">
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-info seat ">student4
-                        </button>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <button class="btn btn-info seat">student5
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-info seat">student6
-                        </button>
-                    </th>
-                       
-                    <th>
-                        <button class="btn btn-info seat ">student7
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-default seat" style=" border:none;">
-                        </button>
-                    </th>
-                    <th>
-                        <button class="btn btn-info seat">student8
-                        </button>
-                    </th>
-                </tr>
-                <button type="button" class="btn btn-info seat" data-toggle="modal" data-target="#example" data-whatever="@mdo">student8</button>
-                <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="exampleModalLabel">学生信息</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="control-label ">学生姓名:</label>
+                        {eq name='$seat["is_seated"]' value="1"}
+                        <?php $student_id =$seat["student_id"] ;
+                            $student=Student::get($student_id);
+                            $klass=Klass::get($student->klass_id);
+                          ?>
+                        <button type="button" class="btn btn-success seat" data-toggle="modal" data-target="#example" data-whatever="@mdo">{$student->name}</button>
+                        <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel">学生信息</h4>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="message-text" class="control-label ">学生学号:</label>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="control-label ">学生姓名:&nbsp;{$student->name}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="control-label ">学生学号:&nbsp;{$student->number}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="control-label ">学生班级:&nbsp;{$klass->name}</label>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="message-text" class="control-label ">学生班级:</label>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        {else/}
+                        <button class="btn btn-info seat">
+                        </button>
+                        {/eq}
+                    </th>
+                    {/eq}
+                    {/eq}
+                    {/eq}
+                    {/volist}
+                    <!-- 输出过道 -->
+                    {volist name="Aisles" id="aisle" key="key"}
+                    {eq name='$aisle["mid"]' value='$Mould->getData("id")'}
+                    {eq name='$aisle["x"]' value='$x'}
+                    {eq name='$aisle["y"]' value='$y'}
+                    <th>
+                        <button class="btn btn-default seat" style="border:none;">
+                        </button>
+                    </th>
+                    {/eq}
+                    {/eq}
+                    {/eq}
+                    {/volist}
+                    <?php endfor; ?>
+                </tr>
+                <?php endfor; ?>
             </table>
         </div>
-    </div>
-    <script type="text/javascript">
-        function myfunction(){
-            var x=document.getElementById('wait').innerHTML;
-            window.location.href="put?data="+x;
+        <hr>
+        <script type="text/javascript">
+        function myfunction() {
+            var x = document.getElementById('wait').innerHTML;
+            window.location.href = "put?data=" + x;
         }
-    </script>
-    <script type="text/javascript">
+        </script>
+        <script type="text/javascript">
         (function() {
             var wait = document.getElementById('wait');
             var interval = setInterval(function() {
                 var time = --wait.innerHTML;
-                if (time <=0 ) {
-                    clearInterval(interval); 
+                if (time <= 0) {
+                    clearInterval(interval);
                 };
             }, 1000);
         })();
-    </script>
-    <script>
-    $('#exampleModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var recipient = button.data('whatever') instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('New message to ' + recipient)
-        modal.find('.modal-body input').val(recipient)
-    })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        </script>
+        <script>
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('whatever') instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </body>
 
 </html>
