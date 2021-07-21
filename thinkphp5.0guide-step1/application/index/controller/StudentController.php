@@ -52,7 +52,7 @@ class StudentController extends Index2Controller
     }
     public function index()
     {
-        $name=Request::instance()->post('name');
+        $name=Request::instance()->get('name');
         $id=session('id');
         $course_id=null;
         $pageSize = 5; // 每页显示5条数据
