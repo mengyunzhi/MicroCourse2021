@@ -38,11 +38,11 @@ class ExcelController
         //6.循环刚取出来的数组，将数据逐一添加到excel表格。
         if(!is_null($list)){
         	for($i=0;$i<count($list);$i++){
-	        	if(is_null($Student=Student::get($list[$i]->id))){
-	        		//return $this->error('不存在id为'.$list[$i]->id.'课程');
+	        	if(is_null($Student=Student::get($list[$i]->student_id))){
+	        		return $Student->error('不存在id为'.$list[$i]->student_id.'学生');
 	        	}
 	        	if(is_null($Course=Course::get($list[$i]->course_id))){
-	        		//return $this->error('不存在id为'.$list[$i]->course_id.'课程');
+	        		return $Student->error('不存在id为'.$list[$i]->course_id.'课程');
 	        	}
 	            $objPHPExcel->getActiveSheet()->setCellValue('A'.($i+2),$Student->name);
 	            $objPHPExcel->getActiveSheet()->setCellValue('B'.($i+2),$Student->number);

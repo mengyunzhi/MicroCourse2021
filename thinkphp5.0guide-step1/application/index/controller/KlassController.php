@@ -6,6 +6,7 @@ use app\common\model\Score;
 use think\Controller;
 use think\Request;
 use think\Db;
+use app\common\model\KlassCourse;
 
 // 教师端班级管理
 class KlassController extends IndexController
@@ -337,6 +338,27 @@ class KlassController extends IndexController
             $Student->klass_id=$klass_id;
             if(!$Student->validate(true)->save()){
                 return $this->error('学生信息错误2');
+            }else{
+                $klass_id=$Student->klass_id;
+                $Klass=Klass::get($klass_id);
+                $Klass->student_number=$Klass->student_number+1;
+                $Klass->save();
+                $KlassCourse=new KlassCourse;
+                $klassCourses=$KlassCourse->select();
+                $number=count($klassCourses);
+                $klassIds=array();
+                for ($j=0 ; $j < $number; $j++) { 
+                    if($klassCourses[$j]->klass_id==$klass_id){
+                        $Score= new Score;
+                        $id=$Student->id;
+                        $Score->course_id=$klassCourses[$j]->course_id;
+                        $Score->student_id=$Student->id;
+                        $Score->usual_score=0;
+                        $Score->exam_score=0;
+                        $Score->sum_score=0;
+                        $this->saveScore($Score);
+                    }
+                }
             }
         }    
         }
@@ -349,5 +371,18 @@ class KlassController extends IndexController
     {
         $ExcelController=new ExcelController;
         $ExcelController->getModel();
+    }
+    /*
+    *保存成绩
+    */
+        public function saveScore(Score $Score)
+    {
+        $newScore=new Score;
+        $newScore->student_id = $Score->student_id;
+        $newScore->course_id = $Score->course_id;
+        $newScore->usual_score = $Score->usual_score;
+        $newScore->exam_score=$Score->exam_score;
+        $newScore->sum_score=$newScore->usual_score+$newScore->exam_score;
+        $newScore->save();
     }
 }
